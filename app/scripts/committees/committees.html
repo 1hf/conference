@@ -1,0 +1,19 @@
+<ion-view>
+	<ion-nav-title>
+		Committees
+	</ion-nav-title>
+	<div class="bar bar-subheader bar-stable item-input-inset">
+		<label class="item-input-wrapper">
+			<i class="icon ion-ios-search placeholder-icon"></i>
+			<input type="search" placeholder="Search" ng-model="vm.filter" ng-change="vm.filterChanged()">
+		</label>
+	</div>
+	<ion-content class="has-subheader">
+		<ion-list>
+			<ion-item ng-repeat="committee in vm.committees"
+				ng-click="vm.goToCommitteeDetails(committee.$id)">
+				{{committee.title}}
+			</ion-item>
+		</ion-list>
+	</ion-content>
+</ion-view>

@@ -1,0 +1,22 @@
+<ion-view>
+	<ion-header-bar>
+		<button class="button button-positive button-clear no-animation"
+			ng-click="vm.startApp()">
+			Skip
+		</button>
+	</ion-header-bar>
+	<ion-content scroll="false" has-header="true">
+		<ion-slide-box show-pager="true" active-slide="index" style="height: 100%">
+			<ion-slide ng-repeat="item in vm.slides" style="text-align: center">
+				<img ng-src="{{item.image}}" class="slide-image"/>
+				<h2 class="slide-title" ng-bind-html="item.title"></h2>
+				<p ng-bind-html="item.description"></p>
+			</ion-slide>
+			<ion-slide style="text-align: center">
+				<img ng-src="images/ica-slidebox-img-4.png" class="slide-image"/>
+				<h2 class="slide-title">Ready?</h2>
+				<a class="button icon-right ion-arrow-right-c button-clear button-calm" ng-click="vm.startApp()">Continue</a>
+			</ion-slide>
+		</ion-slide-box>
+	</ion-content>
+</ion-view>

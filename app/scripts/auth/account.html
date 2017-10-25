@@ -1,0 +1,13 @@
+<ion-view view-title="Account" cache-view="false">
+	<ion-content class="padding">
+		<div style="text-align: center">
+			<img src="http://www.gravatar.com/avatar?d=mm&s=140" style="border-radius: 50%">
+			<h3>{{vm.email}}</h3>
+		</div>
+		<ion-list>
+			<ion-item ng-click="vm.logout()" class="item item-borderless" style="text-align: center">
+				<h2>Logout</h2>
+			</ion-item>
+		</ion-list>
+	</ion-content>
+</ion-view>

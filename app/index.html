@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
+		<title></title>
+
+		<!-- build:css styles/vendor.css -->
+		<!-- bower:css -->
+		<link rel="stylesheet" href="bower_components/components-font-awesome/css/font-awesome.css" />
+		<link rel="stylesheet" href="bower_components/ion-datetime-picker/release/ion-datetime-picker.min.css" />
+		<!-- endbower -->
+		<!-- endbuild -->
+		<link href="styles/main.css" rel="stylesheet">
+
+		<!-- IF using Sass (run gulp sass first), then uncomment below and remove the CSS includes above
+		<link href="styles/ionic.app.css" rel="stylesheet">
+		-->
+
+		<!-- ionic/angularjs js -->
+		<!-- build:js scripts/vendor.js -->
+		<!-- bower:js -->
+		<script src="bower_components/angular/angular.js"></script>
+		<script src="bower_components/angular-animate/angular-animate.js"></script>
+		<script src="bower_components/angular-sanitize/angular-sanitize.js"></script>
+		<script src="bower_components/angular-ui-router/release/angular-ui-router.js"></script>
+		<script src="bower_components/ionic/release/js/ionic.js"></script>
+		<script src="bower_components/ionic/release/js/ionic-angular.js"></script>
+		<script src="bower_components/angular-websocket/angular-websocket.min.js"></script>
+		<script src="bower_components/ngCordova/dist/ng-cordova.js"></script>
+		<script src="bower_components/lodash/lodash.js"></script>
+		<script src="bower_components/angular-base64/angular-base64.js"></script>
+		<script src="bower_components/ionic-service-core/ionic-core.js"></script>
+		<script src="bower_components/ionic-service-push/ionic-push.js"></script>
+		<script src="bower_components/date.format/date.format.js"></script>
+		<script src="bower_components/geolib/dist/geolib.js"></script>
+		<script src="bower_components/ng-cordova-oauth/dist/ng-cordova-oauth.js"></script>
+		<script src="bower_components/angular-local-storage/dist/angular-local-storage.js"></script>
+		<script src="bower_components/ionic-toast/dist/ionic-toast.bundle.min.js"></script>
+		<script src="bower_components/firebase/firebase.js"></script>
+		<script src="bower_components/angularfire/dist/angularfire.js"></script>
+		<script src="bower_components/ion-datetime-picker/release/ion-datetime-picker.min.js"></script>
+		<script src="bower_components/ionic-rating/ionic-rating.js"></script>
+		<!-- endbower -->
+		<!-- endbuild -->
+
+		<!-- cordova script (this will be a 404 during development) -->
+		<script src="cordova.js"></script>
+		<script src="lib/ionic.cloud.min.js"></script>
+
+		<!-- your app's js -->
+		<script src="scripts/configuration.js"></script>
+		<!-- build:js scripts/scripts.js -->
+		<!-- include: "type": "js", "files": ["scripts/**/*.module.js", "scripts/**/*.js"] -->
+		<script src="scripts/about/about.module.js"></script>
+		<script src="scripts/abstracts/abstracts.module.js"></script>
+		<script src="scripts/auth/auth.module.js"></script>
+		<script src="scripts/committees/committees.module.js"></script>
+		<script src="scripts/common/common.module.js"></script>
+		<script src="scripts/events/events.module.js"></script>
+		<script src="scripts/map/map.module.js"></script>
+		<script src="scripts/menu/menu.module.js"></script>
+		<script src="scripts/push/push.module.js"></script>
+		<script src="scripts/schedule/schedule.module.js"></script>
+		<script src="scripts/speakers/speakers.module.js"></script>
+		<script src="scripts/sponsors/sponsors.module.js"></script>
+		<script src="scripts/tutorial/tutorial.module.js"></script>
+		<script src="scripts/about/about.controller.js"></script>
+		<script src="scripts/about/about.service.js"></script>
+		<script src="scripts/abstracts/abstracts-details.controller.js"></script>
+		<script src="scripts/abstracts/abstracts.controller.js"></script>
+		<script src="scripts/abstracts/abstracts.service.js"></script>
+		<script src="scripts/abstracts/author-details.controller.js"></script>
+		<script src="scripts/app.js"></script>
+		<script src="scripts/auth/account.controller.js"></script>
+		<script src="scripts/auth/login-signup.service.js"></script>
+		<script src="scripts/auth/login.controller.js"></script>
+		<script src="scripts/auth/signup.controller.js"></script>
+		<script src="scripts/committees/committee-details.controller.js"></script>
+		<script src="scripts/committees/committees.controller.js"></script>
+		<script src="scripts/committees/committees.service.js"></script>
+		<script src="scripts/committees/member-details.controller.js"></script>
+		<script src="scripts/common/directives/gmaps/gmaps.directive.js"></script>
+		<script src="scripts/common/services/data/data.service.js"></script>
+		<script src="scripts/common/services/data/file-data.service.js"></script>
+		<script src="scripts/common/services/data/firebase-data.service.js"></script>
+		<script src="scripts/common/services/extenal-apps.service.js"></script>
+		<script src="scripts/common/services/html-to-plain-text.service.js"></script>
+		<script src="scripts/config/internet-connectivity.js"></script>
+		<script src="scripts/config/spinner.js"></script>
+		<script src="scripts/configuration.js"></script>
+		<script src="scripts/events/event-details.controller.js"></script>
+		<script src="scripts/events/events.controller.js"></script>
+		<script src="scripts/events/events.service.js"></script>
+		<script src="scripts/map/map.controller.js"></script>
+		<script src="scripts/map/map.service.js"></script>
+		<script src="scripts/menu/menu.controller.js"></script>
+		<script src="scripts/schedule/schedule-details.controller.js"></script>
+		<script src="scripts/schedule/schedule.controller.js"></script>
+		<script src="scripts/schedule/schedule.service.js"></script>
+		<script src="scripts/speakers/speaker-details.controller.js"></script>
+		<script src="scripts/speakers/speakers.controller.js"></script>
+		<script src="scripts/speakers/speakers.service.js"></script>
+		<script src="scripts/sponsors/sponsor-details.controller.js"></script>
+		<script src="scripts/sponsors/sponsors.controller.js"></script>
+		<script src="scripts/sponsors/sponsors.service.js"></script>
+		<script src="scripts/tutorial/tutorial.controller.js"></script>
+		<!-- /include -->
+		<!-- endbuild -->
+	</head>
+
+	<body ng-app="conference">
+		<ion-nav-view></ion-nav-view>
+	</body>
+</html>

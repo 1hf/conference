@@ -1,0 +1,38 @@
+<ion-view class="segments">
+	<ion-nav-title>
+		<button class="button header-button"
+			ng-click="vm.showAll()"
+			ng-class="{ 'selected-header-button': !vm.favorites }">ALL
+		</button>
+		<button class="button header-button"
+			ng-click="vm.showFavorites()"
+			ng-class="{ 'selected-header-button': vm.favorites }">FAVORITES
+		</button>
+	</ion-nav-title>
+	<div class="bar bar-subheader bar-stable item-input-inset">
+		<label class="item-input-wrapper">
+			<i class="icon ion-ios-search placeholder-icon"></i>
+			<input type="search" placeholder="Search" ng-model="vm.filter" ng-change="vm.filterChanged()">
+		</label>
+	</div>
+	<ion-content class="has-subheader">
+		<ion-list can-swipe="true">
+			<ion-item ng-repeat="event in vm.events"
+				ng-click="vm.goToEventDetails(event.$id)"
+				class="item-text-wrap">
+				<h2>{{event.title}}</h2>
+				<p>{{event.startDate| date: 'fullDate'}} - {{event.endDate| date: 'fullDate'}}</p>
+				<ion-option-button class="button-positive"
+					ng-click="vm.addFavorites($event,event.$id)"
+					ng-if="!event.isInFavorites">
+					FAVORITE
+				</ion-option-button>
+				<ion-option-button class="button-assertive"
+					ng-click="vm.removeFavorites(event.$id)"
+					ng-if="event.isInFavorites">
+					REMOVE
+				</ion-option-button>
+			</ion-item>
+		</ion-list>
+	</ion-content>
+</ion-view>

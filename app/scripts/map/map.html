@@ -1,0 +1,10 @@
+<ion-view view-title="Map">
+	<ion-content id="map-view">
+		<gmaps
+			ng-if="vm.data"
+			center="vm.data.origin"
+			zoom="vm.data.zoom"
+			markers="vm.data.markers">
+		</gmaps>
+	</ion-content>
+</ion-view>

@@ -1,0 +1,40 @@
+<ion-view view-title="Author">
+	<ion-content class="padding">
+		<ion-slide-box show-pager="false" ng-if="!!vm.author.avatar">
+			<ion-slide>
+				<div class="as-avatar">
+					<img ng-src="{{vm.author.avatar}}"/>
+		  	</div>
+			</ion-slide>
+		</ion-slide-box>
+
+		<h1>{{vm.author.firstName}} {{vm.author.lastName}}</h1>
+		<p>{{vm.author.affiliation}}</p>
+		<p>{{vm.author.email}}</p>
+
+		<div class="padding-top" ng-if="!!vm.author.bio">
+			<h3>Biography</h3>
+ 			<p>{{vm.author.bio}}</p>
+ 		</div>
+
+		<h3>Contact</h3>
+		<div class="list card">
+			<a href="tel:{{vm.author.phoneNumber}}" class="item item-icon-left">
+				<i class="icon ion-ios-telephone"></i>
+				Phone
+			</a>
+			<a class="item item-icon-left" ng-click="vm.sendEmail()">
+				<i class="icon ion-email"></i>
+				Email
+			</a>
+			<a class="item item-icon-left" ng-click="vm.openUrl(vm.author.linkedIn)">
+				<i class="icon ion-social-linkedin"></i>
+				Linked In
+			</a>
+			<a class="item item-icon-left" ng-click="vm.openUrl(vm.author.webpage)">
+				<i class="icon ion-ios-world"></i>
+				Webpage
+			</a>
+		</div>
+	</ion-content>
+</ion-view>

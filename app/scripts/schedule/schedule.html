@@ -1,0 +1,36 @@
+<ion-view class="segments">
+	<ion-nav-title>
+		<button class="button header-button"
+			ng-click="vm.showAll()"
+			ng-class="{ 'selected-header-button': !vm.favorites }">ALL
+		</button>
+		<button class="button header-button"
+			ng-click="vm.showFavorites()"
+			ng-class="{ 'selected-header-button': vm.favorites }">FAVORITES
+		</button>
+	</ion-nav-title>
+	<ion-nav-buttons side="secondary">
+		<a class="button button-icon icon ion-ios-close-empty" ng-click="vm.clearSessionFilter()" ng-disabled="!vm.filterBySessionId && !vm.filterByDayId"></a>
+		<a class="button button-icon icon ion-android-options" ng-click="vm.showFilter()"></a>
+	</ion-nav-buttons>
+
+	<div class="bar bar-subheader bar-stable item-input-inset">
+		<label class="item-input-wrapper">
+			<i class="icon ion-ios-search placeholder-icon"></i>
+			<input type="search" placeholder="Search" ng-model="vm.filter" ng-change="vm.filterChanged()">
+		</label>
+	</div>
+
+	<ion-content class="has-subheader">
+		<ion-list>
+			<div class="item item-text-wrap {{vm.getClasses(item.type)}}" ng-repeat="item in vm.schedule">
+				<div ng-if="item.type === 'day'">{{item.date}}</div>
+				<div ng-if="item.type === 'session'">{{item.title}}</div>
+				<div ng-if="item.type === 'subsession'" ng-click="vm.goToSessionDetail(item.subsession)">
+					<h2>{{item.subsession.title}}</h2>
+					<p>{{item.subsession.timeStart}} - {{item.subsession.timeEnd}}: {{item.subsession.location}}</p>
+				</div>
+			</div>
+		</ion-list>
+	</ion-content>
+</ion-view>

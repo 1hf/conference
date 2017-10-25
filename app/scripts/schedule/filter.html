@@ -1,0 +1,42 @@
+<ion-modal-view>
+	<ion-header-bar>
+		<button
+			class="button button-clear"
+			ng-click="vm.closeFilter()">
+			CANCEL
+		</button>
+		<h1 class="title">Filter</h1>
+		<button
+			class="button button-clear"
+			ng-click="vm.applyFilters()">
+			DONE
+		</button>
+	</ion-header-bar>
+	<ion-content>
+		<div class="list">
+			<ion-item class="item-divider">Days</ion-item>
+			<ion-radio name="day"
+				ng-model="vm.day"
+				ng-value="'all'"
+				ng-change="vm.setDefaultSession('all')">All
+			</ion-radio>
+			<ion-radio name="day"
+				ng-model="vm.day"
+				ng-value="day"
+				ng-repeat="day in vm.days"
+				ng-change="vm.setDefaultSession(day)">{{day.date}}
+			</ion-radio>
+
+			<ion-item class="item-divider">Sessions</ion-item>
+			<ion-radio name="session"
+				ng-model="vm.sessionId"
+				ng-value="'all'">All
+			</ion-radio>
+			<ion-radio name="session"
+				ng-model="vm.sessionId"
+				ng-value="session.$id"
+				ng-repeat="session in vm.getSessions(vm.day)">{{session.title}}
+			</ion-radio>
+		</div>
+	</ion-content>
+</ion-modal-view>

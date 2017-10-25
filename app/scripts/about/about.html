@@ -1,0 +1,45 @@
+<ion-view>
+	<ion-nav-title>About</ion-nav-title>
+	<ion-nav-buttons side="secondary">
+		<a class="button button-icon icon ion-more" ng-click="vm.showPopover()"></a>
+	</ion-nav-buttons>
+	<ion-content padding="true">
+		<div style="text-align: center;">
+			<img src="{{vm.info.image}}" alt="ionic">
+		</div>
+		<div>
+			<h4 style="text-align: center">{{vm.info.title}}</h4>
+			<div class="list">
+				<div class="item">
+					<i class="icon ion-calendar"></i>
+					<span>Start Date</span>
+					<span style="float: right">{{vm.info.startDate| date: "MMM d, y"}}</span>
+				</div>
+				<div class="item">
+					<i class="icon ion-calendar"></i>
+					<span>End Date</span>
+					<span style="float: right">{{vm.info.endDate| date: "MMM d, y"}}</span>
+				</div>
+				<div class="item">
+					<i class="icon ion-location"></i>
+					<span>Location</span>
+					<span style="float: right">{{vm.info.country}}</span>
+				</div>
+			</div>
+			<p>
+				{{vm.info.description}}
+			</p>
+		</div>
+		<div class="list card">
+			<a class="item item-icon-left">
+				<i class="icon ion-email"></i>
+				Email: {{vm.info.email}}
+			</a>
+
+			<a class="item item-icon-left" ng-click="vm.getDirections()">
+				<i class="icon ion-compass"></i>
+				Find us / Get directions
+			</a>
+		</div>
+	</ion-content>
+</ion-view>

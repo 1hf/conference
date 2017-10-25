@@ -1,0 +1,28 @@
+<ion-modal-view>
+	<ion-header-bar>
+		<button
+			class="button button-clear"
+			ng-click="vm.closeFilter()">
+			CANCEL
+		</button>
+		<h1 class="title">Filter Abstracts</h1>
+		<button
+			class="button button-clear"
+			ng-click="vm.applyFilters()">
+			DONE
+		</button>
+	</ion-header-bar>
+	<ion-content>
+		<ion-list>
+			<ion-item class="item-divider">Type</ion-item>
+			<ion-toggle ng-repeat="type in vm.types" ng-model="type.isChecked">
+				{{type.name}}
+			</ion-toggle>
+
+			<ion-item class="item-divider">Date</ion-item>
+			<ion-toggle ng-repeat="date in vm.dates" ng-model="date.isChecked">
+				{{date.name}}
+			</ion-toggle>
+		</ion-list>
+	</ion-content>
+</ion-modal-view>

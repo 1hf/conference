@@ -1,0 +1,22 @@
+<ion-view view-title="Session">
+	<ion-nav-buttons side="secondary">
+		<button class="button-clear" ng-click="vm.toggleFavorites()">
+			<i class="icon ion-ios-star-outline light" ng-if="!vm.isInFavorites"></i>
+			<i class="icon ion-ios-star light" ng-if="vm.isInFavorites"></i>
+		</button>
+	</ion-nav-buttons>
+	<ion-content padding="true">
+		<h2>{{vm.session.title}}</h2>
+
+		<p>{{vm.session.timeStart}} - {{vm.session.timeEnd}}</p>
+		<p>{{vm.session.location}}</p>
+		<p>{{vm.session.description}}</p>
+
+		<h3 ng-if="vm.session.speakers">Speakers</h3>
+		<ion-list>
+			<ion-item ng-repeat="speaker in vm.session.speakers">
+				{{speaker}}
+			</ion-item>
+		</ion-list>
+	</ion-content>
+</ion-view>

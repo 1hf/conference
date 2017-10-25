@@ -1,0 +1,15 @@
+<ion-view>
+	<ion-nav-title>
+		{{vm.committee.title}}
+	</ion-nav-title>
+	<ion-content>
+		<ion-list>
+			<ion-item class="item item-text-wrap item-avatar" ng-repeat="(id, member) in vm.committee.members" ng-click="vm.goToMemberDetails(id)">
+				<img ng-src="{{member.avatar}}">
+				<h2>{{member.firstName}} {{member.lastName}}</h2>
+				<p>{{member.affiliation}}</p>
+				<p>{{member.email}}</p>
+			</ion-item>
+		</ion-list>
+	</ion-content>
+</ion-view>

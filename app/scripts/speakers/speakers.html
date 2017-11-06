@@ -2,9 +2,9 @@
 	<ion-content>
 		<div class="list">
 			<div class="item item-avatar" ng-repeat="speaker in vm.speakers" ng-click="vm.goToSpeakerDetail(speaker)">
-				<img ng-src="{{speaker.avatar}}">
-				<h2>{{speaker.fullname}}</h2>
-				<p>{{speaker.affiliation}}</p>
+				<img ng-src="{{speaker.profilePic}}">
+				<h2>{{speaker.name}}</h2>
+				<p>{{speaker.about}}</p>
 			</div>
 		</div>
 	</ion-content>

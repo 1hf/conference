@@ -7,6 +7,7 @@
 			firebase.initializeApp(ENV.firebaseConfig);
 
 			var rootRef = firebase.database().ref();
+                        console.log(rootRef);
 			return rootRef;
 		}])
 		.factory('firebaseDataService', firebaseDataService);
@@ -116,7 +117,7 @@
 		}
 
 		function getScheduleDays() {
-			var query = db.child('schedule-days');
+			var query = db.child('schedule');
 			return $firebaseArray(query).$loaded();
 		}
 	}

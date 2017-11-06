@@ -1,22 +1,28 @@
 <ion-view view-title="Session">
-	<ion-nav-buttons side="secondary">
+<!--	<ion-nav-buttons side="secondary">
 		<button class="button-clear" ng-click="vm.toggleFavorites()">
 			<i class="icon ion-ios-star-outline light" ng-if="!vm.isInFavorites"></i>
 			<i class="icon ion-ios-star light" ng-if="vm.isInFavorites"></i>
 		</button>
-	</ion-nav-buttons>
+	</ion-nav-buttons>-->
 	<ion-content padding="true">
-		<h2>{{vm.session.title}}</h2>
+		<h2>{{vm.session.sessions[vm.session.sid-1].events[vm.session.eid-1].eventTitle}}</h2>
 
-		<p>{{vm.session.timeStart}} - {{vm.session.timeEnd}}</p>
+		<p>{{vm.session.sessions[vm.session.sid-1].events[vm.session.eid-1].timeStart | date:'hh:mm a'}}</p>
 		<p>{{vm.session.location}}</p>
-		<p>{{vm.session.description}}</p>
+		<p>{{vm.session.sessions[vm.session.sid-1].events[vm.session.eid-1].eventDescription}}</p>
 
 		<h3 ng-if="vm.session.speakers">Speakers</h3>
 		<ion-list>
-			<ion-item ng-repeat="speaker in vm.session.speakers">
-				{{speaker}}
+			<ion-item ng-if="vm.session.sessions[vm.session.sid-1].events[vm.session.eid-1].speakerNames">
+                            <div style="white-space: normal;"><strong>Speaker</strong>: {{vm.session.sessions[vm.session.sid-1].events[vm.session.eid-1].speakerNames}}</div>
 			</ion-item>
-		</ion-list>
+                        <ion-item ng-if="vm.session.sessions[vm.session.sid-1].events[vm.session.eid-1].moderatorNames">
+                            <div style="white-space: normal;"><strong>Moderator</strong>: {{vm.session.sessions[vm.session.sid-1].events[vm.session.eid-1].moderatorNames}}</div>
+                        </ion-item>
+                        <ion-item ng-if="vm.session.sessions[vm.session.sid-1].events[vm.session.eid-1].chairPersons">
+                            <div style="white-space: normal;"><strong>Chairperson</strong>: {{vm.session.sessions[vm.session.sid-1].events[vm.session.eid-1].chairPersons}}</div>
+			</ion-item>
+                </ion-list>
 	</ion-content>
 </ion-view>

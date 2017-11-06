@@ -27,6 +27,7 @@
 				})
 				.state('app.tabs.schedule-details', {
 					url: '/schedule-details',
+                                        params: {item:null},
 					views: {
 						'schedule-tab': {
 							templateUrl: 'scripts/schedule/schedule-details.html',

@@ -1,11 +1,12 @@
 <ion-view view-title="Speaker">
 	<ion-content class="padding">
 		<div style="text-align: center">
-			<img class="avatar" ng-src="{{vm.speaker.avatar}}"/>
+			<img class="avatar" ng-src="{{vm.speaker.profilePic}}"/>
 		</div>
 
-		<h1>{{vm.speaker.firstName}} {{vm.speaker.lastName}}</h1>
-		<p>{{vm.speaker.affiliation}}</p>
+		<!--<h1>{{vm.speaker.firstName}} {{vm.speaker.lastName}}</h1>-->
+                <h1>{{vm.speaker.name}}</h1>
+		<p>{{vm.speaker.about}}</p>
 		<p>{{vm.speaker.email}}</p>
 
 		<div class="padding-top" ng-if="!!vm.speaker.bio">

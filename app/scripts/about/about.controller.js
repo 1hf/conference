@@ -27,10 +27,10 @@
 		function showPopover() {
 			$ionicActionSheet.show({
 				buttons: [
-					{ text: 'Learn Ionic' },
-					{ text: 'Documentation' },
-					{ text: 'Showcase' },
-					{ text: 'GitHub Repo' }
+//					{ text: 'Learn Ionic' },
+//					{ text: 'Documentation' },
+//					{ text: 'Showcase' },
+//					{ text: 'GitHub Repo' }
 				],
 				cancelText: 'Cancel',
 				cancel: function() {

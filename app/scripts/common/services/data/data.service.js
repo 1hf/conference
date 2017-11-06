@@ -15,6 +15,7 @@
 			case 'REMOTE':
 				return $injector.get('fileDataService');
 			case 'FIREBASE':
+                            //alert('firebaseDataService');
 				return $injector.get('firebaseDataService');
 		}
 

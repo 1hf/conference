@@ -5,10 +5,10 @@
 		.module('conference.schedule')
 		.controller('ScheduleDetailsController', ScheduleDetailsController);
 
-	ScheduleDetailsController.$inject = ['scheduleService', 'ionicToast'];
+	ScheduleDetailsController.$inject = ['scheduleService', 'ionicToast', '$stateParams'];
 
 	/* @ngInject */
-	function ScheduleDetailsController(scheduleService, ionicToast) {
+	function ScheduleDetailsController(scheduleService, ionicToast, $stateParams) {
 		var vm = angular.extend(this, {
 			session: null,
 			toggleFavorites: toggleFavorites
@@ -19,10 +19,12 @@
 		(function activate() {
 			getSession();
 		})();
-
+console.log($stateParams);
 		function getSession() {
-			vm.session = scheduleService.getSession();
-			vm.isInFavorites = scheduleService.isInFavorites(vm.session.$id);
+			//vm.session = scheduleService.getSession();
+			//vm.isInFavorites = scheduleService.isInFavorites(vm.session.$id);
+                        vm.session = $stateParams.item;
+                        console.log(angular.toJson(vm.session));
 		}
 
 		function toggleFavorites() {

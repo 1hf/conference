@@ -46,6 +46,7 @@
 			var filter = (filter ? filter.toLowerCase() : '').trim();
 
 			return dataService.getScheduleDays().then(function(items) {
+                            console.log(items);
 				var schedule = [];
 
 				var orderedDays = _.sortBy(items, 'date');
@@ -110,7 +111,8 @@
 					}
 				})
 
-				return schedule;
+				//return schedule;
+                                return items;
 			});
 		}
 
@@ -134,9 +136,11 @@
 
 		function setSession(currentSession) {
 			session = currentSession;
+                        
 		}
 
 		function getSession() {
+                    console.log(angular.toJson(session));
 			return session;
 		}
 	}

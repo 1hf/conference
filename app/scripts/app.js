@@ -57,5 +57,5 @@ angular.module('conference', [
 
 	.config(function($urlRouterProvider, $compileProvider) {
 		$compileProvider.imgSrcSanitizationWhitelist(/^\s*(https?|file|blob|cdvfile|content):|data:image\//);
-		$urlRouterProvider.otherwise('/tutorial');
+		$urlRouterProvider.otherwise('/app/tab/schedule');
 	});

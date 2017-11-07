@@ -1,44 +1,52 @@
 <ion-view class="segments">
-	<ion-nav-title>
-		<button class="button header-button"
+	<ion-nav-title style="color:#FFF; text-align:center;background-color: #094261;">
+            <h3 style="    margin-top: 7px;color:#FFF;">Schedule</h3>
+<!--		<button class="button header-button"
 			ng-click="vm.showAll()"
 			ng-class="{ 'selected-header-button': !vm.favorites }">ALL
 		</button>
 		<button class="button header-button"
 			ng-click="vm.showFavorites()"
 			ng-class="{ 'selected-header-button': vm.favorites }">FAVORITES
-		</button>
+		</button>-->
 	</ion-nav-title>
 <!--	<ion-nav-buttons side="secondary">
 		<a class="button button-icon icon ion-ios-close-empty" ng-click="vm.clearSessionFilter()" ng-disabled="!vm.filterBySessionId && !vm.filterByDayId"></a>
 		<a class="button button-icon icon ion-android-options" ng-click="vm.showFilter()"></a>
 	</ion-nav-buttons>-->
 
-	<div class="bar bar-subheader bar-stable item-input-inset">
-		<label class="item-input-wrapper">
+	
+<div class="bar bar-subheader bar-stable item-input-inset" style="background: lightgrey;">
+		<label class="item-input-wrapper" style="background: #FFF;">
 			<i class="icon ion-ios-search placeholder-icon"></i>
-			<input type="search" placeholder="Search" ng-model="vm.filter" ng-change="vm.filterChanged()">
+			<input type="search" placeholder="Search" ng-model="filtertxt">
 		</label>
 	</div>
-
 	<ion-content class="has-subheader">
+            
            <div class="bar bar-subheader bar-stable item-input-inset" style="top:0px;">
-                   <div style="width:10%;float: left;text-align: center;padding: 13px;" ng-click="vm.showYesterday()"><i style="font-size:24px;color: blue;" class="icon ion-android-arrow-dropleft-circle"></i></div>
-                   <div style="width:79%; text-align: center;border-width:0px;" class="item" ion-datetime-picker date ng-model="vm.scheduleDate" ng-change="vm.dateChanged()">
+                   <div style="width:10%;float: left;text-align: center;padding: 13px;background: #128DD7;" ng-click="vm.showYesterday()"><i style="font-size:24px;color: #FFF;" class="icon ion-android-arrow-dropleft-circle"></i></div>
+                   <div style="width:81%; text-align: center;border-width:0px;background: #128DD7;color: #FFF;" class="item" ion-datetime-picker date ng-model="vm.scheduleDate" ng-change="vm.dateChanged()" ng-disabled="button_clicked">
                     {{vm.scheduleDate | date: "MMM dd-yyyy"}}
                    </div>
-                   <div style="width:10%;float: left;text-align: center;padding: 13px;" ng-click="vm.showTomorrow()"><i style="font-size:24px;color: blue;" class="icon ion-android-arrow-dropright-circle"></i></div>
+                   <div style="width:10%;float: left;text-align: center;padding: 13px;background: #128DD7;" ng-click="vm.showTomorrow()"><i style="font-size:24px;color: #FFF;" class="icon ion-android-arrow-dropright-circle"></i></div>
+                   
             </div>
             <div class="bar bar-subheader bar-stable item-input-inset" style="top:0px;">
-                <select ng-model="vm.rooms" style="width: 100%;min-height: 40px;border-width: 0px;text-align-last: center;" ng-change="vm.roomChanged()">
+                <select ng-model="vm.rooms" style="width: 100%;min-height: 40px;border-width: 0px;text-align-last: center;background: #128DD7;color:#FFF;" ng-change="vm.roomChanged()">
                     <option value="all">All</option>
                     <option ng-repeat="r in vm.room" value="{{r}}">{{r}}</option>
                 </select>
             </div>
 		<ion-list>
-                    <div ng-if="noRecord" style="text-align: center;color:red;">{{noRecord}}</div>
-			<div style="border-width:1px;" class="item item-text-wrap {{vm.getClasses(item.type)}}" ng-repeat="item in vm.schedule">
-                            
+                    <ion-item ng-if="noRecord">
+                        <div style="text-align: center;color:red;">{{noRecord}}</div>
+                    </ion-item>
+                    
+			<div style="    background: #FFF;border-top: #FFF;" class="item item-text-wrap {{vm.getClasses(item.type)}}" ng-repeat="item in vm.schedule | filter:filtertxt">
+                            <ion-item>
+                                <div>Location: {{item.location}}</div>
+                            </ion-item>
 <!--				<div ng-if="item.type === 'day'">{{item.date}}</div>
 				<div ng-if="item.type === 'session'">{{item.title}}</div>
 				<div ng-if="item.type === 'subsession'" ng-click="vm.goToSessionDetail(item.subsession)">
@@ -47,13 +55,13 @@
 				</div>-->
 
 <!--                            <div>Date: {{item.eventDate | date:medium}}</div>-->
-                            <div>Location: {{item.location}}</div>
-                            <div ng-repeat="session in item.sessions">
+                            
+                            <div ng-repeat="session in item.sessions | filter:filtertxt">
 <!--                                <div>Session: {{session.sessionName}}</div>-->
-                                <div ng-repeat="event in session.events" style="padding:5px;">
-                                    <div>{{event.timeStart}}</div>
-                                    <div style="color:blue;" ng-click="vm.goToSessionDetail(item,session.id,event.id)">{{event.eventTitle}}</div>                                     
-                                </div> 
+                                <ion-item ng-repeat="event in session.events | filter:filtertxt" style="padding:5px;">
+                                    <div style="font-size: 14px;">{{event.timeStart}}</div>
+                                    <div style="color:#107EC1;font-size: 16px;" ng-click="vm.goToSessionDetail(item,session.id,event.id)">{{event.eventTitle}}</div>                                     
+                                </ion-item> 
                             </div>
 			</div>
 		</ion-list>

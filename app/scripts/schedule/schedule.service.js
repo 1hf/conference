@@ -13,6 +13,7 @@
 
 		var service = {
 			getScheduleDays: getScheduleDays,
+                        getScheduleData: getScheduleData,
 			getSessionFilterData: getSessionFilterData,
 			toggleFavorites: toggleFavorites,
 			isInFavorites: isInFavorites,
@@ -113,6 +114,13 @@
 
 				//return schedule;
                                 return items;
+			});
+		}
+                
+                function getScheduleData() {
+			return dataService.getScheduleDays().then(function(items) {
+                            console.log(items);
+                            return items;
 			});
 		}
 

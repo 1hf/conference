@@ -1,16 +1,22 @@
 <ion-view view-title="Floor Map">
-	<ion-content id="map-view">
-		<gmaps
-			ng-if="vm.data"
-			center="vm.data.origin"
-			zoom="vm.data.zoom"
-			markers="vm.data.markers">
-		</gmaps>
-            <ion-item style="height:100%;"><embed width="100%" height="100%" name="plugin" id="plugin" src="http://isacon2017kolkata.com/pdf/HIDCO-GROUND%20FLOOR.pdf" type="application/pdf" internalinstanceid="12">
-            </ion-item>
-            <ion-item style="height:100%;"><embed width="100%" height="100%" name="plugin" id="plugin" src="http://isacon2017kolkata.com/pdf/HIDCO-1ST%20FLOOR.pdf" type="application/pdf" internalinstanceid="13">
-            </ion-item>
-            <ion-item style="height:100%;"><embed width="100%" height="100%" name="plugin" id="plugin" src="http://isacon2017kolkata.com/pdf/HIDCO-2ND%20FLOOR.pdf" type="application/pdf" internalinstanceid="9">
-            </ion-item>    
-                </ion-content>
+    <ion-content id="map-view">
+        <gmaps
+            ng-if="vm.data"
+            center="vm.data.origin"
+            zoom="vm.data.zoom"
+            markers="vm.data.markers">
+        </gmaps>
+        <ion-item style="height:100%;">
+            <ion-item style="border-radius: 5px;" class="item-divider">GROUND FLOOR</ion-item>
+            <img ng-src="images/HIDCO-GROUND-FLOOR-1.jpg"/>
+        </ion-item>
+        <ion-item style="height:100%;">
+            <ion-item style="border-radius: 5px;" class="item-divider">FIRST FLOOR</ion-item>
+            <img ng-src="images/HIDCO-1ST-FLOOR-1.jpg"/>
+        </ion-item>
+        <ion-item style="height:100%;">
+            <ion-item style="border-radius: 5px;" class="item-divider">SECOND FLOOR</ion-item>
+            <img ng-src="images/HIDCO-2ND-FLOOR-1.jpg"/>
+        </ion-item>    
+    </ion-content>
 </ion-view>

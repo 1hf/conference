@@ -5030,7 +5030,8 @@ a.subdued:last-child {
   border-color: transparent;
   background: none;
   box-shadow: none;
-  color: #444;
+  /*color: #444;*/
+  color: #FFF;
   font-size: 17px;
 }
 .bar-stable .button.button-icon {

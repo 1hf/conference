@@ -1,5 +1,8 @@
-<ion-view view-title="Speaker">
-	<ion-content class="padding">
+<ion-view view-title="Speaker" hide-back-button="true">
+     <ion-nav-buttons side="right" class="has-header">
+       <button class="button button-icon icon ion-android-arrow-back" title="Back" ng-click="vm.goBack()"></button>
+   </ion-nav-buttons>
+	<ion-content class="padding" style="margin-top:50px;">
 		<div style="text-align: center">
 			<img class="avatar" ng-src="{{vm.speaker.profilePic}}"/>
 		</div>
@@ -32,6 +35,8 @@
 				<i class="icon ion-ios-world"></i>
 				Webpage
 			</a>
+                    <button class="button button-icon icon ion-android-arrow-back" title="Back" ng-click="vm.goBack()"></button>
 		</div>
+                
 	</ion-content>
 </ion-view>

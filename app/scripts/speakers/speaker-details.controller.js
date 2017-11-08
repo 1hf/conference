@@ -14,7 +14,8 @@
 		var vm = angular.extend(this, {
 			speaker: null,
 			sendEmail: sendEmail,
-			openUrl: openUrl
+			openUrl: openUrl,
+                         goBack:goBack
 		});
 
 		// ********************************************************************
@@ -28,7 +29,9 @@
 				vm.speaker = speaker;
 			})
 		}
-
+function goBack() {
+           $state.go('app.tabs.speakers');
+       }
 		function sendEmail() {
 			$cordovaEmailComposer.isAvailable().then(function() {
 				var email = {

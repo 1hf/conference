@@ -6,17 +6,27 @@
             zoom="vm.data.zoom"
             markers="vm.data.markers">
         </gmaps>
-        <ion-item style="height:100%;">
+        <ion-item>
             <ion-item style="border-radius: 5px;" class="item-divider">GROUND FLOOR</ion-item>
-            <img ng-src="images/HIDCO-GROUND-FLOOR-1.jpg"/>
+            
+                <ion-scroll zooming="true" direction="xy" delegate-handle="zoom-pane" class="zoom-pane" min-zoom="1" scrollbar-x="false" scrollbar-y="false">
+                <img ng-src="images/HIDCO-GROUND-FLOOR-1.jpg"/>             
+            </ion-scroll>
+                
+            
         </ion-item>
-        <ion-item style="height:100%;">
+        <ion-item>
             <ion-item style="border-radius: 5px;" class="item-divider">FIRST FLOOR</ion-item>
-            <img ng-src="images/HIDCO-1ST-FLOOR-1.jpg"/>
+            <ion-item><ion-scroll zooming="true" direction="xy" delegate-handle="zoom-pane" class="zoom-pane" min-zoom="1" scrollbar-x="false" scrollbar-y="false">
+                <img ng-src="images/HIDCO-1ST-FLOOR-1.jpg"/>           
+            </ion-scroll></ion-item>
         </ion-item>
-        <ion-item style="height:100%;">
+        <ion-item>
+            
             <ion-item style="border-radius: 5px;" class="item-divider">SECOND FLOOR</ion-item>
-            <img ng-src="images/HIDCO-2ND-FLOOR-1.jpg"/>
+            <ion-item><ion-scroll zooming="true" direction="xy" delegate-handle="zoom-pane" class="zoom-pane" min-zoom="1" scrollbar-x="false" scrollbar-y="false">
+                <img ng-src="images/HIDCO-2ND-FLOOR-1.jpg"/>          
+            </ion-scroll></ion-item>
         </ion-item>    
     </ion-content>
 </ion-view>

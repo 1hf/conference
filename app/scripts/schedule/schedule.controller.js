@@ -31,7 +31,8 @@
             getClasses: getClasses,
             clearSessionFilter: clearSessionFilter,
             showYesterday: showYesterday,
-            showTomorrow: showTomorrow
+            showTomorrow: showTomorrow,
+            doRefresh: doRefresh
         });
         vm.scheduleDate = '';
         //vm.scheduleDate = new Date();
@@ -41,7 +42,12 @@
         $scope.$on('$ionicView.beforeEnter', function () {
             loadSchedule();
         });
-
+        
+        function doRefresh(){
+            loadSchedule();
+            $scope.$broadcast('scroll.refreshComplete');
+            $scope.$apply();
+        }
         function getClasses(type) {
             switch (type) {
                 case 'day':

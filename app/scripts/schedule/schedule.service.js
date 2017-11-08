@@ -119,7 +119,7 @@
                 
                 function getScheduleData() {
 			return dataService.getScheduleDays().then(function(items) {
-                            console.log(items);
+                            //console.log(angular.toJson(items));
                             return items;
 			});
 		}

@@ -27,15 +27,14 @@
                 </label>
             </div>
            <div class="bar bar-subheader bar-stable item-input-inset" style="top:0px;">
-                   <div style="width:10%;float: left;text-align: center;padding: 13px;background: #128DD7;" ng-click="vm.showYesterday()"><i style="font-size:24px;color: #FFF;" class="icon ion-android-arrow-dropleft-circle"></i></div>
+<!--                   <div style="width:10%;float: left;text-align: center;padding: 13px;background: #128DD7;" ng-click="vm.showYesterday()"><i style="font-size:24px;color: #FFF;" class="icon ion-android-arrow-dropleft-circle"></i></div>
                    <div style="width:81%; text-align: center;border-width:0px;background: #128DD7;color: #FFF;" class="item" ion-datetime-picker date ng-model="vm.scheduleDate" ng-change="vm.dateChanged()" ng-disabled="button_clicked">
                     {{vm.scheduleDate | date: "MMM dd-yyyy"}}
                    </div>
-                   <div style="width:10%;float: left;text-align: center;padding: 13px;background: #128DD7;" ng-click="vm.showTomorrow()"><i style="font-size:24px;color: #FFF;" class="icon ion-android-arrow-dropright-circle"></i></div>
-<!--                   <select ng-model="vm.scheduleDate" style="width: 100%;min-height: 40px;border-width: 0px;text-align-last: center;background: #128DD7;color:#FFF;" ng-change="vm.dateChanged()">
-                    <option value="all">All</option>
-                    <option ng-repeat="d in vm.date" value="{{d}}">{{d | date:'dd-MM-yyyy'}}</option>
-                </select>-->
+                   <div style="width:10%;float: left;text-align: center;padding: 13px;background: #128DD7;" ng-click="vm.showTomorrow()"><i style="font-size:24px;color: #FFF;" class="icon ion-android-arrow-dropright-circle"></i></div>-->
+                   <select ng-model="vm.scheduleDate" style="width: 100%;min-height: 40px;border-width: 0px;text-align-last: center;background: #128DD7;color:#FFF;" ng-change="vm.dateChanged()">
+                    <option ng-repeat="d in vm.date" value="{{d | date:'dd-MM-yyyy'}}">{{d | date:'dd-MM-yyyy'}}</option>
+                </select>
             </div>
             <div class="bar bar-subheader bar-stable item-input-inset" style="top:0px;">
                 <select ng-model="vm.rooms" style="width: 100%;min-height: 40px;border-width: 0px;text-align-last: center;background: #128DD7;color:#FFF;" ng-change="vm.roomChanged()">

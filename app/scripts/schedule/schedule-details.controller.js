@@ -1,45 +1,42 @@
-(function() {
-	'use strict';
+(function () {
+    'use strict';
 
-	angular
-		.module('conference.schedule')
-		.controller('ScheduleDetailsController', ScheduleDetailsController);
+    angular
+            .module('conference.schedule')
+            .controller('ScheduleDetailsController', ScheduleDetailsController);
 
-	ScheduleDetailsController.$inject = ['scheduleService', 'ionicToast', '$stateParams', '$state', '$scope'];
+    ScheduleDetailsController.$inject = ['scheduleService', 'ionicToast', '$stateParams', '$state', '$scope'];
 
-	/* @ngInject */
-	function ScheduleDetailsController(scheduleService, ionicToast, $stateParams, $state, $scope) {
-		var vm = angular.extend(this, {
-			session: null,
-                        doRefresh:doRefresh,
-                        goBack:goBack
+    /* @ngInject */
+    function ScheduleDetailsController(scheduleService, ionicToast, $stateParams, $state, $scope) {
+        var vm = angular.extend(this, {
+            session: null,
+            doRefresh: doRefresh
 //			,toggleFavorites: toggleFavorites
-		});
+        });
 
-		// ********************************************************************
+        // ********************************************************************
 
-		(function activate() {
-			getSession();
-		})();
-		function getSession() {
-			//vm.session = scheduleService.getSession();
-			//vm.isInFavorites = scheduleService.isInFavorites(vm.session.$id);
-                        if($stateParams.item){
-                           vm.session = $stateParams.item;
-                            console.log(angular.toJson(vm.session)); 
-                        }else{
-                            $state.go('app.tabs.schedule');
-                        }
-                        
-		}
-function doRefresh(){
+        (function activate() {
+            getSession();
+        })();
+        function getSession() {
+            //vm.session = scheduleService.getSession();
+            //vm.isInFavorites = scheduleService.isInFavorites(vm.session.$id);
+            if ($stateParams.item) {
+                vm.session = $stateParams.item;
+                //alert(angular.toJson(vm.session));
+            } else {
+                $state.go('app.tabs.schedule');
+            }
+
+        }
+        function doRefresh() {
             getSession();
             $scope.$broadcast('scroll.refreshComplete');
             $scope.$apply();
         }
-        function goBack(){
-           $state.go('app.tabs.schedule'); 
-        }
+
 //		function toggleFavorites() {
 //			vm.isInFavorites = !vm.isInFavorites;
 //			if (vm.isInFavorites) {
@@ -50,5 +47,5 @@ function doRefresh(){
 //				ionicToast.show('\'' + vm.session.title + '\' has been removed from your Favorites', 'bottom', false, 2000);
 //			}
 //		}
-	}
+    }
 })();

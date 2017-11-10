@@ -1,51 +1,48 @@
-(function() {
-	'use strict';
+(function () {
+    'use strict';
 
-	angular
-		.module('conference.speakers')
-		.controller('SpeakerDetailsController', SpeakerDetailsController);
+    angular
+            .module('conference.speakers')
+            .controller('SpeakerDetailsController', SpeakerDetailsController);
 
-	SpeakerDetailsController.$inject = ['speakersService', '$state', '$cordovaEmailComposer', 'externalAppsService'];
+    SpeakerDetailsController.$inject = ['speakersService', '$state', '$cordovaEmailComposer', 'externalAppsService'];
 
-	/* @ngInject */
-	function SpeakerDetailsController(speakersService, $state, $cordovaEmailComposer, externalAppsService) {
-		var speakerId = $state.params.speakerId;
+    /* @ngInject */
+    function SpeakerDetailsController(speakersService, $state, $cordovaEmailComposer, externalAppsService) {
+        var speakerId = $state.params.speakerId;
 
-		var vm = angular.extend(this, {
-			speaker: null,
-			sendEmail: sendEmail,
-			openUrl: openUrl,
-                         goBack:goBack
-		});
+        var vm = angular.extend(this, {
+            speaker: null,
+            sendEmail: sendEmail,
+            openUrl: openUrl
+        });
 
-		// ********************************************************************
+        // ********************************************************************
 
-		(function activate() {
-			getSpeaker();
-		})();
+        (function activate() {
+            getSpeaker();
+        })();
 
-		function getSpeaker() {
-			return speakersService.getSpeaker(speakerId).then(function(speaker) {
-				vm.speaker = speaker;
-			})
-		}
-function goBack() {
-           $state.go('app.tabs.speakers');
-       }
-		function sendEmail() {
-			$cordovaEmailComposer.isAvailable().then(function() {
-				var email = {
-					to: vm.author.email,
-					subject: 'Question on paper',
-					body: 'Following on your paper, I would like to contact you for more clarifications.'
-				};
+        function getSpeaker() {
+            return speakersService.getSpeaker(speakerId).then(function (speaker) {
+                vm.speaker = speaker;
+            })
+        }
 
-				$cordovaEmailComposer.open(email);
-			});
-		}
+        function sendEmail() {
+            $cordovaEmailComposer.isAvailable().then(function () {
+                var email = {
+                    to: vm.author.email,
+                    subject: 'Question on paper',
+                    body: 'Following on your paper, I would like to contact you for more clarifications.'
+                };
 
-		function openUrl(url) {
-			externalAppsService.openExternalUrl(url);
-		}
-	}
+                $cordovaEmailComposer.open(email);
+            });
+        }
+
+        function openUrl(url) {
+            externalAppsService.openExternalUrl(url);
+        }
+    }
 })();

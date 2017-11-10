@@ -2,7 +2,7 @@
 	'use strict';
 
 	angular
-		.module('conference.speakers')
+		.module('conference.speakers') 
 		.controller('SpeakersController', SpeakersController);
 
 	SpeakersController.$inject = ['$state', 'speakersService'];

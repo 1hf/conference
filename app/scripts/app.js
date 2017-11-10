@@ -14,13 +14,12 @@ angular.module('conference', [
 	'ionic.service.push',
 	'gMaps',
 	'ngCordova',
-
 	'conference.common',
 	'conference.menu',
 	'conference.schedule',
 	'conference.map',
 	'conference.speakers',
-	'conference.about',
+	'conference.places',
 	'conference.auth',
 	'conference.tutorial',
 	'conference.abstracts',
@@ -48,7 +47,6 @@ angular.module('conference', [
 			}
 		});
 	})
-
 	.run(function($rootScope) {
 		$rootScope.$on('$stateChangeStart', function(event, toState, toParams, fromState, fromParams) {
 			$rootScope.hideTabs = !!toState.hideTabs;

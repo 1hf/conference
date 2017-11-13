@@ -1,89 +1,89 @@
-(function() {
-	'use strict';
+(function () {
+    'use strict';
 
-	angular
-		.module('conference.auth')
-		.factory('loginSignUpService', loginSignUpService);
+    angular
+            .module('conference.auth')
+            .factory('loginSignUpService', loginSignUpService);
 
-	loginSignUpService.$inject = ['$rootScope', '$firebaseAuth', 'db'];
+    loginSignUpService.$inject = ['$rootScope', '$firebaseAuth', 'db'];
 
-	/* @ngInject */
-	function loginSignUpService($rootScope, $firebaseAuth, db) {
-		var firebaseAuth = firebase.auth();
-		var auth = $firebaseAuth(firebaseAuth);
+    /* @ngInject */
+    function loginSignUpService($rootScope, $firebaseAuth, db) {
+        var firebaseAuth = firebase.auth();
+        var auth = $firebaseAuth(firebaseAuth);
 
-		var service = {
-			user: {
-				isSignedIn: false
-			},
-			signIn: signIn,
-			signUp: signUp,
-			logout: logout,
-			getUser: getStoredUser
-		};
+        var service = {
+            user: {
+                isSignedIn: false
+            },
+            signIn: signIn,
+            signUp: signUp,
+            logout: logout,
+            getUser: getStoredUser
+        };
 
-		firebaseAuth.onAuthStateChanged(function(data) {
-			if (!data) {
-				setUser();
-			} else {
-				setUser(data.email);
-			}
-		});
+        firebaseAuth.onAuthStateChanged(function (data) {
+            if (!data) {
+                setUser();
+            } else {
+                setUser(data.email);
+            }
+        });
 
-		return service;
+        return service;
 
-		// *******************************************************************
+        // *******************************************************************
 
-		function logout() {
-			setUser();
-			auth.$signOut();
-			$rootScope.$emit('loggedOut');
-		}
+        function logout() {
+            setUser();
+            auth.$signOut();
+            $rootScope.$emit('loggedOut');
+        }
 
-		function signUp(email, password) {
-			return auth.$createUserWithEmailAndPassword(email, password).then(
-				function(userData) {
-					setUser(email);
-					$rootScope.$emit('loggedIn');
-					return userData;
-				});
-		}
+        function signUp(email, password) {
+            return auth.$createUserWithEmailAndPassword(email, password).then(
+                    function (userData) {
+                        setUser(email);
+                        $rootScope.$emit('loggedIn');
+                        return userData;
+                    });
+        }
 
-		function signIn(email, password) {
-			return auth.$signInWithEmailAndPassword(email, password).then(
-				function(authData) {
-					console.log('Logged in as:' + authData.uid);
+        function signIn(email, password) {
+            return auth.$signInWithEmailAndPassword(email, password).then(
+                    function (authData) {
+                        console.log('Logged in as:' + authData.uid);
 
-					setUser(email);
-					$rootScope.$emit('loggedIn');
-					return authData;
-				});
-		}
+                        setUser(email);
+                        $rootScope.$emit('loggedIn');
+                        return authData;
+                    });
+        }
 
-		function setUser(email) {
-			if (!email) {
-				service.user.email = null;
-				service.user.isSignedIn = false;
-			} else {
-				service.user.email = email;
-				service.user.isSignedIn = true;
-			}
-			setStoredUser(service.user);
-		}
+        function setUser(email) {
+            if (!email) {
+                service.user.email = null;
+                service.user.isSignedIn = false;
+            } else {
+                service.user.email = email;
+                service.user.isSignedIn = true;
+            }
+            setStoredUser(service.user);
+        }
 
-		function getStoredUser() {
-			var user = localStorage.getItem('authUser');
-			if (user) {
-				user = JSON.parse(user);
-			}
-			return user || { isSignedIn: false };
-		}
+        function getStoredUser() {
+            var user = localStorage.getItem('authUser');
+            if (user) {
+                user = JSON.parse(user);
+            }
+            return user || {isSignedIn: false};
+        }
 
-		function setStoredUser(user) {
-			if (user) {
-				user = JSON.stringify(user);
-			}
-			localStorage.setItem('authUser', user);
-		}
-	}
+        function setStoredUser(user) {
+            if (user) {
+                user = JSON.stringify(user);
+            }
+            localStorage.setItem('authUser', user);
+        }
+    }
 })();

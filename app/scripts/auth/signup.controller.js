@@ -1,46 +1,36 @@
-(function () {
-    'use strict';
+(function() {
+	'use strict';
 
-    angular
-            .module('conference.auth')
-            .controller('SignupController', SignupController);
+	angular
+		.module('conference.auth')
+		.controller('SignupController', SignupController);
 
-    SignupController.$inject = ['$state', '$ionicLoading', 'loginSignUpService', '$ionicPopup'];
+	SignupController.$inject = ['$ionicLoading', 'loginSignUpService'];
 
-    /* @ngInject */
-    function SignupController($state, $ionicLoading, loginSignUpService, $ionicPopup) {
-        var vm = angular.extend(this, {
-            user: {
-                email: null,
-                password: null
-            },
-            signUp: signUp,
-            goBack: goBack
-        });
+	/* @ngInject */
+	function SignupController($ionicLoading, loginSignUpService) {
+		var vm = angular.extend(this, {
+			user: {
+				email: null,
+				password: null
+			},
+			signUp: signUp
+		});
 
-        function signUp() {
-            if (vm.user.email && vm.user.password) {
-                $ionicLoading.show({});
-                loginSignUpService.signUp(vm.user.email, vm.user.password).then(
-                        function () {
-                            $ionicLoading.hide();
-                            $state.go('app.tabs.schedule');
-                        },
-                        function (error) {
-                            $ionicLoading.hide();
-                            alert('Authentication failed:' + error.message);
-                        });
-            } else {
-//                alert('Please enter email and password both');
-                $ionicPopup.alert({
-                    title: 'Invalid User Credentials!',
-                    template: 'Kindly enter both username and password..'
-                });
-            }
-        }
-
-        function goBack() {
-            $state.go('app.signin');
-        }
-    }
+		function signUp() {
+			if (vm.user.email && vm.user.password) {
+				$ionicLoading.show({});
+				loginSignUpService.signUp(vm.user.email, vm.user.password).then(
+					function() {
+						$ionicLoading.hide();
+					},
+					function(error) {
+						$ionicLoading.hide();
+						alert('Authentication failed:' + error.message);
+					});
+			} else {
+				alert('Please enter email and password both');
+			}
+		}
+	}
 })();

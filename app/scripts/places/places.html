@@ -1,7 +1,77 @@
-<ion-view>
+<ion-view class="segments">
 	<ion-nav-title>Places to Visit</ion-nav-title>
 	
 	<ion-content padding="true">
-		Places to Visit
+            <div style="width:50%;">
+            <ion-item>
+                <img src="http://isacon2017kolkata.com/Tours/images/1.png" alt="" title="Tap to read more.." />
+<!--                <p class="title">DARJEELING</p>-->
+                <div class="overlay"></div>
+                <div class="button-read"><a href="#" ng-click="openModal()"> Read More </a></div>
+            </ion-item>
+            </div>
 	</ion-content>
 </ion-view>
+<script id="templates/modal.html" type="text/ng-template">
+      <ion-modal-view>
+        <ion-header-bar class="bar bar-header bar-stable">
+          <h1 class="title">Darjeeling</h1>
+          <button style="color:green;" class="button button-clear button-primary" ng-click="modal.hide()">X</button>
+        </ion-header-bar>
+        <ion-content class="padding" scroll="true" style="padding: 15px;">
+            <ion-scroll zooming="true" direction="xy" delegate-handle="zoom-pane" class="zoom-pane" min-zoom="1" scrollbar-x="false" scrollbar-y="false">
+                <p class="txt_slogan h_content" align="center" style="font-size:22px;"><strong style="color:#FF0000; ">Kalimpong</strong></p>
+            <p class="txt_slogan h_content">
+                Spread in ribbons over a steep mountain ridge, surrounded by emerald-green tea plantations and towered over by the majestic Khanchendzonga (8598m), Darjeeling is the definitive Indian hill station. Dating back to the Raj era, it's arguably West Bengal’s premier attraction, and promises some interesting exploration for the curious traveller. When you aren’t gazing open-mouthed at Khanchendzonga, you can explore colonial-era architecture, visit Buddhist monasteries, and spot snow leopards and red pandas at the nearby zoo. On the steep and bustling streets winding through town, you can lose yourself amid an array of Himalayan faces from Sikkim, Bhutan, Nepal and Tibet. And finally, when energies start to flag, a good, steaming Darjeeling brew is never far away. 
+            </p>
+             <img src="http://isacon2017kolkata.com/images/turu/12.png" alt="Darjeeling" />
+            <p class="txt_slogan h_content" align="center" style="font-size:22px;"><strong style="color:#FF0000; ">Mirik</strong></p>
+            <p class="txt_slogan h_content">
+Nestled near the Nepal border, halfway between Siliguri and Darjeeling, is this high-profile hill station and honeymoon destination. Mirik is surrounded by an undulating carpet of tea estates, orange orchards, cardamom plantations and forests of tall, dark Japanese cedars. It is a quiet retreat that remains off most visitors’ radars. Some of Mirik’s higher hilltops offer wonderful views of morning’s first light striking Khangchendzonga (8598m). </p>
+            <p class="txt_slogan h_content" align="center" style="font-size:22px;"><strong style="color:#FF0000; ">Kurseong</strong></p>
+            <p class="txt_slogan h_content">
+Kurseong, 32km south of Darjeeling, is a tiny and bustling hill town best known for its formidable league of tea estates and a rush of Raj-era boarding schools that dot its extents. Its name derives from the Lepcha word khorsang, a reference to the small white orchid prolific in this area. Flanked by hilly slopes draped with manicured tea estates, it is also currently the southern terminus for the charming toy trains of the Darjeeling Himalayan Railway.<span id="Digha"></span></p>
+            <img src="images/darjeeling/darjeeling01.jpg" style="width:100%;" alt="" />
+            <img src="images/darjeeling/darjeeling02.jpg" style="width:100%;" alt="" /> 
+            <img src="images/darjeeling/darjeeling03.jpg" style="width:100%;" alt="" /> 
+            </ion-scroll>
+            
+           
+        </ion-content>
+      </ion-modal-view>
+    </script>
+<style>
+    img {
+  height: 250px;
+  left: 0;
+}
+.button-read {
+  position: absolute;
+  background: transparent;
+  width: 100%;
+  left:0;
+  top: 150px;
+  text-align: center;
+  opacity: 0;
+  transition: opacity .35s ease;
+}
+
+.button-read a {
+  width: 100%;
+  padding: 12px 48px;
+  text-align: center;
+  color: white;
+  border: solid 2px white;
+  z-index: 1;
+}
+
+.button-read:hover {
+  opacity: 1;
+}
+p{text-align: justify;}
+padding{-webkit-scrollbar
+{
+	width: 10px;
+	background-color: #FFF;
+}}
+</style>

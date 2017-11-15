@@ -1,16 +1,21 @@
-<ion-view title="User Signup" hide-nav-bar="true">
-    <ion-content padding="true" class="has-header">
-        <div class="list padding">
-            <label class="item item-input">
-                <span class="input-label">Email</span>
-                <input type="email" placeholder="Enter the Email Id" ng-model="vm.user.email">
-            </label>
-            <label class="item item-input">
-                <span class="input-label">Password</span>
-                <input type="password" placeholder="Enter the Password" ng-model="vm.user.password">
-            </label>
-            <button class="button button-full button-positive" ng-click="vm.signUp()">CREATE</button>
-            <button class="button button-full button-stable" ng-click="vm.goBack()">BACK</button>
-        </div>
-    </ion-content>
+<ion-view view-title="Singup">
+	<ion-content class="padding">
+		<div style="text-align: center" class="item item-borderless">
+			<img src="images/appicon.svg" alt="appicon" style="height: 150px">
+		</div>
+		<div class="list padding">
+			<label class="item item-input">
+				<span class="input-label">Email</span>
+				<input type="text" ng-model="vm.user.email">
+			</label>
+			<label class="item item-input">
+				<span class="input-label">Password</span>
+				<input type="password" ng-model="vm.user.password">
+			</label>
+			<button
+				class="button button-full button-positive" ng-click="vm.signUp()">
+				CREATE
+			</button>
+		</div>
+	</ion-content>
 </ion-view>

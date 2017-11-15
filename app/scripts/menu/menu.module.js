@@ -14,7 +14,7 @@
 					controller: 'MenuController as vm',
 					resolve: {
 						loggedUser: ['loginSignUpService', function(loginSignUpService) {
-							return loginSignUpService.getUser().isSignedIn;
+							return loginSignUpService.getStoredUser().isSignedIn;
 						}]
 					}
 				})

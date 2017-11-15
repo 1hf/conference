@@ -2,8 +2,8 @@
     <ion-content padding="true" class="has-header">
         <div class="list padding">
             <label class="item item-input">
-                <span class="input-label">Email</span>
-                <input type="email" placeholder="Enter the Email Id" ng-model="vm.user.email">
+                <span class="input-label">Username</span>
+                <input type="text" placeholder="Enter the Email / mobile" ng-model="vm.user.userName">
             </label>
             <label class="item item-input" ng-show="vm.showLogin">
                 <span class="input-label">Password</span>
@@ -11,16 +11,42 @@
             </label>
             <label class="item item-input" ng-show="vm.showReset">
                 <span class="input-label">Mobile Number</span>
-                <input type="number" placeholder="Enter the Mobile Number" ng-model="vm.mobile">
+                <input type="number" placeholder="Enter the Mobile Number" ng-model="vm.user.mobile">
             </label>
             <div style="width: 100%; float: left; margin-top: 10px;">
                 <a class="assertive" href="" style="float: right;" ng-click="vm.displayReset()" ng-show="vm.showLogin">Forgot Password?</a>
             </div>
-            <button class="button button-full button-positive" ng-click="vm.signIn()" ng-show="vm.showLogin">LOGIN</button>
-            <button class="button button-full button-stable" ng-click="vm.signUp()" ng-show="vm.showLogin">SIGN UP</button>
+            <button class="button button-full button-positive" ng-click="vm.loginUser()" ng-show="vm.showLogin">LOGIN</button>
+            <button class="button button-full button-stable" ng-click="vm.gotoSignUp()" ng-show="vm.showLogin">SIGN UP</button>
 
-            <button class="button button-full button-positive" ng-click="vm.resetPassword(vm.mobile)" ng-show="vm.showReset">RESET PASSWORD</button>
+            <button class="button button-full button-positive" ng-click="vm.resetPassword()" ng-show="vm.showReset">RESET PASSWORD</button>
             <button class="button button-full button-stable" ng-click="vm.displayLogin()" ng-show="vm.showReset">BACK</button>
         </div>
     </ion-content>
 </ion-view>
+
+<!--<ion-view view-title="Login"  hide-nav-bar="true">
+	<ion-content class="padding">
+		<div style="text-align: center" class="item item-borderless">
+			<img src="images/appicon.svg" alt="appicon" style="height: 150px">
+		</div>
+		<div class="list padding">
+			<label class="item item-input">
+				<span class="input-label">Email</span>
+				<input type="text" ng-model="vm.user.email">
+			</label>
+			<label class="item item-input">
+				<span class="input-label">Password</span>
+				<input type="password" ng-model="vm.user.password">
+			</label>
+			<button ng-click="vm.signIn()"
+				class="button button-full button-positive">
+				LOGIN
+			</button>
+			<button ng-click="vm.signUp()"
+				class="button button-full button-stable">
+				SIGNUP
+			</button>
+		</div>
+	</ion-content>
+</ion-view>-->

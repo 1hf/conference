@@ -33,6 +33,10 @@
 			getSpeaker: getSpeaker,
 			getAbstractAuthor: getAbstractAuthor,
 			getScheduleDays: getScheduleDays,
+                        getUsers: getUsers,
+                        getUser: getUser,
+                        insertUser: insertUser,
+                        update: update,
 			init: init
 		};
 		return service;
@@ -119,6 +123,25 @@
 		function getScheduleDays() {
 			var query = db.child('schedule');
 			return $firebaseArray(query).$loaded();
+		}
+                function getUser(user) {
+                    //user = parseInt(user);
+			var query = db.child('user').orderByChild('userName').equalTo(user);
+			return $firebaseObject(query).$loaded();
+		}
+                function getUsers() {
+			var query = db.child('user');
+			return $firebaseArray(query).$loaded();
+		}
+                function insertUser(user) {
+			var query = db.child('user');
+			return $firebaseArray(query).$add(user);
+		}
+                function update(id, data, collection) {
+                    console.log(id+"  "+angular.toJson(data)+"  "+collection)
+			var query = db.child(collection+'/'+id);
+			return query.update(data);
+                        //db.child("user/-KytaLkI2xP9-eh0ioNo").update({ firstName: "Prabagar" });
 		}
 	}
 })();

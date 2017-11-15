@@ -1,13 +1,35 @@
 <ion-view view-title="Account" cache-view="false">
-	<ion-content class="padding">
-		<div style="text-align: center">
-			<img src="http://www.gravatar.com/avatar?d=mm&s=140" style="border-radius: 50%">
-			<h3>{{vm.email}}</h3>
-		</div>
-		<ion-list>
-			<ion-item ng-click="vm.logout()" class="item item-borderless" style="text-align: center">
-				<h2>Logout</h2>
-			</ion-item>
-		</ion-list>
-	</ion-content>
+    <ion-content class="padding">
+        <div style="text-align: center">
+            <img ng-src= "{{vm.avatar}}" style="border-radius: 50%" ng-click="vm.showPopup()">
+            <h3>{{vm.email}}</h3>
+        </div>
+        <ion-item ng-click="vm.displayChangePassword(true)" class="item item-borderless" style="text-align: center">
+            <h2>Change Password</h2>
+        </ion-item>
+        <form name="myform" class="list" ng-show="vm.showChangePassword">
+            <label class="item item-input">
+                <input type="password" placeholder="Current Password" ng-model="vm.currentPassword" required>
+            </label>
+            <label class="item item-input">
+                <input type="password" placeholder="New Password" ng-model="vm.newPassword" required>
+            </label>
+            <label class="item item-input">
+                <input type="password" placeholder="Confirm New Password" ng-model="vm.confirmNewPassword" required>
+            </label>
+            <div class="button-bar">
+                <button class="button button-full button-positive" ng-disabled="myform.$invalid" ng-click="vm.updatePassword()">CHANGE</button>
+                <button class="button button-full button-stable" ng-click="vm.displayChangePassword(false)">BACK</button>
+            </div>
+        </form>
+        <ion-item ng-click="vm.logout()" class="item item-borderless" style="text-align: center">
+            <h2>Logout</h2>
+        </ion-item>
+    </ion-content>    
 </ion-view>
+<!--<style>
+    .popup-pin .popup { 
+        height: 30%;
+        width: 80%; 
+    }
+</style>-->

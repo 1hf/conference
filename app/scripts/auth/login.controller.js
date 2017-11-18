@@ -43,14 +43,27 @@
                                 $rootScope.$emit('loggedIn');
                                 $state.go('app.tabs.schedule');
                             } else {
-                                $ionicLoading.hide();
-                                $ionicPopup.alert({
-                                    title: 'Invalid User Credentials!',
-                                    template: 'Kindly enter a valid username and password.'
+                                loginSignUpService.loginMobile(parseInt(vm.user.userName), vm.user.password).then(function(res){
+                                    if (res) {
+                                        $ionicLoading.hide();
+                                        $rootScope.$emit('loggedIn');
+                                        $state.go('app.tabs.schedule');
+                                    } else {
+                                        $ionicLoading.hide();
+                                        $ionicPopup.alert({
+                                            title: 'Invalid User Credentials!',
+                                            template: 'Kindly enter a valid username and password.'
+                                        });
+                                    }                                    
+                                }, function(err){
+                                    $ionicLoading.hide();
+                                    $ionicPopup.alert({
+                                        title: 'Invalid User Credentials!',
+                                        template: 'Kindly enter a valid username and password.'
+                                    });
                                 });
                             }
-                        },
-                        function (error) {
+                        }, function (error) {
                             $ionicLoading.hide();
                             $ionicPopup.alert({
                                 title: 'Invalid User Credentials!',

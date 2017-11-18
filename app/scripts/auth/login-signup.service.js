@@ -116,6 +116,7 @@
         }
         
         function loginMobile(userName, password) {
+            console.log('Mobile');
             console.log(userName + '  ' + password);
             var flag;
             return getUserMobile(userName).then(function (response) {

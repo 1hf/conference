@@ -1,49 +1,44 @@
-(function() {
-	'use strict';
+(function () {
+    'use strict';
 
-	angular
-		.module('conference.places')
-		.controller('PlacesController', PlacesController);
+    angular
+            .module('conference.places')
+            .controller('PlacesController', PlacesController);
 
-	PlacesController.$inject = ['$ionicActionSheet', '$scope', 'placesService', 'externalAppsService', '$ionicModal'];
+    PlacesController.$inject = ['$state', 'placesService'];
 
-	/* @ngInject */
-	function PlacesController($ionicActionSheet, $scope, placesService, externalAppsService, $ionicModal) {
+    /* @ngInject */
+    function PlacesController($state, placesService) {
 
-		var vm = angular.extend(this, {
-			info: null,
-			vanue: null
-		});
+        var vm = angular.extend(this, {
+            placesList: [],
+            gotoPlacesDetails: gotoPlacesDetails
+        });
 
-		//*********************************************
+        (function activate() {
+            getDetails();
+        })();
 
-		(function activate() {
-			//getConferenceData();
-		})();
-                
-                $ionicModal.fromTemplateUrl('templates/modal.html', {
-                    scope: $scope
-                }).then(function (modal) {
-                    $scope.modal = modal;
-                });
-                $scope.openModal = function () {
-                    $scope.modal.show()
-                    
-                };
-//                $scope.user = {"email":"binumontsamuel@gmail.com",
-//                    "firstName":"Binumon",
-//                    "id":"2",
-//                    "lastName":"Samuel",
-//                    "mobile":9035767836,
-//                    "password":"password",
-//                    "userName":"binumontsamuel@gmail.com"};
-//placesService.getConferenceData().then(function(res){
-//    console.log(angular.toJson(res));
-//});
-//placesService.setUser($scope.user).then(function(res){
-//    alert(angular.toJson(res));
-//});
+        function getDetails() {
+            vm.placesList = [{place: 'DARJEELING', image: 'images/places-to-visit/darjeeling/darjeeling-main.png'},
+                {place: 'DIGHA MANDARMANI', image: 'images/places-to-visit/dighaMandarmani/dighaMandarmani-main.png'},
+                {place: 'SHANTINIKETAN', image: 'images/places-to-visit/shantiniketan/shantiniketan-main.png'},
+                {place: 'SUNDERBANS', image: 'images/places-to-visit/sunderbans/sunderbans-main.png'},
+                {place: 'CITY TOUR', image: 'images/places-to-visit/cityTour/cityTour-main.png'}
+            ]
+        }
 
+        function gotoPlacesDetails(value) {
+            $state.go('app.placesDetails', {place: value});
+        }
 
-	}
+//        $ionicModal.fromTemplateUrl('templates/modal.html', {
+//            scope: $scope
+//        }).then(function (modal) {
+//            $scope.modal = modal;
+//        });
+//        $scope.openModal = function () {
+//            $scope.modal.show()
+//        };
+    }
 })();

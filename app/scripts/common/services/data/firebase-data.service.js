@@ -35,6 +35,7 @@
 			getScheduleDays: getScheduleDays,
                         getUsers: getUsers,
                         getUser: getUser,
+                        getUserMobile: getUserMobile,
                         insertUser: insertUser,
                         update: update,
 			init: init
@@ -127,6 +128,11 @@
                 function getUser(user) {
                     //user = parseInt(user);
 			var query = db.child('user').orderByChild('userName').equalTo(user);
+			return $firebaseObject(query).$loaded();
+		}
+                function getUserMobile(user) {
+                    //user = parseInt(user);
+			var query = db.child('user').orderByChild('mobileNumber').equalTo(user);
 			return $firebaseObject(query).$loaded();
 		}
                 function getUsers() {

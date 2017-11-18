@@ -1,30 +1,32 @@
-(function() {
-	'use strict';
+(function () {
+    'use strict';
 
-	angular
-		.module('conference.auth')
-		.factory('loginSignUpService', loginSignUpService);
+    angular
+            .module('conference.auth')
+            .factory('loginSignUpService', loginSignUpService);
 
-	loginSignUpService.$inject = ['$rootScope', '$firebaseAuth', 'db', 'dataService'];
+    loginSignUpService.$inject = ['$rootScope', '$firebaseAuth', 'db', 'dataService', '$http'];
 
-	/* @ngInject */
-	function loginSignUpService($rootScope, $firebaseAuth, db, dataService) {
+    /* @ngInject */
+    function loginSignUpService($rootScope, $firebaseAuth, db, dataService, $http) {
 //		var firebaseAuth = firebase.auth();
 //		var auth = $firebaseAuth(firebaseAuth);
 
-var service = {
+        var service = {
             user: {
                 isSignedIn: false
             },
 //            signIn: signIn,
             login: login,
+            loginMobile: loginMobile,
             logout: logout,
             getStoredUser: getStoredUser,
             getUserDetails: getUserDetails,
             getUsers: getUsers,
             insertUser: insertUser,
             updateUser: updateUser,
-            setUser: setUser
+            setUser: setUser,
+            sendSMS: sendSMS
         };
 
 //		firebaseAuth.onAuthStateChanged(function(data) {
@@ -35,29 +37,32 @@ var service = {
 //			}
 //		});
 
-		return service;
+        return service;
 
-		// *******************************************************************
+        // *******************************************************************
 
-function logout() {
+        function logout() {
             setUser();
             //auth.$signOut();
             $rootScope.$emit('loggedOut');
             return true;
         }
-        
+
         function getUserDetails(user) {
-                return dataService.getUser(user);
+            return dataService.getUser(user);
+        }
+        function getUserMobile(user) {
+            return dataService.getUserMobile(user);
         }
         function getUsers() {
-                return dataService.getUsers();
+            return dataService.getUsers();
         }
         function insertUser(user) {
-                return dataService.insertUser(user);
+            return dataService.insertUser(user);
         }
         function updateUser(updateId, data) {
-                var collection = "user";                
-                return dataService.update(updateId, data, collection);
+            var collection = "user";
+            return dataService.update(updateId, data, collection);
         }
 
 //		function signUp(email, password) {
@@ -80,31 +85,56 @@ function logout() {
 //				});
 //		}
 
-		function login(userName, password) {
-
-            console.log(userName+'  '+password);
-            var count = 0;
+        function login(userName, password) {
+            console.log('email');
+            console.log(userName + '  ' + password);
             var flag;
-            return getUserDetails(userName).then(function(response){
+            return getUserDetails(userName).then(function (response) {
                 console.log(angular.toJson(response));
-                angular.forEach(response, function(v,k){
-                    console.log(angular.toJson(v+"  "+k));
-                    v.$id = k;
-                    console.log(angular.toJson(v));
-                    if((userName == v.email || userName == v.mobileNumber) && v.password === btoa(password)){
-                        setUser(v);
-                        flag = v;
-                    }else{
-                        if(count === response.length-1){
+//                if(!response.$value){
+                    angular.forEach(response, function (v, k) {
+                        console.log(angular.toJson(v + "  " + k));
+                        v.$id = k;
+                        console.log(angular.toJson(v));
+                        if ((userName == v.email || userName == v.mobileNumber) && v.password === btoa(password)) {
+                            setUser(v);
+                            flag = v;
+                        } else {
                             setUser('');
                             flag = '';
-                        }else{
-                            count=count+1;
                         }
-                    }
-                });
+                    });
+                    return flag;
+//                }else if(response.$value==null){
+//                    console.log('mobile');
+//                    var u = parseInt(userName);
+//                   loginMobile(u, password); 
+//                }
                 
-                return flag;
+                
+            });
+        }
+        
+        function loginMobile(userName, password) {
+            console.log(userName + '  ' + password);
+            var flag;
+            return getUserMobile(userName).then(function (response) {
+                console.log(angular.toJson(response));
+                    angular.forEach(response, function (v, k) {
+                        console.log(angular.toJson(v + "  " + k));
+                        v.$id = k;
+                        console.log(angular.toJson(v));
+                        if ((userName == v.email || userName == v.mobileNumber) && v.password === btoa(password)) {
+                            setUser(v);
+                            flag = v;
+                        } else {
+                            setUser('');
+                            flag = '';
+                        }
+                    });
+                    return flag;
+                              
+                
             });
         }
 
@@ -133,5 +163,17 @@ function logout() {
             }
             localStorage.setItem('authUser', user);
         }
-	}
+
+        function sendSMS(number, message) {
+            var KEY = 'Ad2abf667677b7a748622a07ff29ca545';
+            var APIURL = 'https://alerts.solutionsinfini.com';
+            var senderId = 'ONEHLT';
+
+            return $http.post(APIURL + '/api/v3/index.php?method=sms&api_key=' + KEY + '&to=' + number + '&sender=' + senderId + '&message=' + message).then(function (resp) {
+                console.log(resp);
+                return resp;
+            });
+        }
+
+    }
 })();

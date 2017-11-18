@@ -1,23 +1,22 @@
-(function() {
-	'use strict';
+(function () {
+    'use strict';
 
-	angular
-		.module('conference.places')
-		.factory('placesService', placesService);
+    angular
+            .module('conference.places')
+            .factory('placesService', placesService);
 
-	placesService.$inject = ['dataService'];
+    placesService.$inject = ['dataService'];
 
-	/* @ngInject */
-	function placesService(dataService) {
+    /* @ngInject */
+    function placesService(dataService) {
 
-		var service = {
-			getConferenceData: getConferenceData
-		};
-		return service;
+        var service = {
+            getConferenceData: getConferenceData
+        };
+        return service;
 
-
-		function getConferenceData() {
-			return dataService.getConferenceData();
-		}
-	}
+        function getConferenceData() {
+            return dataService.getConferenceData();
+        }
+    }
 })();

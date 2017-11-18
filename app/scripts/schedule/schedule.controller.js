@@ -6,11 +6,11 @@
             .controller('ScheduleController', ScheduleController);
 
     //ScheduleController.$inject = ['scheduleService', '$state', 'filterModal', '_', '$scope', '$filter'];
-    ScheduleController.$inject = ['scheduleService', '$state', '_', '$scope', '$filter'];
+    ScheduleController.$inject = ['scheduleService', '$state', '_', '$scope', '$filter', '$ionicLoading'];
 
     /* @ngInject */
     //function ScheduleController(scheduleService, $state, filterModal, _, $scope, $filter) {
-    function ScheduleController(scheduleService, $state, _, $scope, $filter) {
+    function ScheduleController(scheduleService, $state, _, $scope, $filter, $ionicLoading) {
         $scope.dt = [];
         var vm = angular.extend(this, {
             filter: null,
@@ -43,7 +43,7 @@
         vm.rooms = 'all';
         
         //*********************************************
-
+        $ionicLoading.hide();
         $scope.$on('$ionicView.beforeEnter', function () {
             loadSchedule();
         });
@@ -101,12 +101,12 @@
                 }
                 console.log(angular.toJson(vm.date));
 
-
+                $ionicLoading.hide();    
 
             });
         }
         function loadSchedule() {
-
+            $ionicLoading.show({template: 'Loading Schedules...'});
             vm.schedule = [];
             vm.room = [];
             vm.rooms = 'all';

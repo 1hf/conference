@@ -10,8 +10,7 @@
                 <input type="password" placeholder="Enter the Password" ng-model="vm.user.password">
             </label>
             <label class="item item-input" ng-show="vm.showReset">
-                <span class="input-label">Mobile Number</span>
-                <input type="number" placeholder="Enter the Mobile Number" ng-model="vm.user.mobile">
+                <input type="number" placeholder="Mobile number without a Country Code" ng-model="vm.user.mobileNumber">
             </label>
             <div style="width: 100%; float: left; margin-top: 10px;">
                 <a class="assertive" href="" style="float: right;" ng-click="vm.displayReset()" ng-show="vm.showLogin">Forgot Password?</a>
@@ -24,29 +23,3 @@
         </div>
     </ion-content>
 </ion-view>
-
-<!--<ion-view view-title="Login"  hide-nav-bar="true">
-	<ion-content class="padding">
-		<div style="text-align: center" class="item item-borderless">
-			<img src="images/appicon.svg" alt="appicon" style="height: 150px">
-		</div>
-		<div class="list padding">
-			<label class="item item-input">
-				<span class="input-label">Email</span>
-				<input type="text" ng-model="vm.user.email">
-			</label>
-			<label class="item item-input">
-				<span class="input-label">Password</span>
-				<input type="password" ng-model="vm.user.password">
-			</label>
-			<button ng-click="vm.signIn()"
-				class="button button-full button-positive">
-				LOGIN
-			</button>
-			<button ng-click="vm.signUp()"
-				class="button button-full button-stable">
-				SIGNUP
-			</button>
-		</div>
-	</ion-content>
-</ion-view>-->

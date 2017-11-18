@@ -1,5 +1,12 @@
 {
-  "name": "Masimo",
+  "name": "ISACON 2017",
   "app_id": "2b059281",
-  "type": "ionic1"
+  "type": "ionic1",
+  "integrations": {},
+  "watchPatterns": [
+    "scss/**/*",
+    "www/**/*",
+    "!www/lib/**/*",
+    "!www/**/*.map"
+  ]
 }

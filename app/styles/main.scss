@@ -104,7 +104,7 @@ $ionicons-font-path: "../fonts" !default;
 $extended-footer-height: 70px;
 
 // Include all of Ionic
-@import "../bower_components/ionic/scss/ionic";
+@import "../../bower_components/ionic/scss/ionic";
 
 @import "common";
 @import "home";

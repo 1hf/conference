@@ -16,7 +16,7 @@ bower install
 # If this process fails comment this line and uncomment the
 # "cordova plugin add ..." lines that follow.
 #
-ionic state restore
+#ionic state restore
 #
 # cordova plugin add cordova-plugin-device
 # cordova plugin add cordova-plugin-console
@@ -33,7 +33,7 @@ ionic state restore
 #
 # Comment out the platform(s) your system supports
 #
-grunt platform:add:ios
+#grunt platform:add:ios
 # grunt platform:add:android
 
 #

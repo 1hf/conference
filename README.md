@@ -10,3 +10,10 @@ git checkout ajz #branch
 ```shell
 npm install
 ```
+
+## Tips ##
+* If scss compile fails
+```shell
+vi app/styles/main.scss
+# changed line 107 to ../../bower_components ...
+```

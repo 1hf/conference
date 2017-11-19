@@ -18,6 +18,7 @@
             showLogin: true,
             showReset: false,
             loginUser: loginUser,
+            uploadData: uploadData,
             gotoSignUp: gotoSignUp,
             displayReset: displayReset,
             displayLogin: displayLogin,
@@ -25,13 +26,325 @@
         });
         //
         console.log(angular.toJson(localStorage.getItem('authUser')));
-//        if(JSON.parse(localStorage.getItem('authUser')).isSignedIn){
-//            $ionicLoading.show({template: 'Logging you in...'});
-//            $state.go('app.tabs.schedule');            
-//        }else{
-//            //
+        if(JSON.parse(localStorage.getItem('authUser')).isSignedIn){
+            $ionicLoading.show({template: 'Logging you in...'});
+            $state.go('app.tabs.schedule');            
+        }else{
+            //
+        }
+//        var speakerData = [
+//{
+//  "firstName" : "Dr. Peter",
+//  "lastName": "Slinger",
+//  "education" : "",
+//  "about" : "",
+//  "profilePic" : "",
+//  "address": {"Address1":"","City":"","State":"","zipCode":""},
+//  "email" : "",
+//  "phoneNumber":"",
+//  "academicAppointment": "",
+//  "areasInterest": "",
+//  "ongoingResearch": "",
+//  "publications": "",
+//  "achievements": ""
+//},
+//{
+//  "firstName" : "Dr. Ronald",
+//  "lastName": "D Miller",
+//  "education" : "",
+//  "about" : "",
+//  "profilePic" : "",
+//  "address": {"Address1":"","City":"","State":"","zipCode":""},
+//  "email" : "",
+//  "phoneNumber":"",
+//  "academicAppointment": "",
+//  "areasInterest": "",
+//  "ongoingResearch": "",
+//  "publications": "",
+//  "achievements": ""
+//},
+//{
+//  "firstName" : "Dr. Gentle",
+//  "lastName": "S Shrestha",
+//  "education" : "",
+//  "about" : "",
+//  "profilePic" : "",
+//  "address": {"Address1":"","City":"","State":"","zipCode":""},
+//  "email" : "",
+//  "phoneNumber":"",
+//  "academicAppointment": "",
+//  "areasInterest": "",
+//  "ongoingResearch": "",
+//  "publications": "",
+//  "achievements": ""
+//},
+//{
+//  "firstName" : "Dr. Prof. Ravi",
+//  "lastName": "Mahajan",
+//  "education" : "",
+//  "about" : "",
+//  "profilePic" : "",
+//  "address": {"Address1":"","City":"","State":"","zipCode":""},
+//  "email" : "",
+//  "phoneNumber":"",
+//  "academicAppointment": "",
+//  "areasInterest": "",
+//  "ongoingResearch": "",
+//  "publications": "",
+//  "achievements": ""
+//},
+//{
+//  "firstName" : "Dr. Venugopal",
+//  "lastName": "S Reddy",
+//  "education" : "",
+//  "about" : "",
+//  "profilePic" : "",
+//  "address": {"Address1":"","City":"","State":"","zipCode":""},
+//  "email" : "",
+//  "phoneNumber":"",
+//  "academicAppointment": "",
+//  "areasInterest": "",
+//  "ongoingResearch": "",
+//  "publications": "",
+//  "achievements": ""
+//},
+//{
+//  "firstName" : "Dr. Abhijit",
+//  "lastName": "Biswas",
+//  "education" : "",
+//  "about" : "",
+//  "profilePic" : "",
+//  "address": {"Address1":"","City":"","State":"","zipCode":""},
+//  "email" : "",
+//  "phoneNumber":"",
+//  "academicAppointment": "",
+//  "areasInterest": "",
+//  "ongoingResearch": "",
+//  "publications": "",
+//  "achievements": ""
+//},
+//{
+//  "firstName" : "Dr. Priya",
+//  "lastName": "R Menon",
+//  "education" : "",
+//  "about" : "",
+//  "profilePic" : "",
+//  "address": {"Address1":"","City":"","State":"","zipCode":""},
+//  "email" : "",
+//  "phoneNumber":"",
+//  "academicAppointment": "",
+//  "areasInterest": "",
+//  "ongoingResearch": "",
+//  "publications": "",
+//  "achievements": ""
+//},
+//{
+//  "firstName" : "Dr. Giuseppe",
+//  "lastName": "A Marraro",
+//  "education" : "",
+//  "about" : "",
+//  "profilePic" : "",
+//  "address": {"Address1":"","City":"","State":"","zipCode":""},
+//  "email" : "",
+//  "phoneNumber":"",
+//  "academicAppointment": "",
+//  "areasInterest": "",
+//  "ongoingResearch": "",
+//  "publications": "",
+//  "achievements": ""
+//},
+//{
+//  "firstName" : "Dr. Eric",
+//  "lastName": "Hodgson",
+//  "education" : "",
+//  "about" : "",
+//  "profilePic" : "",
+//  "address": {"Address1":"","City":"","State":"","zipCode":""},
+//  "email" : "",
+//  "phoneNumber":"",
+//  "academicAppointment": "",
+//  "areasInterest": "",
+//  "ongoingResearch": "",
+//  "publications": "",
+//  "achievements": ""
+//},
+//{
+//  "firstName" : "Dr. Bhavani Shankar",
+//  "lastName": "Kodali",
+//  "education" : "",
+//  "about" : "",
+//  "profilePic" : "",
+//  "address": {"Address1":"","City":"","State":"","zipCode":""},
+//  "email" : "",
+//  "phoneNumber":"",
+//  "academicAppointment": "",
+//  "areasInterest": "",
+//  "ongoingResearch": "",
+//  "publications": "",
+//  "achievements": ""
+//},
+//{
+//  "firstName" : "Dr. Swapna",
+//  "lastName": "Chaudhury",
+//  "education" : "",
+//  "about" : "",
+//  "profilePic" : "",
+//  "address": {"Address1":"","City":"","State":"","zipCode":""},
+//  "email" : "",
+//  "phoneNumber":"",
+//  "academicAppointment": "",
+//  "areasInterest": "",
+//  "ongoingResearch": "",
+//  "publications": "",
+//  "achievements": ""
+//},
+//{
+//  "firstName" : "Dr. Kallol",
+//  "lastName": "Chaudhury",
+//  "education" : "",
+//  "about" : "",
+//  "profilePic" : "",
+//  "address": {"Address1":"","City":"","State":"","zipCode":""},
+//  "email" : "",
+//  "phoneNumber":"",
+//  "academicAppointment": "",
+//  "areasInterest": "",
+//  "ongoingResearch": "",
+//  "publications": "",
+//  "achievements": ""
+//},
+//{
+//  "firstName" : "Dr. Devendra",
+//  "lastName": "Tilak",
+//  "education" : "",
+//  "about" : "",
+//  "profilePic" : "",
+//  "address": {"Address1":"","City":"","State":"","zipCode":""},
+//  "email" : "",
+//  "phoneNumber":"",
+//  "academicAppointment": "",
+//  "areasInterest": "",
+//  "ongoingResearch": "",
+//  "publications": "",
+//  "achievements": ""
+//},
+//{
+//  "firstName" : "Dr. Jayaram",
+//  "lastName": "Dasan",
+//  "education" : "",
+//  "about" : "",
+//  "profilePic" : "",
+//  "address": {"Address1":"","City":"","State":"","zipCode":""},
+//  "email" : "",
+//  "phoneNumber":"",
+//  "academicAppointment": "",
+//  "areasInterest": "",
+//  "ongoingResearch": "",
+//  "publications": "",
+//  "achievements": ""
+//},
+//{
+//  "firstName" : "Dr. Bandana",
+//  "lastName": "Paudel",
+//  "education" : "",
+//  "about" : "",
+//  "profilePic" : "",
+//  "address": {"Address1":"","City":"","State":"","zipCode":""},
+//  "email" : "",
+//  "phoneNumber":"",
+//  "academicAppointment": "",
+//  "areasInterest": "",
+//  "ongoingResearch": "",
+//  "publications": "",
+//  "achievements": ""
+//},
+//{
+//  "firstName" : "Prof. Dr. C. R. DAS",
+//  "lastName": "",
+//  "education" : "",
+//  "about" : "",
+//  "profilePic" : "",
+//  "address": {"Address1":"","City":"","State":"","zipCode":""},
+//  "email" : "",
+//  "phoneNumber":"",
+//  "academicAppointment": "",
+//  "areasInterest": "",
+//  "ongoingResearch": "",
+//  "publications": "",
+//  "achievements": ""
+//},
+//{
+//  "firstName" : "Dr. Tarit",
+//  "lastName": "Saha",
+//  "education" : "",
+//  "about" : "",
+//  "profilePic" : "",
+//  "address": {"Address1":"","City":"","State":"","zipCode":""},
+//  "email" : "",
+//  "phoneNumber":"",
+//  "academicAppointment": "",
+//  "areasInterest": "",
+//  "ongoingResearch": "",
+//  "publications": "",
+//  "achievements": ""
+//},
+//{
+//  "firstName" : "Dr. Farhan",
+//  "lastName": "Husain",
+//  "education" : "",
+//  "about" : "",
+//  "profilePic" : "",
+//  "address": {"Address1":"","City":"","State":"","zipCode":""},
+//  "email" : "",
+//  "phoneNumber":"",
+//  "academicAppointment": "",
+//  "areasInterest": "",
+//  "ongoingResearch": "",
+//  "publications": "",
+//  "achievements": ""
+//},
+//{
+//  "firstName" : "Dr. Kaushik",
+//  "lastName": "Dasgupta",
+//  "education" : "",
+//  "about" : "",
+//  "profilePic" : "",
+//  "address": {"Address1":"","City":"","State":"","zipCode":""},
+//  "email" : "",
+//  "phoneNumber":"",
+//  "academicAppointment": "",
+//  "areasInterest": "",
+//  "ongoingResearch": "",
+//  "publications": "",
+//  "achievements": ""
+//},
+//{
+//  "firstName" : "Dr. Ashish",
+//  "lastName": "Sinha",
+//  "education" : "",
+//  "about" : "",
+//  "profilePic" : "images/watermark.png",
+//  "address": {"Address1":"","City":"","State":"","zipCode":""},
+//  "email" : "",
+//  "phoneNumber":"",
+//  "academicAppointment": "",
+//  "areasInterest": "",
+//  "ongoingResearch": "",
+//  "publications": "",
+//  "achievements": ""
+//}
+//];
+//        function uploadData() {
+//            console.log('speakerData upload');
+//            angular.forEach(speakerData, function(v,k){
+//                loginSignUpService.insertSpeaker(v).then(function(res){
+//                    console.log(angular.toJson(res));
+//                    console.log(k+" records uploaded");
+//                }, function(err){
+//                    
+//                });
+//            });
 //        }
-        //
         function loginUser() {
             if (vm.user.userName && vm.user.password) {
                 $ionicLoading.show({template: 'Logging you in...'});

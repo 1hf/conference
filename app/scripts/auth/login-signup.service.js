@@ -24,6 +24,7 @@
             getUserDetails: getUserDetails,
             getUsers: getUsers,
             insertUser: insertUser,
+            insertSpeaker: insertSpeaker,
             updateUser: updateUser,
             setUser: setUser,
             sendSMS: sendSMS
@@ -59,6 +60,9 @@
         }
         function insertUser(user) {
             return dataService.insertUser(user);
+        }
+        function insertSpeaker(speaker) {
+            return dataService.insertSpeaker(speaker);
         }
         function updateUser(updateId, data) {
             var collection = "user";

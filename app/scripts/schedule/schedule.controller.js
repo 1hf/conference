@@ -6,11 +6,11 @@
             .controller('ScheduleController', ScheduleController);
 
     //ScheduleController.$inject = ['scheduleService', '$state', 'filterModal', '_', '$scope', '$filter'];
-    ScheduleController.$inject = ['scheduleService', '$state', '_', '$scope', '$filter'];
+    ScheduleController.$inject = ['scheduleService', '$state', '_', '$scope', '$filter', '$ionicSlideBoxDelegate', '$interval'];
 
     /* @ngInject */
     //function ScheduleController(scheduleService, $state, filterModal, _, $scope, $filter) {
-    function ScheduleController(scheduleService, $state, _, $scope, $filter) {
+    function ScheduleController(scheduleService, $state, _, $scope, $filter, $ionicSlideBoxDelegate, $interval) {
         $scope.dt = [];
         var vm = angular.extend(this, {
             filter: null,
@@ -47,7 +47,20 @@
         $scope.$on('$ionicView.beforeEnter', function () {
             loadSchedule();
         });
+$scope.banners = ["1","2"];
+$scope.lengthG = $scope.banners.length;
+                    $scope.count = 1;
+                    $interval(function () {
+                        if ((parseInt($scope.count)) === (parseInt($scope.lengthG))) {
+                            $scope.count = 1;
+                            $ionicSlideBoxDelegate.slide(0);
+                        } else {
+                            $ionicSlideBoxDelegate.next();
+                            $scope.count++;
+                        }
 
+                        //$scope.$apply();
+                    }, 7000);
         function doRefresh() {
             loadSchedule();
             $scope.$broadcast('scroll.refreshComplete');

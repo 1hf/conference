@@ -12,7 +12,7 @@
 //		var firebaseAuth = firebase.auth();
 //		var auth = $firebaseAuth(firebaseAuth);
 
-        var service = {
+    var service = {
             user: {
                 isSignedIn: false
             },
@@ -22,9 +22,9 @@
             logout: logout,
             getStoredUser: getStoredUser,
             getUserDetails: getUserDetails,
+            getUserMobile: getUserMobile,
             getUsers: getUsers,
             insertUser: insertUser,
-            insertSpeaker: insertSpeaker,
             updateUser: updateUser,
             setUser: setUser,
             sendSMS: sendSMS
@@ -61,9 +61,6 @@
         function insertUser(user) {
             return dataService.insertUser(user);
         }
-        function insertSpeaker(speaker) {
-            return dataService.insertSpeaker(speaker);
-        }
         function updateUser(updateId, data) {
             var collection = "user";
             return dataService.update(updateId, data, collection);
@@ -95,12 +92,11 @@
             var flag;
             return getUserDetails(userName).then(function (response) {
                 console.log(angular.toJson(response));
-//                if(!response.$value){
                     angular.forEach(response, function (v, k) {
                         console.log(angular.toJson(v + "  " + k));
                         v.$id = k;
                         console.log(angular.toJson(v));
-                        if ((userName == v.email || userName == v.mobileNumber) && v.password === btoa(password)) {
+                        if (userName == v.email && v.password === btoa(password)) {
                             setUser(v);
                             flag = v;
                         } else {
@@ -108,13 +104,7 @@
                             flag = '';
                         }
                     });
-                    return flag;
-//                }else if(response.$value==null){
-//                    console.log('mobile');
-//                    var u = parseInt(userName);
-//                   loginMobile(u, password); 
-//                }
-                
+                    return flag;                
                 
             });
         }
@@ -129,7 +119,7 @@
                         console.log(angular.toJson(v + "  " + k));
                         v.$id = k;
                         console.log(angular.toJson(v));
-                        if ((userName == v.email || userName == v.mobileNumber) && v.password === btoa(password)) {
+                        if (userName == v.mobileNumber && v.password === btoa(password)) {
                             setUser(v);
                             flag = v;
                         } else {

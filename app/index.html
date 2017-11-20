@@ -119,12 +119,26 @@
 	</head>
         
 	<body ng-app="conference">
-            <div style="background-color:lightblue; height:auto; width:100%">
-<!--                <img src="http://isacon2017kolkata.com/images/logo/logo.png" style="width:100%;height: 55px;" alt="Logo" />-->
+<!--            <div style="background-color:lightblue; height:auto; width:100%">
+                <img src="http://isacon2017kolkata.com/images/logo/logo.png" style="width:100%;height: 55px;" alt="Logo" />
                 <img src="images/logo.png" style="width:100%;height: 55px;" alt="Logo" />
-            </div>
+            </div>-->
+<ion-slide-box slider="slider1" style="height:55px;">
+        <ion-slide options="{direction: 'vertical',loop: true,effect: 'fade',autoplay: 500}" style="width:100%;height:55px;">
+            <img ng-src="http://isacon2017kolkata.com/images/logo/logo.png" style="width:100%;height: 100%;margin:2px;display:block;border-radius: 10px;" 
+                 title="Banner">
+
+        </ion-slide>
+        <ion-slide options="{direction: 'vertical',loop: true,effect: 'fade',autoplay: 100}" style="width:100%;height:55px;">
+            <img ng-src="images/logo.png" style="width:100%;height: 100%;margin:2px;display:block;border-radius: 10px;" 
+                 title="Banner">
+
+        </ion-slide>
+    </ion-slide-box>
 		<ion-nav-view></ion-nav-view>
 	</body>
-        
+        <style>.padding::after{
+   content: ""; background:url(images/watermark.png); background-repeat:repeat; background-size: 100% auto; height: auto; vertical-align: top; width: auto; opacity: 0.1; top: 0; left: 0; bottom: 0; right: 0; position: absolute; z-index: -1;  
+}.slider-pager{display:none;}</style>
         
 </html>

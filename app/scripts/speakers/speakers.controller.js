@@ -23,7 +23,6 @@
 		function getSpeakers() {
 			speakersService.getSpeakers().then(function(items) {
 				vm.speakers = items;
-                                console.log(angular.toJson(vm.speakers));
 			})
 		}
 

@@ -10,18 +10,17 @@
 	/* @ngInject */
 	function MapController(mapService) {
 		var vm = angular.extend(this, {
-			data: null
+			//data: null
 		});
 
 		(function activate() {
-			initMapDetails()
+			//initMapDetails()
 		})();
 
-		function initMapDetails() {
-			mapService.getMapDetails().then(function(data) {
-				vm.data = data;
-			})
-		}
-
+//		function initMapDetails() {
+//			mapService.getMapDetails().then(function(data) {
+//				vm.data = data;
+//			})
+//		}
 	}
 })();

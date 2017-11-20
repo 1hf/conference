@@ -51,8 +51,9 @@ angular.module('gMaps', [])
 				console.log('map: start loading js gmaps');
 				var script = $window.document.createElement('script');
 				script.type = 'text/javascript';
-				script.src = 'http://maps.googleapis.com/maps/api/js?v=3.exp&sensor=true&callback=InitMapCb';
-				$window.document.body.appendChild(script);
+				//script.src = 'http://maps.googleapis.com/maps/api/js?v=3.exp&sensor=true&callback=InitMapCb';
+			script.src = 'http://maps.googleapis.com/maps/api/js?v=3.exp&callback=InitMapCb';	
+                            $window.document.body.appendChild(script);
 			}
 
 			function createMap() {
@@ -85,7 +86,7 @@ angular.module('gMaps', [])
 					});
 				}
 			}
-
+                        
 			scope.$watch('markers', function() {
 				updateMarkers();
 			});

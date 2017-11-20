@@ -1,36 +1,37 @@
-<ion-view id="events" view-title="Event">
-	<ion-nav-buttons side="secondary">
-		<button class="button-clear" ng-click="vm.toggleFavorites()">
-			<i class="icon ion-ios-star-outline" ng-if="!vm.event.isInFavorites"></i>
-			<i class="icon ion-ios-star light" ng-if="vm.event.isInFavorites"></i>
-		</button>
-	</ion-nav-buttons>
-	<ion-content padding="true">
-		<h2>{{vm.event.title}}</h2>
-		<p>
-			{{vm.event.startDate| date: 'fullDate'}} - {{vm.event.endDate| date: 'fullDate'}}
-		</p>
+<ion-view id="events" view-title="Workshop Details">
+<!--    <ion-nav-buttons side="secondary">
+        <button class="button-clear" ng-click="vm.toggleFavorites()">
+            <i class="icon ion-ios-star-outline" ng-if="!vm.event.isInFavorites"></i>
+            <i class="icon ion-ios-star light" ng-if="vm.event.isInFavorites"></i>
+        </button>
+    </ion-nav-buttons>-->
+    <ion-content padding="true">
+        <h2>{{vm.event.title}}</h2>
+        <p>
+            {{vm.event.startDate| date: 'fullDate'}} - {{vm.event.endDate| date: 'fullDate'}}
 
-		<p>{{vm.event.description}}</p>
-		<div id="map">
-			<gmaps
-				ng-if="vm.zoom"
-				center="vm.origin"
-				zoom="vm.zoom"
-				markers="vm.markers">
-			</gmaps>
-		</div>
-		<div class="list card">
-			<a class="item item-icon-left" ng-click="vm.toggleFavorites()">
-				<span ng-if="!vm.event.isInFavorites">
-					<i class="icon ion-ios-star-outline"></i>
-					<span>Add to favorites</span>
-				</span>
-				<span ng-if="vm.event.isInFavorites">
-					<i class="icon ion-ios-star balanced"></i>
-					<span>Remove from favorites</span>
-				</span>
-			</a>
-		</div>
-	</ion-content>
+        </p>
+
+        <p>{{vm.event.venue}}</p>
+        <div id="map">
+            <gmaps
+                ng-if="vm.zoom"
+                center="vm.origin"
+                zoom="vm.zoom"
+                markers="vm.markers">
+            </gmaps>
+        </div>
+<!--        <div class="list card">
+            <a class="item item-icon-left" ng-click="vm.toggleFavorites()">
+                <span ng-if="!vm.event.isInFavorites">
+                    <i class="icon ion-ios-star-outline"></i>
+                    <span>Add to favorites</span>
+                </span>
+                <span ng-if="vm.event.isInFavorites">
+                    <i class="icon ion-ios-star balanced"></i>
+                    <span>Remove from favorites</span>
+                </span>
+            </a>
+        </div>-->
+    </ion-content>
 </ion-view>

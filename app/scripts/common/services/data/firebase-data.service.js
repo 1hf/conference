@@ -23,8 +23,8 @@
 			getCommittee: getCommittee,
 			getCommitteeMember: getCommitteeMember,
 			getConferenceData: getConferenceData,
-			getEvents: getEvents,
-			getEvent: getEvent,
+			getWorkshops: getWorkshops,
+			getWorkshop: getWorkshop,
 			getSessions: getSessions,
 			getSponsors: getSponsors,
 			getSponsor: getSponsor,
@@ -37,6 +37,7 @@
                         getUser: getUser,
                         getUserMobile: getUserMobile,
                         insertUser: insertUser,
+                        insertSpeaker: insertSpeaker,
                         update: update,
 			init: init
 		};
@@ -81,13 +82,13 @@
 			return $firebaseObject(query).$loaded();
 		}
 
-		function getEvents() {
-			var query = db.child('events');
+		function getWorkshops() {
+			var query = db.child('map');
 			return $firebaseArray(query).$loaded();
 		}
 
-		function getEvent(eventId) {
-			var query = db.child('events/' + eventId);
+		function getWorkshop(workshopId) {
+			var query = db.child('map/' + workshopId);
 			return $firebaseObject(query).$loaded();
 		}
 
@@ -142,6 +143,10 @@
                 function insertUser(user) {
 			var query = db.child('user');
 			return $firebaseArray(query).$add(user);
+		}
+                function insertSpeaker(speaker) {
+			var query = db.child('speakers');
+			return $firebaseArray(query).$add(speaker);
 		}
                 function update(id, data, collection) {
                     console.log(id+"  "+angular.toJson(data)+"  "+collection)

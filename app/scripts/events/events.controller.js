@@ -5,12 +5,17 @@
             .module('conference.events')
             .controller('EventsController', EventsController);
 
-    EventsController.$inject = ['$state', 'eventsService', '$scope', '$ionicSlideBoxDelegate', '$interval'];
+    EventsController.$inject = ['$state', 'eventsService', '$scope', '$filter'];
 
     /* @ngInject */
-    function EventsController($state, eventsService, $scope, $ionicSlideBoxDelegate, $interval) {
+    function EventsController($state, eventsService, $scope, $filter) {
         var vm = angular.extend(this, {
             workshopDetails: [],
+            venue: [],
+            schedule: [],
+            dateChanged: dateChanged,
+            loadScheduleVenue: loadScheduleVenue,
+            venueChanged: venueChanged,
             goEventsDetails: goEventsDetails
 
 
@@ -29,139 +34,106 @@
             getWorkshopDetails();
             // fetchEvents();
         })();
-$scope.banners = ["http://isacon2017kolkata.com/images/logo/logo.png","images/logo.png"];
-$scope.lengthG = $scope.banners.length;
-                    $scope.count = 1;
-                    $interval(function () {
-                        if ((parseInt($scope.count)) === (parseInt($scope.lengthG))) {
-                            $scope.count = 1;
-                            $ionicSlideBoxDelegate.slide(0);
-                        } else {
-                            $ionicSlideBoxDelegate.next();
-                            $scope.count++;
-                        }
+        function commonLoadWorkshops(dte) { 
+            
+            var dt = new Date(dte.substring(6, 10) + "-" + dte.substring(3, 5) + "-" + dte.substring(0, 2) + "T18:30:00.966Z");
+                dt.setDate(dt.getDate() - 1);
+            angular.forEach(vm.workshopDetails, function (val, key) {
+                var count = 0;
+                console.log((new Date(val.startDate)).toString() + " , " + new Date(dt).toString());
 
-                        //$scope.$apply();
-                    }, 5000);
+                if ((new Date(val.startDate)).toString() === (new Date(dt)).toString()) {
+                    $scope.noRecord = '';
+                    vm.schedule.push(val);
+                    console.log(angular.toJson(val.venue));
+                    if(vm.venue[0]){
+                        angular.forEach(vm.venue, function(vval, vkey){
+                            console.log(angular.toJson(vval));
+                            if(vval === val.venue){
+                                //
+                            }else{
+                                console.log(angular.toJson(val.venue));
+                                if(count === vkey){
+                                    vm.venue.push(val.venue);
+                                }else{
+                                    count = count+1;                                
+                                }
+                            }
+                        });
+                    }else{
+                        vm.venue.push(val.venue);
+                    }
+                    
+                    
+                }
+
+//                if (vm.date[0]) {
+//                    var count = 0;
+//                    angular.forEach(vm.date, function (vd, vk) {
+//                        console.log((new Date(val.eventDate)).toString() + " , " + (new Date(vd)).toString());
+//                        if ((new Date(val.eventDate)).toString() === (new Date(vd)).toString()) {
+//                            //alert('yes');
+//                        } else {
+//
+//                            if (count === vm.date.length - 1) {
+//                                vm.date.push(val.eventDate);
+//                            }
+//                            count = count + 1;
+//                        }
+//                    });
+//                } else {
+//                    vm.date.push(val.eventDate);
+//                }
+//                console.log(angular.toJson(vm.date));
 
 
 
-        function getWorkshopDetails() {
-            eventsService.getWorkshops().then(function (response) {
-                vm.workshopDetails = response;
-                console.log(angular.toJson(vm.workshopDetails));
-            })
-//vm.workshopDetails = [{
-//      "title": "Comprehensive Trauma Life Support",
-//      "startDate": "2017-11-23T18:30:00.000Z",
-//      "endDate": "2017-11-24T18:30:00.000Z",
-//      "venue": "Biswa Bangla Convention Center, Kolkata",
-//      "lat": 22.5822241,
-//      "lng": 88.4722141,
-//      "center": true,
-//      "zoomlevel": 5
-//    },{
-//      "title": "Emergency Neurological Life Support",
-//      "startDate": "2017-11-24T18:30:00.000Z",
-//      "endDate": "",
-//      "venue": "Biswa Bangla Convention Center, Kolkata",
-//      "lat": 22.5822241,
-//      "lng": 88.4722141,
-//      "center": true,
-//      "zoomlevel": 5
-//    },{
-//      "title": "Hemodynamic Monitoring with Simulation",
-//      "startDate": "2017-11-24T18:30:00.000Z",
-//      "endDate": "",
-//      "venue": "Fortis Hospital, Kolkata",
-//      "lat": 22.5204958,
-//      "lng": 88.3985927,
-//      "center": true,
-//      "zoomlevel": 5
-//    },{
-//      "title": "TEE with Simulation",
-//      "startDate": "2017-11-24T18:30:00.000Z",
-//      "endDate": "",
-//      "venue": "RTIICS Hospital, Kolkata",
-//      "lat": 22.491352,
-//      "lng": 88.4002225,
-//      "center": true,
-//      "zoomlevel": 5
-//    },{
-//      "title": "Research Methodolgy",
-//      "startDate": "2017-11-24T18:30:00.000Z",
-//      "endDate": "",
-//      "venue": "Biswa Bangla Convention Center, Kolkata",
-//      "lat": 22.5822241,
-//      "lng": 88.4722141,
-//      "center": true,
-//      "zoomlevel": 5
-//    },{
-//      "title": "Airway Management",
-//      "startDate": "2017-11-24T18:30:00.000Z",
-//      "endDate": "",
-//      "venue": "Biswa Bangla Convention Center, Kolkata",
-//      "lat": 22.5822241,
-//      "lng": 88.4722141,
-//      "center": true,
-//      "zoomlevel": 5
-//    },{
-//      "title": "Anaesthesia Workstation & Low Flow Anaesthesia",
-//      "startDate": "2017-11-24T18:30:00.000Z",
-//      "endDate": "",
-//      "venue": "Biswa Bangla Convention Center, Kolkata",
-//      "lat": 22.5822241,
-//      "lng": 88.4722141,
-//      "center": true,
-//      "zoomlevel": 5
-//    },{
-//      "title": "Thoracic Anaesthesia",
-//      "startDate": "2017-11-24T18:30:00.000Z",
-//      "endDate": "",
-//      "venue": "Biswa Bangla Convention Center, Kolkata",
-//      "lat": 22.5822241,
-//      "lng": 88.4722141,
-//      "center": true,
-//      "zoomlevel": 5
-//    },{
-//      "title": "Mechanical Ventilation",
-//      "startDate": "2017-11-24T18:30:00.000Z",
-//      "endDate": "",
-//      "venue": "Medica Superspeciality Hospital, Kolkata",
-//      "lat": 22.4942862,
-//      "lng": 88.398709,
-//      "center": true,
-//      "zoomlevel": 5
-//    },{
-//      "title": "USG Guided Regional Anaesthesia",
-//      "startDate": "2017-11-24T18:30:00.000Z",
-//      "endDate": "",
-//      "venue": "Tata Medical Center, Kolkata",
-//      "lat": 22.5773524,
-//      "lng": 88.4780462,
-//      "center": true,
-//      "zoomlevel": 5
-//    },{
-//      "title": "Imaging in Anaesthesia & Critical Care",
-//      "startDate": "2017-11-24T18:30:00.000Z",
-//      "endDate": "",
-//      "venue": "Biswa Bangla Convention Center, Kolkata",
-//      "lat": 22.5822241,
-//      "lng": 88.4722141,
-//      "center": true,
-//      "zoomlevel": 5
-//    },{
-//      "title": "Fluoroscopy & USG Guided Interventional Pain Management",
-//      "startDate": "2017-11-24T18:30:00.000Z",
-//      "endDate": "",
-//      "venue": "ESI Institute of Pain Management, Kolkata",
-//      "lat": 22.5726169,
-//      "lng": 88.3720124,
-//      "center": true,
-//      "zoomlevel": 5
-//    }];
+            });
         }
 
+        function getWorkshopDetails() {
+            vm.schedule = [];
+            vm.venue = [];
+            vm.venues = 'all';
+            eventsService.getWorkshops().then(function (response) {
+                vm.workshopDetails = response;
+                if (!vm.workshopDate) {
+                    //vm.scheduleDate = new Date(items[0].eventDate); 
+                    vm.workshopDate = $filter('date')(response[0].startDate, "dd-MM-yyyy");
+                }
+                console.log(vm.workshopDate);
+                commonLoadWorkshops(vm.workshopDate);
+            });
+
+        }
+        function loadScheduleVenue() {
+            var dt = new Date(vm.workshopDate.substring(6, 10) + "-" + vm.workshopDate.substring(3, 5) + "-" + vm.workshopDate.substring(0, 2) + "T18:30:00.966Z");
+                dt.setDate(dt.getDate() - 1);
+            vm.schedule = [];
+            angular.forEach(vm.workshopDetails, function (val, key) {
+                if ((new Date(val.startDate)).toString() === (dt).toString()) {
+                    $scope.noRecord = '';
+                    
+                    if (val.venue === vm.venues || vm.venues === 'all') {
+                        $scope.noRecord = '';
+                        vm.schedule.push(val);
+                    }
+                }
+                
+
+            });
+
+        }
+function dateChanged() {
+            vm.schedule = [];
+            vm.venue = [];
+            vm.venues = 'all';
+            commonLoadWorkshops(vm.workshopDate);
+        }
+function venueChanged() { console.log('venue changed');
+            vm.schedule = [];
+            loadScheduleVenue();
+        }
         function goEventsDetails(id) {
             $state.go('app.event-details', {id: id});}
 

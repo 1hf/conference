@@ -8,26 +8,38 @@
             <input type="search" placeholder="Search" ng-model="filtertxt">
         </label>
     </div>
-    
+
     <ion-content class="padding has-subheader">
-<!--        <ion-slide-box slider="slider1" style="height:55px;">
-        <ion-slide options="{direction: 'vertical',loop: true,effect: 'fade',autoplay: 100}" style="width:98%;height:55px;">
-            <img ng-src="http://isacon2017kolkata.com/images/logo/logo.png" style="width:98%;height: 100%;margin:2px;display:block;border-radius: 10px;" 
-                 title="Banner">
-
-        </ion-slide>
-        <ion-slide options="{direction: 'vertical',loop: true,effect: 'fade',autoplay: 100}" style="width:98%;height:55px;">
-            <img ng-src="images/logo.png" style="width:98%;height: 100%;margin:2px;display:block;border-radius: 10px;" 
-                 title="Banner">
-
-        </ion-slide>
-    </ion-slide-box>-->
+        <!--        <ion-slide-box slider="slider1" style="height:55px;">
+                <ion-slide options="{direction: 'vertical',loop: true,effect: 'fade',autoplay: 100}" style="width:98%;height:55px;">
+                    <img ng-src="http://isacon2017kolkata.com/images/logo/logo.png" style="width:98%;height: 100%;margin:2px;display:block;border-radius: 10px;" 
+                         title="Banner">
+        
+                </ion-slide>
+                <ion-slide options="{direction: 'vertical',loop: true,effect: 'fade',autoplay: 100}" style="width:98%;height:55px;">
+                    <img ng-src="images/logo.png" style="width:98%;height: 100%;margin:2px;display:block;border-radius: 10px;" 
+                         title="Banner">
+        
+                </ion-slide>
+            </ion-slide-box>-->
+        <div class="bar bar-subheader bar-stable item-input-inset" style="top:0px;">
+            <select ng-model="vm.workshopDate" style="width: 100%;min-height: 40px;border-width: 0px;text-align-last: center;background: #128DD7;color:#FFF;" ng-change="vm.dateChanged()">
+                <option value="{{'2017-11-23T18:30:00.000Z'| date:'dd-MM-yyyy'}}" selected>{{'2017-11-23T18:30:00.000Z'| date:'dd-MM-yyyy'}}</option>
+                <option value="{{'2017-11-24T18:30:00.000Z'| date:'dd-MM-yyyy'}}">{{'2017-11-24T18:30:00.000Z'| date:'dd-MM-yyyy'}}</option>
+            </select>
+        </div>
+        <div class="bar bar-subheader bar-stable item-input-inset" style="top:0px;">
+            <select ng-model="vm.venues" style="width: 100%;min-height: 40px;border-width: 0px;text-align-last: center;background: #128DD7;color:#FFF;" ng-change="vm.venueChanged()">
+                <option value="all">All</option>
+                <option ng-repeat="v in vm.venue" value="{{v}}">{{v}}</option>
+            </select>
+        </div>
         <ion-list can-swipe="true">
-            <ion-item class="item-text-wrap" ng-repeat="workshop in vm.workshopDetails| filter: filtertxt">
+            <ion-item class="item-text-wrap" ng-repeat="workshop in vm.schedule | filter: filtertxt">
                 <h2>{{workshop.title}}</h2>
                 <h3>{{workshop.venue}}</h3>
-                <h3 ng-if="workshop.startDate && workshop.endDate">{{workshop.startDate| date: 'fullDate'}} - {{workshop.endDate| date: 'fullDate'}}</h3>
-                <h3 ng-if="workshop.startDate && !workshop.endDate">{{workshop.startDate| date: 'fullDate'}}</h3>
+                <h2 ng-if="workshop.startDate && workshop.endDate">{{workshop.startDate| date: 'fullDate'}} - {{workshop.endDate| date: 'fullDate'}}</h2>
+                <h2 ng-if="workshop.startDate && !workshop.endDate">{{workshop.startDate| date: 'fullDate'}}</h2>
                 <a ng-click="vm.goEventsDetails(workshop.$id)" style="cursor: progress;">View map <i class="icon ion-android-map" style="color:red;"></i></a>
             </ion-item>
         </ion-list>

@@ -14,12 +14,12 @@
     <access launch-external="yes" origin="maps:*" />
     <access launch-external="yes" origin="geo:*" />
     <platform name="android">
-        <icon density="ldpi" src="resources/android/icon/icon.png" />
-        <icon density="mdpi" src="resources/android/icon/icon.png" />
-        <icon density="hdpi" src="resources/android/icon/icon.png" />
-        <icon density="xhdpi" src="resources/android/icon/icon.png" />
-        <icon density="xxhdpi" src="resources/android/icon/icon.png" />
-        <icon density="xxxhdpi" src="resources/android/icon/icon.png" />
+        <icon density="ldpi" src="resources/android/icon/ldpiicon.png" />
+        <icon density="mdpi" src="resources/android/icon/mdpiicon.png" />
+        <icon density="hdpi" src="resources/android/icon/hdpiicon.png" />
+        <icon density="xhdpi" src="resources/android/icon/xhdpiicon.png" />
+        <icon density="xxhdpi" src="resources/android/icon/xhdpiicon.png" />
+        <icon density="xxxhdpi" src="resources/android/icon/xhdpiicon.png" />
         <splash density="port-ldpi" src="resources/android/splash/splash.png" />
         <splash density="port-mdpi" src="resources/android/splash/splash.png" />
         <splash density="port-hdpi" src="resources/android/splash/splash.png" />
@@ -60,7 +60,7 @@
         <param name="android-package" value="org.apache.cordova.NetworkManager" />
     </feature>
     <preference name="SplashScreen" value="screen" />
-    <preference name="SplashScreenDelay" value="5000" />
+    <preference name="SplashScreenDelay" value="3000" />
     <preference name="webviewbounce" value="false" />
     <preference name="UIWebViewBounce" value="false" />
     <preference name="DisallowOverscroll" value="true" />

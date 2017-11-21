@@ -5,10 +5,10 @@
 		.module('conference.menu')
 		.controller('MenuController', MenuController);
 
-	MenuController.$inject = ['$rootScope', 'loggedUser', 'loginSignUpService', '$ionicSideMenuDelegate'];
+	MenuController.$inject = ['$scope', '$rootScope', 'loggedUser', 'loginSignUpService', '$ionicSideMenuDelegate', '$interval', '$ionicSlideBoxDelegate'];
 
 	/* @ngInject */
-	function MenuController($rootScope, loggedUser, loginSignUpService, $ionicSideMenuDelegate) {
+	function MenuController($scope, $rootScope, loggedUser, loginSignUpService, $ionicSideMenuDelegate, $interval, $ionicSlideBoxDelegate) {
 		var vm = angular.extend(this, {
 			loggedUser: loggedUser,
 			logout: logout
@@ -18,7 +18,20 @@
 		})();
 
 		//****************************
+        $scope.banners = ["1","2"];
+$scope.lengthG = $scope.banners.length;
+                    $scope.count = 1;
+                    $interval(function () {
+                        if ((parseInt($scope.count)) === (parseInt($scope.lengthG))) {
+                            $scope.count = 1;
+                            $ionicSlideBoxDelegate.slide(0);
+                        } else {
+                            $ionicSlideBoxDelegate.next();
+                            $scope.count++;
+                        }
 
+                        //$scope.$apply();
+                    }, 7000);
 		function logout() {
 			loginSignUpService.logout();
 			$ionicSideMenuDelegate.toggleLeft();

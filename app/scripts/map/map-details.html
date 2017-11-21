@@ -1,0 +1,22 @@
+<ion-view title="{{vm.level}}">
+    <ion-nav-buttons side="left" class="has-header">
+        <button class="button button-icon icon ion-android-arrow-back" title="Back" ng-click="vm.goBack()">Back</button>
+    </ion-nav-buttons>
+    <ion-content class="padding">
+        <ion-item>
+            <div>
+                <ion-scroll
+                    direction="xy"
+                    zooming="true"
+                    min-zoom="1.0"
+                    max-zoom="5.0"
+                    overflow-scroll="false"
+                    has-bouncing="false"
+                    > 
+                    <img ng-src="{{vm.src}}"/>             
+                </ion-scroll>
+            </div>
+        </ion-item>    
+    </ion-content>
+</ion-view>
+<style>.item{padding: 0px;}</style>

@@ -5,7 +5,7 @@
         Masimo Conference
     </description>
     <author email="dev@onehealth.solutions" href="http://www.masimoatisacon.com">
-       OneHealth Dev Team
+        OneHealth Dev Team
     </author>
     <content src="index.html" />
     <access origin="*" />
@@ -13,6 +13,18 @@
     <access launch-external="yes" origin="mailto:*" />
     <access launch-external="yes" origin="maps:*" />
     <access launch-external="yes" origin="geo:*" />
+    <platform name="android">
+        <icon density="ldpi" src="resources/android/icon/icon.png" />
+        <icon density="mdpi" src="resources/android/icon/icon.png" />
+        <icon density="hdpi" src="resources/android/icon/icon.png" />
+        <icon density="xhdpi" src="resources/android/icon/icon.png" />
+        <icon density="xxhdpi" src="resources/android/icon/icon.png" />
+        <icon density="xxxhdpi" src="resources/android/icon/icon.png" />
+        <splash density="port-ldpi" src="resources/android/splash/splash.png" />
+        <splash density="port-mdpi" src="resources/android/splash/splash.png" />
+        <splash density="port-hdpi" src="resources/android/splash/splash.png" />
+        <splash density="port-xhdpi" src="resources/android/splash/splash.png" />
+    </platform>
     <platform name="ios">
         <icon height="57" src="resources/ios/icons/icon.png" width="57" />
         <icon height="114" src="resources/ios/icons/icon@2x.png" width="114" />
@@ -48,7 +60,7 @@
         <param name="android-package" value="org.apache.cordova.NetworkManager" />
     </feature>
     <preference name="SplashScreen" value="screen" />
-    <preference name="SplashScreenDelay" value="3000" />
+    <preference name="SplashScreenDelay" value="5000" />
     <preference name="webviewbounce" value="false" />
     <preference name="UIWebViewBounce" value="false" />
     <preference name="DisallowOverscroll" value="true" />

@@ -5,20 +5,21 @@
             .module('conference.auth')
             .factory('loginSignUpService', loginSignUpService);
 
-    loginSignUpService.$inject = ['$rootScope', '$firebaseAuth', 'db', 'dataService', '$http'];
+    loginSignUpService.$inject = ['$rootScope', '$firebaseAuth', 'db', 'dataService', '$http', 'localStorageService'];
 
     /* @ngInject */
-    function loginSignUpService($rootScope, $firebaseAuth, db, dataService, $http) {
+    function loginSignUpService($rootScope, $firebaseAuth, db, dataService, $http, localStorageService) {
 //		var firebaseAuth = firebase.auth();
 //		var auth = $firebaseAuth(firebaseAuth);
 
-    var service = {
+        var service = {
             user: {
                 isSignedIn: false
             },
 //            signIn: signIn,
             login: login,
             loginMobile: loginMobile,
+            upload: upload,
             logout: logout,
             getStoredUser: getStoredUser,
             getUserDetails: getUserDetails,
@@ -26,8 +27,7 @@
             getUsers: getUsers,
             insertUser: insertUser,
             updateUser: updateUser,
-            setUser: setUser,
-            sendSMS: sendSMS
+            setUser: setUser
         };
 
 //		firebaseAuth.onAuthStateChanged(function(data) {
@@ -86,50 +86,51 @@
 //				});
 //		}
 
-        function login(userName, password) {
+        function upload(data, collection) {
+            return dataService.uploadData(data, collection);
+        }
+
+        function login(userName) {
             console.log('email');
-            console.log(userName + '  ' + password);
+            console.log(userName);
             var flag;
             return getUserDetails(userName).then(function (response) {
                 console.log(angular.toJson(response));
-                    angular.forEach(response, function (v, k) {
-                        console.log(angular.toJson(v + "  " + k));
-                        v.$id = k;
-                        console.log(angular.toJson(v));
-                        if (userName == v.email && v.password === btoa(password)) {
-                            setUser(v);
-                            flag = v;
-                        } else {
-                            setUser('');
-                            flag = '';
-                        }
-                    });
-                    return flag;                
-                
+                angular.forEach(response, function (v, k) {
+                    console.log(angular.toJson(v + "  " + k));
+                    v.$id = k;
+                    console.log(angular.toJson(v));
+                    if (userName == v.email) {
+                        setUser(v);
+                        flag = v;
+                    } else {
+                        setUser('');
+                        flag = '';
+                    }
+                });
+                return flag;
             });
         }
-        
-        function loginMobile(userName, password) {
+
+        function loginMobile(userName) {
             console.log('Mobile');
-            console.log(userName + '  ' + password);
+            console.log(userName);
             var flag;
             return getUserMobile(userName).then(function (response) {
                 console.log(angular.toJson(response));
-                    angular.forEach(response, function (v, k) {
-                        console.log(angular.toJson(v + "  " + k));
-                        v.$id = k;
-                        console.log(angular.toJson(v));
-                        if (userName == v.mobileNumber && v.password === btoa(password)) {
-                            setUser(v);
-                            flag = v;
-                        } else {
-                            setUser('');
-                            flag = '';
-                        }
-                    });
-                    return flag;
-                              
-                
+                angular.forEach(response, function (v, k) {
+                    console.log(angular.toJson(v + "  " + k));
+                    v.$id = k;
+                    console.log(angular.toJson(v));
+                    if (userName == v.mobileNumber) {
+                        setUser(v);
+                        flag = v;
+                    } else {
+                        setUser('');
+                        flag = '';
+                    }
+                });
+                return flag;
             });
         }
 
@@ -145,7 +146,7 @@
         }
 
         function getStoredUser() {
-            var user = localStorage.getItem('authUser');
+            var user = localStorageService.get('authUser');
             if (user) {
                 user = JSON.parse(user);
             }
@@ -156,19 +157,19 @@
             if (user) {
                 user = JSON.stringify(user);
             }
-            localStorage.setItem('authUser', user);
+            localStorageService.set('authUser', user);
         }
 
-        function sendSMS(number, message) {
-            var KEY = 'Ad2abf667677b7a748622a07ff29ca545';
-            var APIURL = 'https://alerts.solutionsinfini.com';
-            var senderId = 'ONEHLT';
-
-            return $http.post(APIURL + '/api/v3/index.php?method=sms&api_key=' + KEY + '&to=' + number + '&sender=' + senderId + '&message=' + message).then(function (resp) {
-                console.log(resp);
-                return resp;
-            });
-        }
+//        function sendSMS(number, message) {
+//            var KEY = 'Ad2abf667677b7a748622a07ff29ca545';
+//            var APIURL = 'https://alerts.solutionsinfini.com';
+//            var senderId = 'ONEHLT';
+//
+//            return $http.post(APIURL + '/api/v3/index.php?method=sms&api_key=' + KEY + '&to=' + number + '&sender=' + senderId + '&message=' + message).then(function (resp) {
+//                console.log(resp);
+//                return resp;
+//            });
+//        }
 
     }
 })();

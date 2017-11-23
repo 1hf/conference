@@ -20,13 +20,13 @@
 
         function initMapDetails() {
             if (vm.level == 'Level 0') {
-                vm.src = 'images/HIDCO-GROUND-FLOOR-1.jpg';
+                vm.src = 'http://prakrithi.co/isacon2017/HIDCO-GROUND-FLOOR-1.jpg';
 
             } else if (vm.level == 'Level 2') {
-                vm.src = 'images/HIDCO-1ST-FLOOR-1.jpg';
+                vm.src = 'http://prakrithi.co/isacon2017/HIDCO-1ST-FLOOR-1.jpg';
 
             } else if (vm.level == 'Level 4') {
-                vm.src = 'images/HIDCO-2ND-FLOOR-1.jpg';
+                vm.src = 'http://prakrithi.co/isacon2017/HIDCO-2ND-FLOOR-1.jpg';
             }
         }
 

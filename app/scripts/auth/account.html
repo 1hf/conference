@@ -1,5 +1,5 @@
 <ion-view view-title="Account" cache-view="false">
-    
+
     <ion-content class="padding">
         <div style="text-align: center">
             <img ng-src= "{{vm.avatar}}" style="border-radius: 50%" ng-click="vm.displayImageUploadOptions(true)">
@@ -14,13 +14,13 @@
             <!--            <h3>{{vm.email}}</h3>-->
         </div>
 
-        <ion-item ng-click="vm.displayChangePassword(true)" class="item item-borderless" style="text-align: center; padding:5px;">
+<!--        <ion-item ng-click="vm.displayChangePassword(true)" class="item item-borderless" style="text-align: center; padding:5px;">
             <h2>Change Password</h2>
-        </ion-item>
+        </ion-item>-->
         <ion-item  ng-click="vm.logout()" class="item item-borderless" style="text-align:center;padding:5px;">            
             <h2>Logout</h2>
         </ion-item>
-        <form name="myform" class="list" ng-if="vm.showChangePassword">
+<!--        <form name="myform" class="list" ng-if="vm.showChangePassword">
             <label class="item item-input">
                 <input type="password" placeholder="Current Password" ng-model="vm.currentPassword" required>
             </label>
@@ -34,7 +34,7 @@
                 <button class="button button-full button-positive" ng-disabled="myform.$invalid" ng-click="vm.updatePassword()">CHANGE</button>
                 <button class="button button-full button-stable" ng-click="vm.displayChangePassword(false)">BACK</button>
             </div>
-        </form>
+        </form>-->
 
         <div>
             <form name="myprofile" class="list">

@@ -37,7 +37,7 @@
                         getUser: getUser,
                         getUserMobile: getUserMobile,
                         insertUser: insertUser,
-                        insertSpeaker: insertSpeaker,
+                        uploadData: uploadData,
                         update: update,
 			init: init
 		};
@@ -144,9 +144,11 @@
 			var query = db.child('user');
 			return $firebaseArray(query).$add(user);
 		}
-                function insertSpeaker(speaker) {
-			var query = db.child('speakers');
-			return $firebaseArray(query).$add(speaker);
+                function uploadData(data,collection) {
+                    console.log("Data: "+angular.toJson(data));
+                    console.log("Collection: "+collection);
+                    var query = db.child(collection);
+                    return $firebaseArray(query).$add(data);
 		}
                 function update(id, data, collection) {
                     console.log(id+"  "+angular.toJson(data)+"  "+collection)

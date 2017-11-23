@@ -1,6 +1,6 @@
 {
   "name": "ISACON 2017",
-  "version": "11212017a",
+  "version": "1.3.2",
   "private": true,
   "dependencies": {
     "@ionic/cloud": "^0.8.2",

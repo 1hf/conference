@@ -24,8 +24,7 @@
                                     templateUrl: 'scripts/speakers/speaker-details.html',
                                     controller: 'SpeakerDetailsController as vm'
                                 }
-                            },
-                            hideTabs: true
+                            }
                         })
                         .state('app.tabs.speakers-session-details', {
                             url: '/speakers-session-details',

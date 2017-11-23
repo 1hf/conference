@@ -9,7 +9,9 @@
 
     /* @ngInject */
     function eventsService(dataService, firebaseDataService, $q, _, localStorageService) {
+        //localStorageService.set('favoritesEvents', null);
         var events = null;
+        var workshop = null;
         var service = {
             fetchEvents: fetchEvents,
             getWorkshop: getWorkshop,
@@ -18,14 +20,19 @@
             isInFavorites: isInFavorites
         };
         return service;
-
+        localStorageService.set('favoritesEvents', null);
 
         function getWorkshop(workshopId) {
             return dataService.getWorkshop(workshopId);
         }
 
         function getWorkshops() {
-            return dataService.getWorkshops();
+            return dataService.getWorkshops().then(function (workshops) {
+                console.log(angular.toJson(workshops));
+                workshop = workshops;
+                return workshop;
+            });
+
         }
 
         function fetchEvents(filter, showFavorites) {
@@ -41,13 +48,13 @@
         }
 
         function toggleFavorites(eventId, toggle) {
-            _.each(events, function (event) {
+            _.each(workshop, function (event) {
                 if (event.$id === eventId) {
                     event.isInFavorites = toggle;
 
                     var favorites = localStorageService.get('favoritesEvents') || [];
                     if (toggle) {
-                        favorites.push(event.$id);
+                        favorites.push(event);
                         favorites = _.uniq(favorites);
                     } else {
                         favorites = _.filter(favorites, function (item) {

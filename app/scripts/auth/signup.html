@@ -1,6 +1,6 @@
 <ion-view title="User Signup" hide-nav-bar="true">
-    <ion-content padding="true" class="has-header">
-        <form class="list padding" name="myform">
+    <ion-content class="padding">
+        <form class="list" name="myform">
             <label class="item item-input">
                 <span class="input-label">First Name<sup> <font color="red"> * </sup></span>
                 <input type="text" placeholder="Enter the First Name" ng-model="vm.user.firstName" required />
@@ -17,10 +17,10 @@
                 <span class="input-label">Email<sup> <font color="red"> * </sup></span>
                 <input type="email" placeholder="Enter the Email" ng-model="vm.user.email" required>
             </label>
-            <label class="item item-input">
+<!--            <label class="item item-input">
                 <span class="input-label">Password<sup> <font color="red"> * </sup></span>
                 <input type="password" placeholder="Enter the Password" ng-model="vm.user.password" required>
-            </label>
+            </label>-->
             <label class="item item-input">
                 <span class="input-label">Designation</span>
                 <input type="text" placeholder="Enter the Designation" ng-model="vm.user.designation">

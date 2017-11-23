@@ -6,11 +6,11 @@
             .controller('ScheduleController', ScheduleController);
 
     //ScheduleController.$inject = ['scheduleService', '$state', 'filterModal', '_', '$scope', '$filter'];
-    ScheduleController.$inject = ['scheduleService', '$state', '_', '$scope', '$filter', '$ionicSlideBoxDelegate', '$interval'];
+    ScheduleController.$inject = ['scheduleService', '$state', '_', '$scope', '$filter', '$ionicSlideBoxDelegate', '$interval', '$ionicLoading'];
 
     /* @ngInject */
     //function ScheduleController(scheduleService, $state, filterModal, _, $scope, $filter) {
-    function ScheduleController(scheduleService, $state, _, $scope, $filter, $ionicSlideBoxDelegate, $interval) {
+    function ScheduleController(scheduleService, $state, _, $scope, $filter, $ionicSlideBoxDelegate, $interval, $ionicLoading) {
         $scope.dt = [];
         var vm = angular.extend(this, {
             filter: null,
@@ -41,26 +41,14 @@
         vm.scheduleDate = '';
         //vm.scheduleDate = new Date();
         vm.rooms = 'all';
-        
+
         //*********************************************
 
         $scope.$on('$ionicView.beforeEnter', function () {
             loadSchedule();
+            $ionicLoading.hide();
         });
-$scope.banners = ["1","2"];
-$scope.lengthG = $scope.banners.length;
-                    $scope.count = 1;
-                    $interval(function () {
-                        if ((parseInt($scope.count)) === (parseInt($scope.lengthG))) {
-                            $scope.count = 1;
-                            $ionicSlideBoxDelegate.slide(0);
-                        } else {
-                            $ionicSlideBoxDelegate.next();
-                            $scope.count++;
-                        }
 
-                        //$scope.$apply();
-                    }, 7000);
         function doRefresh() {
             loadSchedule();
             $scope.$broadcast('scroll.refreshComplete');
@@ -82,10 +70,10 @@ $scope.lengthG = $scope.banners.length;
             vm.filterByDayId = null;
             loadSchedule();
         }
-        function commonLoadSchedules(dte) { 
-            
+        function commonLoadSchedules(dte) {
+
             var dt = new Date(dte.substring(6, 10) + "-" + dte.substring(3, 5) + "-" + dte.substring(0, 2) + "T18:30:00.966Z");
-                dt.setDate(dt.getDate() - 1);
+            dt.setDate(dt.getDate() - 1);
             angular.forEach(vm.schedules, function (val, key) {
                 console.log((new Date(val.eventDate)).toString() + " , " + new Date(dt).toString());
 
@@ -129,7 +117,7 @@ $scope.lengthG = $scope.banners.length;
                     //vm.scheduleDate = new Date(items[0].eventDate); 
                     vm.scheduleDate = $filter('date')(items[0].eventDate, "dd-MM-yyyy");
                 }
-                
+
                 //alert(new Date(dt));
                 commonLoadSchedules(vm.scheduleDate);
             });
@@ -157,22 +145,19 @@ $scope.lengthG = $scope.banners.length;
 
         function loadScheduleRoom() {
             var dt = new Date(vm.scheduleDate.substring(6, 10) + "-" + vm.scheduleDate.substring(3, 5) + "-" + vm.scheduleDate.substring(0, 2) + "T18:30:00.966Z");
-                dt.setDate(dt.getDate() - 1);
+            dt.setDate(dt.getDate() - 1);
             vm.schedule = [];
             vm.room = [];
             angular.forEach(vm.schedules, function (val, key) {
                 if ((new Date(val.eventDate)).toString() === (dt).toString()) {
                     $scope.noRecord = '';
                     vm.room.push(val.location);
-
+                    if (val.location === vm.rooms || vm.rooms === 'all') {
+                        $scope.noRecord = '';
+                        vm.schedule.push(val);
+                    }
                 }
-                if (val.location === vm.rooms || vm.rooms === 'all') {
-                    $scope.noRecord = '';
-                    vm.schedule.push(val);
-                }
-
             });
-
         }
 
         function roomChanged() {

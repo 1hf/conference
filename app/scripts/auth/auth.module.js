@@ -10,6 +10,7 @@
                 $stateProvider
                         .state('app.signin', {
                             url: '/signin',
+                            params: {userName: null},
                             templateUrl: 'scripts/auth/signin.html',
                             controller: 'LoginController as vm'
                         })

@@ -17,7 +17,9 @@
 		//*********************************************
 
 		(function activate() {
-			getSpeakers()
+                    vm.speakers=[];
+			getSpeakers();
+                        
 		})();
 
 		function getSpeakers() {

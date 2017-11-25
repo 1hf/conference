@@ -1,0 +1,81 @@
+<ion-view view-title="Account" cache-view="false">
+
+    <ion-content class="padding">
+        <div style="text-align: center">
+            <img ng-src= "{{vm.avatar}}" style="border-radius: 50%" ng-click="vm.displayImageUploadOptions(true)">
+            <div class="button-bar" ng-show="vm.showImageUploadOptions">
+                <div class="button" style="font-size: 40px; margin-top: 3px; font-size: 10px; border: 1px solid gray" ng-click="vm.uploadImage('takePictue')">
+                    <i class="icon ion-camera"> TAKE PICTURE</i>                       
+                </div>
+                <div class="button" style="font-size: 40px; margin-top: 3px; font-size: 10px; border: 1px solid gray" ng-click="vm.uploadImage('chooseImage')">
+                    <i class="icon ion-image"> CHOOSE IMAGE</i>                       
+                </div>
+            </div>
+            <!--            <h3>{{vm.email}}</h3>-->
+        </div>
+
+<!--        <ion-item ng-click="vm.displayChangePassword(true)" class="item item-borderless" style="text-align: center; padding:5px;">
+            <h2>Change Password</h2>
+        </ion-item>-->
+        <ion-item  ng-click="vm.logout()" class="item item-borderless" style="text-align:center;padding:5px;">            
+            <h2>Logout</h2>
+        </ion-item>
+<!--        <form name="myform" class="list" ng-if="vm.showChangePassword">
+            <label class="item item-input">
+                <input type="password" placeholder="Current Password" ng-model="vm.currentPassword" required>
+            </label>
+            <label class="item item-input">
+                <input type="password" placeholder="New Password" ng-model="vm.newPassword" required>
+            </label>
+            <label class="item item-input">
+                <input type="password" placeholder="Confirm New Password" ng-model="vm.confirmNewPassword" required>
+            </label>
+            <div class="button-bar">
+                <button class="button button-full button-positive" ng-disabled="myform.$invalid" ng-click="vm.updatePassword()">CHANGE</button>
+                <button class="button button-full button-stable" ng-click="vm.displayChangePassword(false)">BACK</button>
+            </div>
+        </form>-->
+
+        <div>
+            <form name="myprofile" class="list">
+                <label class="item item-input">
+                    <span class="input-label">First Name<sup> <font color="red"> * </font></sup></span>
+                    <input type="text" placeholder="Enter the First Name" ng-model="vm.user.firstName" required />
+                </label>
+                <label class="item item-input">
+                    <span class="input-label">Last Name</span>
+                    <input type="text" placeholder="Enter the Last Name" ng-model="vm.user.lastName">
+                </label>
+                <label class="item item-input">
+                    <span class="input-label">Mobile</span>
+                    <input type="number" placeholder="Enter the Mobile Number" ng-model="vm.user.mobileNumber" required>
+                </label>
+                <label class="item item-input">
+                    <span class="input-label">Email<sup> <font color="red"> * </font></sup></span>
+                    <input type="email" placeholder="Enter the Email" ng-model="vm.user.email" required>
+                </label>
+                <label class="item item-input">
+                    <span class="input-label">Designation</span>
+                    <input type="text" placeholder="Enter the Designation" ng-model="vm.user.designation">
+                </label>
+                <label class="item item-input">
+                    <span class="input-label">Address</span>
+                    <textarea placeholder="Enter the Address" ng-model="vm.user.address.Address1">{{vm.user.address.Address1}}</textarea>
+                </label>
+                <label class="item item-input">
+                    <span class="input-label">City</span>
+                    <input type="text" placeholder="Enter the City" ng-model="vm.user.address.City" />
+                </label>
+                <label class="item item-input">
+                    <span class="input-label">State</span>
+                    <input type="text" placeholder="Enter the State" ng-model="vm.user.address.State" />
+                </label>
+                <label class="item item-input">
+                    <span class="input-label">Zipcode</span>
+                    <input type="text" placeholder="Enter the zipcode" ng-model="vm.user.address.zipCode"/>
+                </label>
+                <button class="button button-full button-positive" ng-disabled="myprofile.$invalid" ng-click="vm.updateProfile()">Update Profile</button>
+            </form>
+        </div>
+    </ion-content>    
+</ion-view>

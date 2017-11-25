@@ -1,0 +1,28 @@
+<ion-view view-title="Login" hide-nav-bar="true">
+    <ion-content class="padding">
+            <div class="list" style="    position: absolute;
+    width: 100%;
+    height: auto;
+    margin-top: 50%;
+    display: block;">
+                <label class="item item-input">
+                    <input type="text" placeholder="Enter Your Email / Mobile" ng-model="vm.user.userName">
+                </label>
+                <!--            <label class="item item-input" ng-show="vm.showLogin">
+                                <span class="input-label">Password</span>
+                                <input type="password" placeholder="Enter the Password" ng-model="vm.user.password">
+                            </label>
+                            <label class="item item-input" ng-show="vm.showReset">
+                                <input type="number" placeholder="Mobile number without a Country Code" ng-model="vm.user.mobileNumber">
+                            </label>-->
+                <!--            <div style="width: 100%; float: left; margin-top: 10px;">
+                                <a class="assertive" href="" style="float: right;" ng-click="vm.displayReset()" ng-show="vm.showLogin">Forgot Password?</a>
+                            </div>-->
+                <button class="button button-full button-positive" ng-click="vm.loginUser()">LOGIN</button>
+                <button class="button button-full button-stable" ng-click="vm.gotoSignUp()">SIGN UP</button>
+
+                <!--            <button class="button button-full button-positive" ng-click="vm.resetPassword()" ng-show="vm.showReset">RESET PASSWORD</button>
+                            <button class="button button-full button-stable" ng-click="vm.displayLogin()" ng-show="vm.showReset">BACK</button>-->
+            </div>
+    </ion-content>
+</ion-view>

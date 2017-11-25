@@ -1,0 +1,38 @@
+<ion-view>
+	<ion-nav-title>
+		{{vm.sponsor.name}}
+	</ion-nav-title>
+	<ion-content padding="true">
+		<div style="text-align: center;">
+			<img src="{{vm.sponsor.logo}}">
+		</div>
+		<h2>{{vm.sponsor.name}}</h2>
+		<p>
+			{{vm.sponsor.description}}
+		</p>
+
+		<h3>Contact</h3>
+		<div class="list card">
+			<a href="tel:{{vm.sponsor.phoneNumber}}" class="item item-icon-left">
+				<i class="icon ion-ios-telephone"></i>
+				Phone
+			</a>
+			<a class="item item-icon-left" ng-click="vm.sendEmail()">
+				<i class="icon ion-email"></i>
+				Email
+			</a>
+			<a class="item item-icon-left" ng-click="vm.openUrl(vm.sponsor.facebook)">
+				<i class="icon ion-social-facebook"></i>
+				Facebook
+			</a>
+			<a class="item item-icon-left" ng-click="vm.openUrl(vm.sponsor.twitter)">
+				<i class="icon ion-social-twitter"></i>
+				Twitter
+			</a>
+			<a class="item item-icon-left" ng-click="vm.openUrl(vm.sponsor.webpage)">
+				<i class="icon ion-ios-world"></i>
+				Webpage
+			</a>
+		</div>
+	</ion-content>
+</ion-view>

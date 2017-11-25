@@ -1,0 +1,57 @@
+<ion-view view-title="Abstract">
+	<ion-nav-buttons side="secondary">
+		<button class="button-clear" ng-click="vm.toggleFavorites()">
+			<i class="icon ion-ios-star-outline light" ng-if="!vm.abstract.isInFavorites"></i>
+			<i class="icon ion-ios-star light" ng-if="vm.abstract.isInFavorites"></i>
+		</button>
+	</ion-nav-buttons>
+	<ion-content padding="true">
+		<h2>{{vm.abstract.title}}</h2>
+		<p><i class="icon ion-calendar"></i> {{vm.abstract.startDate | date: 'short'}} •
+			<i class="icon ion-clock"></i> {{vm.abstract.duration}} mins •
+			<span class="as-capitalized"><i class="icon ion-pricetags"></i> {{vm.abstract.type}}</span>
+		</p>
+
+		<h4>Presenters</h4>
+				<div ng-repeat="presenter in vm.abstract.presenters">
+					<p>{{presenter.firstName}} {{presenter.lastName}}, {{presenter.affiliation}}</p>
+			  </div>
+
+		<div class="padding-top">
+			<h3>Abstract</h3>
+			<p>{{vm.abstract.body}}</p>
+		</div>
+
+		<h3 ng-if="(vm.abstract.authors|json).length">Authors</h3>
+		<ion-list ng-if="(vm.abstract.authors|json).length">
+			<ion-item ng-repeat="(id, author) in vm.abstract.authors" ng-click="vm.goToAuthorDetail(id)">
+				<h2>{{author.firstName}} {{author.lastName}}</h2>
+				<p>{{author.affiliation}} {{author.email}}</p>
+			</ion-item>
+		</ion-list>
+		<h4 ng-if="(vm.abstract.corresponding|json).length">Corresponding</h4>
+		<ion-list>
+			<ion-item ng-repeat="participant in vm.abstract.corresponding"
+				ng-if="(vm.abstract.corresponding|json).length">
+				<h2>{{participant.firstName}} {{participant.lastName}}</h2>
+				<p>{{participant.affiliation}} {{participant.email}}</p>
+			</ion-item>
+		</ion-list>
+		<div class="list card">
+			<a class="item item-icon-left" ng-click="vm.toggleFavorites()">
+				<span ng-if="!vm.abstract.isInFavorites">
+					<i class="icon ion-ios-star-outline"></i>
+					<span>Add to favorites</span>
+				</span>
+				<span ng-if="vm.abstract.isInFavorites">
+					<i class="icon ion-ios-star balanced"></i>
+					<span>Remove from favorites</span>
+				</span>
+			</a>
+			<a class="item item-icon-left" ng-click="vm.openPdf()" ng-if="!!vm.abstract.pdf">
+					<i class="icon ion-document-text"></i>
+					<span>Download PDF</span>
+			</a>
+		</div>
+	</ion-content>
+</ion-view>

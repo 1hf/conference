@@ -1,0 +1,37 @@
+<ion-view title="Speaker">
+    <ion-content class="padding">
+        <div style="text-align: center">
+            <img class="avatar" ng-src="{{vm.speaker.profilePic}}"/>
+        </div>
+
+        <h1>{{vm.speaker.firstName}} {{vm.speaker.lastName}}</h1>
+        <p>{{vm.speaker.about}}</p>
+        <p>{{vm.speaker.email}}</p>
+
+        <div class="padding-top" ng-if="!!vm.speaker.bio">
+            <h3>Biography</h3>
+            <p>{{vm.speaker.bio}}</p>
+        </div>
+
+        <h3>Contact</h3>
+        <div class="list card">
+            <a href="tel:{{vm.speaker.phoneNumber}}" class="item item-icon-left">
+                <i class="icon ion-ios-telephone"></i>
+                Phone
+            </a>
+            <a class="item item-icon-left" ng-click="vm.sendEmail()">
+                <i class="icon ion-email"></i>
+                Email
+            </a>
+            <a class="item item-icon-left" ng-click="vm.openUrl(vm.speaker.linkedIn)">
+                <i class="icon ion-social-linkedin"></i>
+                Linked In
+            </a>
+            <a class="item item-icon-left" ng-click="vm.openUrl(vm.speaker.webpage)">
+                <i class="icon ion-ios-world"></i>
+                Webpage
+            </a>
+        </div>
+
+    </ion-content>
+</ion-view>

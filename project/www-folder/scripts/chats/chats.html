@@ -1,0 +1,50 @@
+<ion-view class="segments">
+    <ion-nav-title style="color:#FFF; text-align:center;background-color: #094261;">
+        <h3 style="margin-top: 7px;color:#FFF;">Users</h3>
+        <!--		<button class="button header-button"
+                                ng-click="vm.showAll()"
+                                ng-class="{ 'selected-header-button': !vm.favorites }">ALL
+                        </button>
+                        <button class="button header-button"
+                                ng-click="vm.showFavorites()"
+                                ng-class="{ 'selected-header-button': vm.favorites }">FAVORITES
+                        </button>-->
+    </ion-nav-title>
+    <!--	<ion-nav-buttons side="secondary">
+                    <a class="button button-icon icon ion-android-options" ng-click="vm.showFilter()"></a>
+            </ion-nav-buttons>-->
+
+    <div class="bar bar-subheader bar-stable item-input-inset">
+        <label class="item-input-wrapper">
+            <i class="icon ion-ios-search placeholder-icon"></i>
+            <input type="search" placeholder="Search"  ng-model="filtertxt">
+        </label>
+    </div>
+
+    <ion-content class="padding has-subheader has-header">
+        <ion-item class="item-avatar" ng-repeat=" user in vm.users| filter:filtertxt" ng-click="vm.goToChatsMessages(user)">
+            <img ng-src="{{user.avatar}}">
+            <h2>{{user.firstName}} {{user.lastName}}</h2>
+        </ion-item>
+
+        <!--        <ion-list can-swipe="true">
+                    <ion-item ng-repeat="abstract in vm.abstracts"
+                              ng-click="vm.goToAbstractDetail(abstract.$id)"
+                              class="item-text-wrap">
+                        <h2>{{abstract.title}}</h2>
+                        <p>{{abstract.startDate| date: 'short'}}</p>
+                        <p class="ion-pricetags as-capitalized"> {{abstract.type}}</p>
+                        <ion-option-button class="button-positive"
+                                           ng-click="vm.addFavorites($event, abstract)"
+                                           ng-if="!abstract.isInFavorites">
+                            FAVORITE
+                        </ion-option-button>
+                        <ion-option-button class="button-assertive"
+                                           ng-click="vm.removeFavorites(abstract)"
+                                           ng-if="abstract.isInFavorites">
+                            REMOVE
+                        </ion-option-button>
+                    </ion-item>
+                </ion-list>-->
+    </ion-content>
+</ion-view>

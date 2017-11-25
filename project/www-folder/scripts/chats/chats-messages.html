@@ -1,0 +1,47 @@
+<ion-view class="segments">
+    <ion-nav-title style="color:#FFF; text-align:center;background-color: #094261;">
+        <h3 style="margin-top: 7px;color:#FFF;">{{vm.user.firstName}} {{vm.user.lastName}}</h3>
+    </ion-nav-title>
+    <!--	<ion-nav-buttons side="secondary">
+                    <button class="button-clear" ng-click="vm.toggleFavorites()">
+                            <i class="icon ion-ios-star-outline light" ng-if="!vm.abstract.isInFavorites"></i>
+                            <i class="icon ion-ios-star light" ng-if="vm.abstract.isInFavorites"></i>
+                    </button>
+            </ion-nav-buttons>-->
+    <ion-content class="padding has-subheader has-header" scroll="false">
+        <ion-scroll class="top-container">
+            <ion-list>                
+                <ion-item class="item-avatar" ng-repeat="msg in vm.messages">
+                    <img ng-if="msg.messageFrom===vm.fromuser">
+                    <h3>{{msg.messengerName}}</h3>
+                    <h2>{{msg.messageText}}</h2>
+                    <img ng-if="msg.messageTo===vm.fromuser">
+                </ion-item>
+            </ion-list>
+        </ion-scroll>
+        <form class="list bottom-form">
+            <label class="item item-input">
+<!--                <span class="input-label">Messages</span>-->
+                <input type="text" ng-model="vm.message.messageText" placeholder="">
+            </label>
+            <button class="button button-positive button-block" ng-click="vm.sendMessage()">Submit</button>
+        </form>
+    </ion-content>
+</ion-view>
+<style>
+    .top-container{
+        height: calc(100% - 96px);
+        overflow:scroll;
+    }
+
+    .bottom-form{
+        position:absolute;
+        bottom:0px;
+        display:block;
+        width:100%;
+        background-color:white;
+        button{
+            margin:0px !important;
+        }
+    }
+</style>

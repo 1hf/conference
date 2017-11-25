@@ -1,0 +1,29 @@
+<ion-view view-title="Floor Map">
+    <ion-content class="padding" id="map-view">
+        <ion-item>
+            <ion-slide-box slider="slider1" style="height:100%">
+                <ion-slide options="{direction: 'vertical',loop: true,effect: 'fade',autoplay: 500}" style="width:100%; height:100%;">
+                    <div ng-click="vm.goMapDetails('Level 0')">
+                        <ion-item class="item-divider">Level 0</ion-item>
+                        <img ng-src="http://prakrithi.co/isacon2017/HIDCO-GROUND-FLOOR-1.jpg"/>
+                    </div>
+                </ion-slide>
+
+                <ion-slide options="{direction: 'vertical',loop: true,effect: 'fade',autoplay: 100}" style="width:100%; height:100%;">
+                    <div ng-click="vm.goMapDetails('Level 2')">
+                        <ion-item class="item-divider">Level 2</ion-item>
+                        <img ng-src="http://prakrithi.co/isacon2017/HIDCO-1ST-FLOOR-1.jpg"/>
+                    </div>
+                </ion-slide>
+
+                <ion-slide options="{direction: 'vertical',loop: true,effect: 'fade',autoplay: 100}" style="width:100%; height:100%;">
+                    <div ng-click="vm.goMapDetails('Level 4')">
+                        <ion-item class="item-divider">Level 4</ion-item>
+                        <img ng-src="http://prakrithi.co/isacon2017/HIDCO-2ND-FLOOR-1.jpg"/>
+                    </div>
+                </ion-slide>
+            </ion-slide-box>
+        </ion-item>    
+    </ion-content>
+</ion-view>
+<style>.item{padding: 0px;}</style>

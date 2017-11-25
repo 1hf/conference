@@ -1,0 +1,48 @@
+/*
+ * Home
+ */
+.home-hello {
+	position: relative;
+}
+
+.home img {
+	display: inherit;
+}
+
+.home-hello .item {
+	position: absolute;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	margin: 0;
+	border: 0;
+	background: rgba(255, 255, 255, 0.6);
+}
+
+.card.col.home h1 {
+	text-align: center;
+}
+
+.card.col.home h2 {
+	text-align: center;
+}
+
+.tabs {
+	-webkit-transition: all linear 0.2s;
+	transition: all linear 0.2s;
+}
+
+.tabs-item-hide > .tabs {
+	-webkit-transition: all linear 0.2s;
+	transition: all linear 0.2s;
+	bottom: -49px;
+	display: flex;
+}
+
+.header-button {
+	margin-top: 5px;
+}
+
+.selected-header-button {
+	font-weight: bold !important;
+}

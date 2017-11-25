@@ -1,0 +1,78 @@
+<ion-view class="segments">
+    <ion-nav-title style="color:#FFF; text-align:center;background-color: #094261;">
+        <h3 style="margin-top: 7px;color:#FFF;">Social Wall</h3>
+        <!--		<button class="button header-button"
+                                ng-click="vm.showAll()"
+                                ng-class="{ 'selected-header-button': !vm.favorites }">ALL
+                        </button>
+                        <button class="button header-button"
+                                ng-click="vm.showFavorites()"
+                                ng-class="{ 'selected-header-button': vm.favorites }">FAVORITES
+                        </button>-->
+    </ion-nav-title>
+    <!--	<ion-nav-buttons side="secondary">
+                    <a class="button button-icon icon ion-android-options" ng-click="vm.showFilter()"></a>
+            </ion-nav-buttons>-->
+
+    <div class="bar bar-subheader bar-stable item-input-inset">
+        <label class="item-input-wrapper">
+            <i class="icon ion-ios-search placeholder-icon"></i>
+            <input type="search" placeholder="Search" ng-model="filtertxt">
+        </label>
+    </div>
+
+    <ion-content class="padding has-subheader has-header" scroll="false">
+
+        <!--        <ion-scroll class="top-container" scroll-Glue>-->
+        <ion-scroll class="top-container">
+            <ion-refresher pulling-text="Pulled to refresh" on-refresh="vm.doRefresh()"></ion-refresher>
+            <ion-list>
+                <ion-item class="item-avatar" ng-repeat="msg in vm.messages| filter: filtertxt | orderBy:'-messageDate'">
+                    <img src="{{msg.messengerPic}}" alt="{{msg.messengerName}}">
+                    <h4>{{msg.messengerName}}</h4>
+                    <h3 ng-if="msg.messageText">{{msg.messageText}}</h3>
+                    <img ng-if="msg.pictureMessage" src="{{msg.pictureMessage}}" alt="" />
+                </ion-item>
+            </ion-list>
+            
+        </ion-scroll>
+        
+        <form class="list bottom-form">
+                    
+                
+            <label class="item item-input">
+                <!--                <span class="input-label">Messages</span>-->
+                <input type="text" placeholder="Enter message" ng-model="vm.message.messageText" style="margin-left:5px;">
+            
+            
+                <i style="padding:5px;font-size: 35px;color: cornflowerblue;cursor:pointer;" 
+                   class="icon ion-camera" 
+                   on-touch="vm.clickImage()"></i>
+            
+                <i style="padding:5px;font-size: 35px;color: cornflowerblue;cursor:pointer;" 
+                   class="icon ion-android-image" 
+                   on-touch="vm.uploadImage()"></i>
+            
+            </label>
+            
+            <button class="button button-positive button-block" ng-disabled="!vm.message.messageText && !vm.message.pictureMessage" ng-click="vm.submitMessage()">Submit</button>
+        </form>
+
+    </ion-content>
+</ion-view>
+<style>
+    .top-container{
+        height: calc(100% - 120px);
+        overflow:scroll;
+    }
+
+    .bottom-form{
+        bottom:0px;
+        display:block;
+        width:100%;
+        background-color:transparent;
+        button{
+            margin:0px !important;
+        }
+    }
+</style>

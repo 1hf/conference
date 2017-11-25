@@ -1,0 +1,43 @@
+<ion-view view-title="Message">
+<!--	<ion-nav-buttons side="secondary">
+		<button class="button-clear" ng-click="vm.toggleFavorites()">
+			<i class="icon ion-ios-star-outline light" ng-if="!vm.abstract.isInFavorites"></i>
+			<i class="icon ion-ios-star light" ng-if="vm.abstract.isInFavorites"></i>
+		</button>
+	</ion-nav-buttons>-->
+	<ion-content class="padding has-subheader has-header" scroll="false">
+        <ion-scroll class="top-container">
+            <ion-list>
+                <ion-item class="item-avatar">
+                    <img>
+                    <h2>Item</h2>
+                </ion-item>
+            </ion-list>
+        </ion-scroll>
+        <form class="list bottom-form">
+            <label class="item item-input">
+                <span class="input-label">Messages</span>
+                <input type="text" placeholder="">
+            </label>
+            <button class="button button-positive button-block">Submit</button>
+        </form>
+
+    </ion-content>
+</ion-view>
+<style>
+    .top-container{
+    height: calc(100% - 96px);
+    overflow:scroll;
+}
+
+.bottom-form{
+    position:absolute;
+    bottom:0px;
+    display:block;
+    width:100%;
+    background-color:white;
+    button{
+        margin:0px !important;
+    }
+}
+</style>

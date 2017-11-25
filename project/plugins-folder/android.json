@@ -1,0 +1,49 @@
+{
+  "prepare_queue": {
+    "installed": [],
+    "uninstalled": []
+  },
+  "config_munge": {
+    "files": {}
+  },
+  "installed_plugins": {
+    "cordova-plugin-device": {
+      "PACKAGE_NAME": "io.appseed.conference"
+    },
+    "cordova-plugin-email-composer": {
+      "PACKAGE_NAME": "io.appseed.conference"
+    },
+    "cordova-plugin-geolocation": {
+      "PACKAGE_NAME": "io.appseed.conference"
+    },
+    "cordova-plugin-inappbrowser": {
+      "PACKAGE_NAME": "io.appseed.conference"
+    },
+    "cordova-plugin-ionic-webview": {
+      "PACKAGE_NAME": "io.appseed.conference"
+    },
+    "cordova-plugin-network-information": {
+      "PACKAGE_NAME": "io.appseed.conference"
+    },
+    "cordova-plugin-splashscreen": {
+      "PACKAGE_NAME": "io.appseed.conference"
+    },
+    "cordova-plugin-transport-security": {
+      "PACKAGE_NAME": "io.appseed.conference"
+    },
+    "cordova-plugin-whitelist": {
+      "PACKAGE_NAME": "io.appseed.conference"
+    },
+    "ionic-plugin-keyboard": {
+      "PACKAGE_NAME": "io.appseed.conference"
+    },
+    "phonegap-plugin-push": {
+      "SENDER_ID": "669701331606",
+      "PACKAGE_NAME": "io.appseed.conference"
+    },
+    "cordova-plugin-camera": {
+      "PACKAGE_NAME": "in.masimoatisacon.conference"
+    }
+  },
+  "dependent_plugins": {}
+}

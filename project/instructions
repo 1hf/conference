@@ -1,0 +1,15 @@
+The project folder is the working code
+cd to the project folder
+
+1. Rename plugins-folder to plugins and www-folder to www
+2. sudo npm install
+3. ionic cordova platform add android / ios
+4. cordova build android / ios
+
+5. Add the cordova camera plugin
+cordova plugin add cordova-plugin-camera
+
+Again build the app
+cordova build android / ios
+
+

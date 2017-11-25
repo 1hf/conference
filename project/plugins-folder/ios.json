@@ -1,0 +1,44 @@
+{
+    "prepare_queue": {
+        "installed": [],
+        "uninstalled": []
+    },
+    "config_munge": {
+        "files": {}
+    },
+    "installed_plugins": {
+        "cordova-plugin-console": {
+            "PACKAGE_NAME": "io.appseed.conference"
+        },
+        "cordova-plugin-device": {
+            "PACKAGE_NAME": "io.appseed.conference"
+        },
+        "cordova-plugin-geolocation": {
+            "GEOLOCATION_USAGE_DESCRIPTION": " ",
+            "PACKAGE_NAME": "io.appseed.conference"
+        },
+        "cordova-plugin-inappbrowser": {
+            "PACKAGE_NAME": "io.appseed.conference"
+        },
+        "cordova-plugin-network-information": {
+            "PACKAGE_NAME": "io.appseed.conference"
+        },
+        "cordova-plugin-transport-security": {
+            "PACKAGE_NAME": "io.appseed.conference"
+        },
+        "cordova-plugin-whitelist": {
+            "PACKAGE_NAME": "io.appseed.conference"
+        },
+        "de.appplant.cordova.plugin.email-composer": {
+            "PACKAGE_NAME": "io.appseed.conference"
+        },
+        "ionic-plugin-keyboard": {
+            "PACKAGE_NAME": "io.appseed.conference"
+        }
+    },
+    "dependent_plugins": {
+        "cordova-plugin-compat": {
+            "PACKAGE_NAME": "io.appseed.conference"
+        }
+    }
+}

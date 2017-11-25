@@ -5,16 +5,19 @@
             .module('conference.chats')
             .controller('ChatsMessagesController', ChatsMessagesController);
 
-    ChatsMessagesController.$inject = ['ChatsService', '$stateParams', '$state', 'ionicToast', 'externalAppsService', 'localStorageService'];
+    ChatsMessagesController.$inject = ['ChatsService', '$stateParams', '$state', '$ionicLoading', 'ionicToast', 'externalAppsService', 'localStorageService'];
 
     /* @ngInject */
-    function ChatsMessagesController(ChatsService, $stateParams, $state, ionicToast, externalAppsService, localStorageService) {
+    function ChatsMessagesController(ChatsService, $stateParams, $state, $ionicLoading, ionicToast, externalAppsService, localStorageService) {
 
         var vm = angular.extend(this, {
             message: {
                 messageText: null
             },
-            fromuser: $stateParams.user,
+            user: {
+              firstname: JSON.parse(localStorageService.get('authUser')).firstName,
+              lastname: JSON.parse(localStorageService.get('authUser')).lastName
+            },
             abstract: null,
             messages: [],
 //            goToAuthorDetail: goToAuthorDetail,
@@ -25,6 +28,11 @@
 
         (function activate() {
             getChat();
+            vm.fromuser = $stateParams.user.$id;
+            var ref = firebase.database().ref("chatMessages");
+            firebase.database().ref().on('value', function (snapshot) {
+                getChat();
+            });
         })();
 
         function sendMessage() {
@@ -33,7 +41,7 @@
             var message = {
                 messageFrom: JSON.parse(localStorageService.get('authUser')).$id,
                 messageTo: $stateParams.user.$id,
-                messengerName: JSON.parse(localStorageService.get('authUser')).firstName+" "+JSON.parse(localStorageService.get('authUser')).lastName,
+                messengerName: JSON.parse(localStorageService.get('authUser')).firstName + " " + JSON.parse(localStorageService.get('authUser')).lastName,
                 messageText: vm.message.messageText,
                 messageDate: now,
                 isDeleted: false
@@ -49,28 +57,30 @@
         }
 
         function getChat() {
+
             vm.messages = [];
-            if(!$stateParams.user){
+            if (!$stateParams.user) {
                 $state.go('app.chats');
-            }else{
-               console.log(angular.toJson($stateParams.user.$id+"  "+JSON.parse(localStorageService.get('authUser')).$id)); 
-               ChatsService.getChat(JSON.parse(localStorageService.get('authUser')).$id,$stateParams.user.$id).then(function(res){
+            } else {
+                console.log(angular.toJson($stateParams.user.$id + "  " + JSON.parse(localStorageService.get('authUser')).$id));
+                ChatsService.getChat(JSON.parse(localStorageService.get('authUser')).$id, $stateParams.user.$id).then(function (res) {
                     console.log(angular.toJson(res));
                     var chatmessages = res;
-                    angular.forEach(chatmessages, function(v,k){
+                    
+                    angular.forEach(chatmessages, function (v, k) {
                         console.log(angular.toJson(v));
-                        if((v.messageFrom == $stateParams.user.$id && v.messageTo == JSON.parse(localStorageService.get('authUser')).$id) || (v.messageFrom == JSON.parse(localStorageService.get('authUser')).$id && v.messageTo == $stateParams.user.$id)){
+                        if ((v.messageFrom === $stateParams.user.$id && v.messageTo === JSON.parse(localStorageService.get('authUser')).$id) || (v.messageFrom === JSON.parse(localStorageService.get('authUser')).$id && v.messageTo === $stateParams.user.$id)) {
                             vm.messages.push(v);
-                        }else{
+                        } else {
 
                         }
                     });
-               }, function(err){
-                   console.log(angular.toJson(err));
-               });
+                }, function (err) {
+                    console.log(angular.toJson(err));
+                });
             }
-            
-            
+
+
 //            return ChatsService.getChat(abstractId).then(function (abstract) {
 //                vm.abstract = abstract;
 //                vm.abstract.isInFavorites = ChatsService.isInFavorites(vm.abstract.$id);

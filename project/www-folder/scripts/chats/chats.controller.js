@@ -23,14 +23,26 @@
             addFavorites: addFavorites,
             showFavorites: showFavorites,
             removeFavorites: removeFavorites,
-            showAll: showAll
+            showAll: showAll,
+            loadMore: loadMore
         });
 
         (function activate() {
             fetchUsers();
         })()
-
+        
+        function loadMore() {
+            console.log(vm.users.length, vm.users.length+50);
+            loginSignUpService.getmoreUsers(vm.users.length, vm.users.length+50).then(function (res) {
+                angular.forEach(res, function(val, key){
+                    vm.users.push(val);
+                });
+                //vm.users = res;
+                $ionicLoading.hide();
+            });
+        }
         function fetchUsers() {
+            
             $ionicLoading.show({template: 'Loading Users'});
             loginSignUpService.getUsers().then(function (res) {
                 vm.users = res;

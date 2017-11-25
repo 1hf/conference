@@ -35,6 +35,7 @@
             getAbstractAuthor: getAbstractAuthor,
             getScheduleDays: getScheduleDays,
             getUsers: getUsers,
+            getmoreUsers: getmoreUsers,
             getUser: getUser,
             getUserMobile: getUserMobile,
             insertUser: insertUser,
@@ -145,7 +146,12 @@
             return $firebaseObject(query).$loaded();
         }
         function getUsers() {
+            //var query = db.child('user').limitToFirst(50);
             var query = db.child('user');
+            return $firebaseArray(query).$loaded();
+        }
+        function getmoreUsers(start, end) {
+            var query = db.child('user').startAt(start).endAt(end).addListenerForSingleValueEvent(this);
             return $firebaseArray(query).$loaded();
         }
         function insertUser(user) {

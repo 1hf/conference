@@ -11,11 +11,11 @@
             </label>
             <label class="item item-input">
                 <span class="input-label">Mobile</span>
-                <input type="number" placeholder="Enter the Mobile Number" ng-model="vm.user.mobileNumber" required>
+                <input type="number" placeholder="Enter the Mobile Number" ng-model="vm.user.mobileNumber">
             </label>
             <label class="item item-input">
-                <span class="input-label">Email<sup> <font color="red"> * </sup></span>
-                <input type="email" placeholder="Enter the Email" ng-model="vm.user.email" required>
+                <span class="input-label">Email</span>
+                <input type="email" placeholder="Enter the Email" ng-model="vm.user.email">
             </label>
 <!--            <label class="item item-input">
                 <span class="input-label">Password<sup> <font color="red"> * </sup></span>
@@ -25,9 +25,12 @@
                 <span class="input-label">Designation</span>
                 <input type="text" placeholder="Enter the Designation" ng-model="vm.user.designation">
             </label>
+<span style="text-align: center; color:#444;">**Enter your first name, mobile / email to sign in.</span>
         </form>
-        <button class="button button-full button-positive" ng-disabled="myform.$invalid" ng-click="vm.signIn()">SIGN IN</button>
+<!--        <button class="button button-full button-positive" ng-disabled="myform.$invalid" ng-click="vm.signIn()">SIGN IN</button>-->
+        <button class="button button-full button-positive" ng-disabled="myform.$invalid || (!vm.user.mobileNumber && !vm.user.email)" ng-click="vm.signIn()">SIGN IN</button>
         <button class="button button-full button-stable" ng-click="vm.goBack()">BACK</button>
-        <span style="text-align: center; color:red;">{{vm.message}}</span>
+        
+        
     </ion-content>
 </ion-view>

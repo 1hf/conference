@@ -27,7 +27,8 @@
             getUsers: getUsers,
             insertUser: insertUser,
             updateUser: updateUser,
-            setUser: setUser
+            setUser: setUser,
+            getmoreUsers: getmoreUsers
         };
 
 //		firebaseAuth.onAuthStateChanged(function(data) {
@@ -57,6 +58,9 @@
         }
         function getUsers() {
             return dataService.getUsers();
+        }
+        function getmoreUsers(start,end) {
+            return dataService.getmoreUsers(start,end);
         }
         function insertUser(user) {
             return dataService.insertUser(user);

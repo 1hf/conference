@@ -10,7 +10,15 @@
     /* @ngInject */
     function AccountController($scope, $ionicPopup, loginSignUpService, $ionicLoading, $cordovaCamera) {
         var vm = angular.extend(this, {
-            user: null,
+            user: {
+                firstName: null,
+                lastName: null,
+                email: null,
+                mobileNumber: null,
+//                password: null,
+                designation: null,
+                address:{Address1: null, Address2: null, City:null, State:null, zipCode: null}
+            },
             email: null,
 //            showChangePassword: false,
 //            currentPassword: null,
@@ -31,6 +39,7 @@
 
         function getUser() {
             vm.user = loginSignUpService.getStoredUser();
+            console.log(angular.toJson(vm.user));
             vm.userId = loginSignUpService.getStoredUser().$id;
             console.log(angular.toJson(vm.userId));
             vm.email = loginSignUpService.getStoredUser().email;
@@ -83,12 +92,29 @@
         }
 
         function updateProfile() {
+            var data;
             $ionicLoading.show({template: 'Updating profile details...'});
-            var data = {firstName: vm.user.firstName, lastName: vm.user.lastName, avatar: vm.user.avatar,
-                mobileNumber: vm.user.mobileNumber, email: vm.user.email, designation: vm.user.designation,
-                address: {Address1: vm.user.address.Address1, City: vm.user.address.City, State: vm.user.address.State,
-                    zipCode: vm.user.address.zipCode}};
-            loginSignUpService.updateUser(vm.userId, data).then(function (res) {
+            if(vm.user.avatar){
+                var data = {firstName: vm.user.firstName, lastName: vm.user.lastName, avatar: vm.user.avatar,
+                mobileNumber: vm.user.mobileNumber, email: vm.user.email, designation: vm.user.designation
+            };
+            }else{
+                var data = {firstName: vm.user.firstName, lastName: vm.user.lastName,
+                mobileNumber: vm.user.mobileNumber, email: vm.user.email, designation: vm.user.designation
+            };
+            }
+            angular.forEach(vm.user, function(value, key){
+                console.log(key);
+                if(key=='$id'){ console.log('hai');
+                    delete vm.user.$id;
+                    console.log(angular.toJson(vm.user));
+                }
+            });
+//            var data = {firstName: vm.user.firstName, lastName: vm.user.lastName, avatar: vm.user.avatar,
+//                mobileNumber: vm.user.mobileNumber, email: vm.user.email, designation: vm.user.designation,
+//                address: {Address1: vm.user.address.Address1, City: vm.user.address.City, State: vm.user.address.State,
+//                    zipCode: vm.user.address.zipCode}};
+            loginSignUpService.updateUser(vm.userId, vm.user).then(function (res) {
                 $ionicLoading.hide();
                 console.log(angular.toJson(res));
                 loginSignUpService.setUser(vm.user);

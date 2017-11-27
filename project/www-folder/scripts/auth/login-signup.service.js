@@ -25,10 +25,11 @@
             getUserDetails: getUserDetails,
             getUserMobile: getUserMobile,
             getUsers: getUsers,
+            getmoreUsers: getmoreUsers,
+            getusersData: getusersData,
             insertUser: insertUser,
             updateUser: updateUser,
-            setUser: setUser,
-            getmoreUsers: getmoreUsers
+            setUser: setUser
         };
 
 //		firebaseAuth.onAuthStateChanged(function(data) {
@@ -56,11 +57,15 @@
         function getUserMobile(user) {
             return dataService.getUserMobile(user);
         }
-        function getUsers() {
-            return dataService.getUsers();
+        function getUsers(start) {
+            return dataService.getUsers(start);
         }
-        function getmoreUsers(start,end) {
-            return dataService.getmoreUsers(start,end);
+        function getmoreUsers(k) {
+            console.log(k);
+            return dataService.getmoreUsers(k);
+        }
+        function getusersData(start) {
+            return dataService.getusersData(start);
         }
         function insertUser(user) {
             return dataService.insertUser(user);

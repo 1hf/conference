@@ -36,6 +36,7 @@
             getScheduleDays: getScheduleDays,
             getUsers: getUsers,
             getmoreUsers: getmoreUsers,
+            getusersData: getusersData,
             getUser: getUser,
             getUserMobile: getUserMobile,
             insertUser: insertUser,
@@ -146,13 +147,27 @@
             return $firebaseObject(query).$loaded();
         }
         function getUsers() {
-            //var query = db.child('user').limitToFirst(50);
-            var query = db.child('user');
+            var query = db.child('user').orderByChild("firstName");
             return $firebaseArray(query).$loaded();
+            
         }
-        function getmoreUsers(start, end) {
-            var query = db.child('user').startAt(start).endAt(end).addListenerForSingleValueEvent(this);
-            return $firebaseArray(query).$loaded();
+        
+        
+            
+                
+        function getusersData(start) {
+            
+            if(start==0){
+                var query = db.child('user').orderByKey().limitToFirst(250);
+                return $firebaseArray(query).$loaded();
+            }else{
+                
+            }
+        }
+        function getmoreUsers(k) {
+            console.log(k);
+            var query = db.child('user').orderByKey().startAt(k).limitToFirst(250);
+                return $firebaseArray(query).$loaded();
         }
         function insertUser(user) {
             var query = db.child('user');

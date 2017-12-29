@@ -1,7 +1,11 @@
-<ion-view class="segments">
+<ion-view class="segments" hideBackButton>
     <ion-nav-title style="color:#FFF; text-align:center;background-color: #094261;">
-        <h3 style="margin-top: 7px;color:#FFF;">{{vm.user.firstname}} {{vm.user.lastname}}</h3>
+        <h3 style="margin-top: 7px;color:#FFF;">Chat Messages</h3>
     </ion-nav-title>
+    <ion-nav-buttons side="secondary">
+                    
+                    <a style="padding: 5px;cursor:pointer;font-size:16px;font-weight: 500;" ng-click="vm.goBack()""><i class="icon ion-ios-arrow-back"></i> Back</a>
+            </ion-nav-buttons>
     <!--	<ion-nav-buttons side="secondary">
                     <button class="button-clear" ng-click="vm.toggleFavorites()">
                             <i class="icon ion-ios-star-outline light" ng-if="!vm.abstract.isInFavorites"></i>
@@ -11,7 +15,7 @@
     <ion-content class="padding has-subheader has-header" scroll="false">
         <ion-scroll class="top-container" scroll-glue>
             <ion-list>                
-                <ion-item class="" ng-repeat="msg in vm.messages">
+                <ion-item class="" ng-repeat="msg in vm.messages[0].messages">
 <!--                    <img ng-if="msg.messageFrom===vm.fromuser" style="text-align:right;">-->
                     <h3 ng-if="msg.messageFrom===vm.fromuser" style="text-align: right;color:brown;">{{msg.messengerName}}</h3>
                     <h2 ng-if="msg.messageFrom===vm.fromuser" style="text-align:right;">{{msg.messageText}}</h2>

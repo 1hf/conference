@@ -20,14 +20,28 @@
 			getTypes: getTypes,
 			getDates: getDates,
 			fetchChats: fetchChats,
+			insertCommentsLikes: insertCommentsLikes,
+			fetchCommentsLikes: fetchCommentsLikes,
+			updateMessage: updateMessage,
+			updateLikesComments: updateLikesComments,
 			toggleFavorites: toggleFavorites,
 			isInFavorites: isInFavorites,
                         addMessage: addMessage,
-                        getMessages: getMessages
+                        getMessages: getMessages,
+                        getMessage: getMessage,
+                        getUser: getUser
 		};
 		return service;
                 
-                function addMessage(msg) {
+                function getMessage(message) {
+			return dataService.getSocialMessage(message);
+		}
+                
+                function getUser(user) {
+			return dataService.getsocialUser(user);
+		}
+                
+        function addMessage(msg) {
 			return dataService.insertData(msg,"social");
 		}
                 
@@ -38,6 +52,26 @@
 		function getChat(abstractId) {
 			return dataService.getChat(abstractId);
 		}
+		function updateMessage(updateId, data) {
+            var collection = "social";
+            return dataService.update(updateId, data, collection);
+        }
+		function updateLikesComments(updateId, data) {
+		            var collection = "commentsLikes";
+		            return dataService.update(updateId, data, collection);
+		        }
+
+		 function insertCommentsLikes(data) {
+            var collection = "commentsLikes";
+            return dataService.insertData(data,collection);
+        }
+        function fetchCommentsLikes() {
+            var collection = "commentsLikes";
+            return dataService.getData(collection);
+        }
+
+
+
 
 		function getTypes() {
 			return getChats().then(function(abstracts) {

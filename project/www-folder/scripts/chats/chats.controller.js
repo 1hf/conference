@@ -5,14 +5,16 @@
             .module('conference.chats')
             .controller('ChatsController', ChatsController);
 
-    ChatsController.$inject = ['ChatsService', '$state', '$ionicListDelegate', 'filterModal', '_', '$scope', '$q', '$ionicLoading', 'loginSignUpService'];
+    ChatsController.$inject = ['ChatsService', '$state', '$filter', '$ionicListDelegate', 'filterModal', '_', '$scope', '$q', '$ionicLoading', 'loginSignUpService', 'localStorageService', '$ionicPopover'];
 
     /* @ngInject */
-    function ChatsController(ChatsService, $state, $ionicListDelegate, filterModal, _, $scope, $q, $ionicLoading, loginSignUpService) {
+    function ChatsController(ChatsService, $state, $filter, $ionicListDelegate, filterModal, _, $scope, $q, $ionicLoading, loginSignUpService, localStorageService, $ionicPopover) {
         var vm = angular.extend(this, {
+            key: { key: null },
             chats: [],
             users: [],
             filter: null,
+            newUser: null,
             favorites: false,
             types: [],
             dates: [],
@@ -24,45 +26,143 @@
             showFavorites: showFavorites,
             removeFavorites: removeFavorites,
             showAll: showAll,
-            loadMore: loadMore
+            loadMore: loadMore,
+            searchUser: searchUser
         });
-
+        $scope.newUsers = [];
+        
         (function activate() {
-            fetchUsers();
+            //fetchUsers();
+            $scope.lastKey = '';
+            getusersData();
+           
         })()
         
-        function loadMore() {
-            console.log(vm.users.length, vm.users.length+50);
-            loginSignUpService.getmoreUsers(vm.users.length, vm.users.length+50).then(function (res) {
-                angular.forEach(res, function(val, key){
-                    vm.users.push(val);
-                });
-                //vm.users = res;
-                $ionicLoading.hide();
+
+        function getusersData() {
+            $scope.newUsers = [];
+            $ionicLoading.show({template: 'Loading Messages'});
+            var myId = JSON.parse(localStorageService.get('authUser')).$id;
+            return ChatsService.getChats(myId).then(function (items) {
+                console.log(angular.toJson(items));
+                if(items.length>0){
+                    angular.forEach(items, function(itemval, itemkey){
+                        var count = 0;
+                        console.log(itemval);
+                        angular.forEach(itemval.messages, function(v,k){
+                            if(v.messageTo == JSON.parse(localStorageService.get('authUser')).$id && v.read==0){
+                                count = count+1;
+                            }else{
+                               // 
+                            }
+                            if(k == itemval.messages.length-1){
+                                itemval.totalUnread = count;
+                                if(itemval.messageFrom == myId){
+                                   ChatsService.getUserId(itemval.messageTo).then(function(res){
+                                    console.log(angular.toJson(res));
+                                       // itemval.user = res;
+                                       res.message = itemval;                           
+                                        $scope.newUsers.push(res);
+                                   });
+                                }
+                                if(itemval.messageTo == myId){
+                                   ChatsService.getUserId(itemval.messageFrom).then(function(res){
+                                    console.log(angular.toJson(res));
+                                       // itemval.user = res;
+                                       res.message = itemval;
+                                        $scope.newUsers.push(res);
+                                   });
+                                }
+                            }
+                        });
+
+
+                        $ionicLoading.hide();
+                    });
+                }else{
+                    $ionicLoading.hide();
+                }
+                
             });
+        
+        
         }
-        function fetchUsers() {
-            
-            $ionicLoading.show({template: 'Loading Users'});
-            loginSignUpService.getUsers().then(function (res) {
+        $ionicPopover.fromTemplateUrl('newUser.html', {
+          scope: $scope
+        }).then(function(popover) {
+          $scope.popover = popover;
+        });
+        $scope.openPopover = function($event) {
+          $scope.popover.show($event);
+          //alert(angular.toJson(msg));
+       };
+       $scope.closePopover = function() {
+          $scope.popover.hide();
+       };
+       function searchUser(){        
+        
+        $scope.error = "";
+        if((vm.newUser.toString()).length==10){
+        $ionicLoading.show({template: 'Loading Users'});          
+            return ChatsService.getUser(vm.newUser).then(function (users) {
+                console.log(angular.toJson(users));
+                if(!users.$value){
+
+                    angular.forEach(users, function(val,key){
+                        if(JSON.parse(localStorageService.get('authUser')).$id!==key){
+                            val.$id = key;
+                            val.message={};
+                            $scope.newUsers.push(val);
+                            //$scope.newUsers.$id = key;
+                            $ionicLoading.hide();
+                            $scope.error = "";
+                            $scope.popover.hide();
+                        }else{
+                            $ionicLoading.hide();
+                            $scope.error = "You Cannot chat with yourself.. :)";
+                            //alert('You Cannot chat with yourself.. :)');
+                        }                        
+                    });
+                    
+                }
+                if(users.$value==null){
+                    $scope.error = 'No User Found..';
+                    $ionicLoading.hide();
+                }
+
+                //$scope.newUsers.splice(0,0, users);
+                //console.log(angular.toJson($scope.newUsers));
+            }) 
+        }
+       }
+        function loadMore(k){
+            $ionicLoading.show({template: 'Loading more Users'});
+            console.log(k);
+            loginSignUpService.getmoreUsers(k).then(function(result){
+                    console.log(result);    
+            angular.forEach(result, function(v,k){
+                if(k<result.length-1){
+                  vm.users.push(v);  
+                }
+                    vm.key.key = v.$id;
+                    console.log(vm.key.key);
+            });
+            $ionicLoading.hide();
+        });
+        }
+        function fetchUsers() {            
+           // $ionicLoading.show({template: 'Loading Users'});
+            //loginSignUpService.getUsers(0).then(function (res) {
+            loginSignUpService.getUsers(0).then(function (res) {
                 vm.users = res;
-                $ionicLoading.hide();
-//                console.log(angular.toJson(res));
-//                if (res[0]) {
-//                    angular.forEach(res, function (val, key) {
-//                        vm.users.push(val);
-//                        if (res.length - 1 == key) {
-//                            $ionicLoading.hide();
-//                        }
-//                    });
-//                } else {
-//                    $ionicLoading.hide();
-//                }
+               // $ionicLoading.hide();
+
             });
         }
 
-        function goToChatsMessages(user) {
+        function goToChatsMessages(user) { console.log(angular.toJson(user));
             $state.go('app.chats-messages', {user: user});
+
         }
 
         function showFilter() {

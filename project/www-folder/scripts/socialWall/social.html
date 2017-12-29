@@ -27,22 +27,62 @@
         <ion-scroll class="top-container">
             <ion-refresher pulling-text="Pulled to refresh" on-refresh="vm.doRefresh()"></ion-refresher>
             <ion-list>
-                <ion-item class="item-avatar" ng-repeat="msg in vm.messages| filter: filtertxt | orderBy:'-messageDate'">
-                    <img src="{{msg.messengerPic}}" alt="{{msg.messengerName}}">
-                    <h4>{{msg.messengerName}}</h4>
-                    <h3 ng-if="msg.messageText">{{msg.messageText}}</h3>
-                    <img ng-if="msg.pictureMessage" src="{{msg.pictureMessage}}" alt="" />
+                <ion-item style="white-space: normal;border: 1px solid lightgrey;margin: 3px 5px 5px 5px;border-radius: 5px;background-color: white;" class="item-avatar" ng-repeat="msg in vm.messages| filter: filtertxt | orderBy:'-messageDate'">
+                    <img src="{{msg.messengerPic || 'images/avatar.png'}}" alt="{{msg.messengerName}}" ng-click="vm.showMessageDetails(msg.$id)" />
+                    <i class="icon ion-android-options" style="font-size: 16px;float: right;cursor: pointer;" ng-click = "openPopover($event,msg)"></i>
+                    <h4 ng-click="vm.showMessageDetails(msg.$id)">{{msg.messengerName}}</h4>
+                    <h5 ng-click="vm.showMessageDetails(msg.$id)">{{msg.timediff}}</h5>
+                    <h3 ng-if="msg.messageText" style="white-space: normal;" ng-click="vm.showMessageDetails(msg.$id)">{{msg.messageText}}</h3>
+                    <img ng-if="msg.pictureMessage" src="{{msg.pictureMessage}}" alt="" ng-click="vm.showMessageDetails(msg.$id)" />
+                   <div style="width:100%;float:left;height:auto;">
+                        <a class="assertive" style="float: left;width: 50px;cursor: pointer;">
+                            <i class="icon ion-heart" ng-click="vm.msgLikes(msg.$id)"></i>
+                            {{msg.commentsLikes.totalLikes || '0'}}
+                        </a>
+                        <a class="positive-900" style="float: left;width: 50px;cursor: pointer;">
+                            <i class="icon ion-chatbubbles" ng-click="openModal(msg)"></i>
+                            {{msg.commentsLikes.totalComments || '0'}}
+                        </a>
+                        <a class="positive-900" style="float: left;width: 50px;cursor: pointer;">
+                            <i class="icon ion-share" style="font-size: 20px;padding:5px;"></i>
+                        </a>
+                    </div>
+                    <!-- <div style="width: 100%;float:left;height:auto;border: 1px dotted blanchedalmond;padding:3px;">
+                        <div style="float: left;background-color: transparent;">
+                            <div style="float: left;">
+                                <img src="{{vm.userAvatar || 'images/avatar.png'}}" alt="{{msg.messengerName}}" style="border-radius: 50%; width:30px;margin-top: 5px;">
+                            </div>
+                            <div style="float: left;">
+                                <div style="float:left">
+                                    <textarea id="commentText[{{$index}}]" placeholder="Enter Comment" ng-model="vm.commentText" style="margin:5px;background-color: #FFF; width: 275px;"></textarea>
+                                </div>
+                                <div style="float:left;padding: 15px 0px 0px 10px;">
+                                    <i class="icon ion-android-send assertive" style="font-size: 16px;cursor:pointer;" ng-click="saveComment(msg)"></i>
+                                </div>                              
+                                
+                            </div>                          
+                            
+                        </div>
+                        <div style="width: 100%">
+                            <ion-item class="zoomInLeft animated" ng-repeat="gc in msg.comments track by $index" ng-class="$index%2 != 0 ? 'classA' : 'classB'">
+                                <i class="icon ion-chatbubbles" style="float: right;color: chocolate;"></i><h5>{{gc.commentBy}} on: on {{gc.commentDate | date:'dd-MM-yyyy hh:mm a'}}</h5>
+                                <h4 style="text-decoration: blink;text-align: right;">{{gc.comment}}</h4>
+                            </ion-item>
+                        </div>
+                    
+                    </div> -->
+                    
                 </ion-item>
             </ion-list>
-            
+          <img ng-if="vm.message.pictureMessage" src="{{vm.message.pictureMessage}}" style="width:100px;height:100px;" />  
         </ion-scroll>
         
         <form class="list bottom-form">
                     
                 
-            <label class="item item-input">
+            <label class="item item-input" style="padding: 6px 8px 5px 5px;">
                 <!--                <span class="input-label">Messages</span>-->
-                <input type="text" placeholder="Enter message" ng-model="vm.message.messageText" style="margin-left:5px;">
+                <input type="text" placeholder="Enter message" ng-model="vm.message.messageText" style="margin-left:5px;margin-right:5px;">
             
             
                 <i style="padding:5px;font-size: 35px;color: cornflowerblue;cursor:pointer;" 
@@ -59,6 +99,90 @@
         </form>
 
     </ion-content>
+    <script id="templates/modal.html" type="text/ng-template">
+      <ion-modal-view style="border: 1px solid chocolate;
+    background-color: antiquewhite;
+    background-position: center;
+    top: 5%;
+    left: 1%;
+    overflow: auto;
+    height: 90%;
+    width: 95%;">
+
+        <ion-header-bar class="bar bar-header bar-stable">
+          <h1 class="title">Comments</h1>
+          <button style="color:green;" class="button button-clear button-primary" ng-click="modal.hide()">X</button>
+        </ion-header-bar>
+        <ion-content class="padding has-subheader has-header" scroll="false">
+        <ion-item style="white-space: normal;border: 1px solid lightgrey;margin: 3px 5px 5px 5px;border-radius: 5px;background-color: white;" class="item-avatar">
+            <img src="{{fullMessage.messengerPic || 'images/avatar.png'}}" alt="{{fullMessage.messengerName}}" />
+            <h4>{{fullMessage.messengerName}}</h4>
+            <h5>{{fullMessage.timediff}}</h5>
+            <h3 ng-if="fullMessage.messageText" style="white-space: nowrap;">{{fullMessage.messageText}}</h3>
+            <img ng-if="fullMessage.pictureMessage" src="{{fullMessage.pictureMessage}}" alt="" />
+           
+        </ion-item>
+        <ion-scroll ng-if="fullMessage.pictureMessage && fullMessage.messageText" class="top-container" scroll-glue style="height: calc(100% - 259px);">
+            <ion-item class="zoomInLeft animated" ng-repeat="gc in socialComments.comments track by $index" ng-class="$index%2 != 0 ? 'classA' : 'classB'">
+                <i class="icon ion-chatbubbles" style="float: right;color: chocolate;"></i><h5 style="color: grey;">{{gc.commentBy}} commented: </h5>
+                <h4 style="text-decoration: blink;text-align: right;white-space: normal;">{{gc.comment}}</h4>
+                <h5 style="color: grey;"> on {{gc.commentDate | date:'dd-MM-yyyy hh:mm a'}}</h5>
+            </ion-item>
+            </ion-scroll>
+        <ion-scroll ng-if="!fullMessage.pictureMessage && fullMessage.messageText" class="top-container" scroll-glue style="height: calc(100% - 120px);">
+            <ion-item class="zoomInLeft animated" ng-repeat="gc in socialComments.comments track by $index" ng-class="$index%2 != 0 ? 'classA' : 'classB'">
+                <i class="icon ion-chatbubbles" style="float: right;color: chocolate;"></i><h5 style="color: grey;">{{gc.commentBy}} commented: </h5>
+                <h4 style="text-decoration: blink;text-align: right;white-space: normal;">{{gc.comment}}</h4>
+                <h5 style="color: grey;"> on {{gc.commentDate | date:'dd-MM-yyyy hh:mm a'}}</h5>
+            </ion-item>
+        </ion-scroll>
+        <ion-scroll ng-if="fullMessage.pictureMessage && !fullMessage.messageText" class="top-container" scroll-glue style="height: calc(100% - 249px);">
+            <ion-item class="zoomInLeft animated" ng-repeat="gc in socialComments.comments track by $index" ng-class="$index%2 != 0 ? 'classA' : 'classB'">
+                <i class="icon ion-chatbubbles" style="float: right;color: chocolate;"></i><h5 style="color: grey;">{{gc.commentBy}} commented: </h5>
+                <h4 style="text-decoration: blink;text-align: right;white-space: normal;">{{gc.comment}}</h4>
+                <h5 style="color: grey;"> on {{gc.commentDate | date:'dd-MM-yyyy hh:mm a'}}</h5>
+            </ion-item>
+        </ion-scroll>
+            <form id="addTask-form15" class="list bottom-form">
+                <label class="item item-input" style="padding: 0px;">
+                    <!--<span class="input-label" style="font-size: 11px;">Comment: </span>-->
+                    <textarea placeholder="Enter Comments" ng-model="newComment.comment" style="background-color: #FFF;"></textarea>
+                    <i class="icon ion-chatbubbles" style="font-size: 24px; margin-left:5px;color:red;cursor:pointer;" on-touch="vm.saveComment(m)" ng-show="newComment.comment!==''"></i>
+                </label>                 
+            </form>        
+        </ion-content>
+      </ion-modal-view>
+    </script>
+    <script id = "options.html" type = "text/ng-template">
+   <ion-popover-view style="border-radius: 25px;    height: 150px;width: 150px;">      
+        <ion-header-bar class="bar bar-header bar-stable" style="background-color: white !important;">
+        <h1 class="title">Options</h1>
+          <button style="color:green;float:right;" class="button button-clear button-primary" ng-click="closePopover()">X</button>
+        </ion-header-bar>
+        <ion-content class="padding has-header" scroll="false">
+        <i class="icon ion-close" style="font-size: 16px;padding:5px;"></i>Delete<br />
+        <i class="icon ion-share" style="font-size: 16px;padding:5px;"></i>Share
+      </ion-content>        
+   </ion-popover-view>
+</script>
+    <!-- <script id="templates/optionsModal.html" type="text/ng-template">
+      <ion-modal-view style="
+    top: 25%;
+    left: 25%;
+    overflow: auto;
+    height: 35%;
+    width: 50%;">
+
+        <ion-header-bar class="bar bar-header bar-stable" style="background-color: white !important;">
+          <button style="color:green;float:right;" class="button button-clear button-primary" ng-click="optionsmodal.hide()">X</button>
+        </ion-header-bar>
+        <ion-content class="padding has-header" scroll="false">
+        <i class="icon ion-close" style="font-size: 16px;padding:5px;"></i>Delete<br />
+        <i class="icon ion-share" style="font-size: 16px;padding:5px;"></i>Share
+                
+        </ion-content>
+      </ion-modal-view>
+    </script> -->
 </ion-view>
 <style>
     .top-container{
@@ -75,4 +199,9 @@
             margin:0px !important;
         }
     }
+    .classA{background-color: lightgrey;border-radius: 20px;}
+    .classB{background-color: ghostwhite;border-radius: 20px;margin:2px 0px 2px 0px;}
+    /*.modal-backdrop-bg{    background-color: lightgrey;
+    opacity: 0.5;}*/
+    
 </style>

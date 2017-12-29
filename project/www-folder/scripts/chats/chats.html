@@ -1,6 +1,6 @@
 <ion-view class="segments">
     <ion-nav-title style="color:#FFF; text-align:center;background-color: #094261;">
-        <h3 style="margin-top: 7px;color:#FFF;">Users</h3>
+        <h3 style="margin-top: 7px;color:#FFF;">Chats</h3>
         <!--		<button class="button header-button"
                                 ng-click="vm.showAll()"
                                 ng-class="{ 'selected-header-button': !vm.favorites }">ALL
@@ -10,9 +10,10 @@
                                 ng-class="{ 'selected-header-button': vm.favorites }">FAVORITES
                         </button>-->
     </ion-nav-title>
-    <!--	<ion-nav-buttons side="secondary">
-                    <a class="button button-icon icon ion-android-options" ng-click="vm.showFilter()"></a>
-            </ion-nav-buttons>-->
+    	<ion-nav-buttons side="secondary">
+                    <!-- <a class="button button-icon icon ion-android-options" ng-click="vm.showFilter()"></a> -->
+                    <a style="padding: 5px;cursor:pointer;" ng-click="openPopover($event)"">New User</a>
+            </ion-nav-buttons>
 
     <div class="bar bar-subheader bar-stable item-input-inset">
         <label class="item-input-wrapper">
@@ -22,30 +23,61 @@
     </div>
 
     <ion-content class="padding has-subheader has-header">
-        <ion-item class="item-avatar" ng-repeat=" user in vm.users| filter:filtertxt" ng-click="vm.goToChatsMessages(user)">
+        
+        <!-- <ion-item class="item-avatar" ng-repeat=" user in vm.users | filter:filtertxt" ng-click="vm.goToChatsMessages(user)">
             <img ng-src="{{user.avatar}}">
             <h2>{{user.firstName}} {{user.lastName}}</h2>
+        </ion-item> -->
+        <ion-item class="item-avatar" ng-repeat=" user in newUsers | filter:filtertxt track by $index" style="white-space: normal;">
+            
+            <img ng-src="{{user.avatar}}" alt="Avatar" ng-click="vm.goToChatsMessages(user.$id)" />
+            <h2 ng-click="vm.goToChatsMessages(user.$id)">{{user.firstName}} {{user.lastName}}<!-- <span class="bubble-right" title="Total Messages">{{user.message.totalMessages}}</span> --><span ng-if="user.message.totalUnread>0" class="bubble-right-unread" title="Unread Messages">{{user.message.totalUnread}}</span></h2>
+            <h3 ng-click="vm.goToChatsMessages(user.$id)">{{user.mobileNumber}}</h3>
+            <h3 ng-click="vm.goToChatsMessages(user.$id)">{{user.email}}</h3>
+            
         </ion-item>
 
-        <!--        <ion-list can-swipe="true">
-                    <ion-item ng-repeat="abstract in vm.abstracts"
-                              ng-click="vm.goToAbstractDetail(abstract.$id)"
-                              class="item-text-wrap">
-                        <h2>{{abstract.title}}</h2>
-                        <p>{{abstract.startDate| date: 'short'}}</p>
-                        <p class="ion-pricetags as-capitalized"> {{abstract.type}}</p>
-                        <ion-option-button class="button-positive"
-                                           ng-click="vm.addFavorites($event, abstract)"
-                                           ng-if="!abstract.isInFavorites">
-                            FAVORITE
-                        </ion-option-button>
-                        <ion-option-button class="button-assertive"
-                                           ng-click="vm.removeFavorites(abstract)"
-                                           ng-if="abstract.isInFavorites">
-                            REMOVE
-                        </ion-option-button>
-                    </ion-item>
-                </ion-list>
-        <a ng-click="vm.loadMore()">Load more...</a>-->
     </ion-content>
+    <script id = "newUser.html" type = "text/ng-template">
+   <ion-popover-view style="border-radius: 10px;    height: 150px;width: 150px;">      
+        <ion-header-bar class="bar bar-header bar-stable" style="background-color: white !important;">
+        <h2 class="title" style="color:chocolate;font-size:12px;">New Chat</h2>
+          <button style="color:green;float:right;" class="button button-clear button-primary" ng-click="closePopover()">X</button>
+        </ion-header-bar>
+        <ion-content class="padding has-header" scroll="false">
+        <label>Search Mobile No.</label>
+        <input type="number" ng-model="vm.newUser" placeholder="Enter Mobile No." ng-change="vm.searchUser()" style="border: 1px solid chocolate;width: 100%;" />
+        <div ng-if="error" style="color:red;">{{error}}</div>
+      </ion-content>        
+   </ion-popover-view>
+</script>
 </ion-view>
+<style>
+    .popover-backdrop{
+        opacity: 0.6;
+    background-color: blue !important;
+    }
+    .bubble-right{
+        float: right;
+    background: red;
+    width: 20px;
+    border-radius: 50%;
+    height: 18px;
+    text-align: center;
+    font-size: 14px;
+    font-weight: 500;
+    color: #FFF;
+    }
+    .bubble-right-unread{
+        float: right;
+        margin-right:5px;
+    background: green;
+    width: 20px;
+    border-radius: 50%;
+    height: 18px;
+    text-align: center;
+    font-size: 14px;
+    font-weight: 500;
+    color: #FFF;
+    }
+</style>

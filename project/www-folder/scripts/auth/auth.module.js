@@ -32,7 +32,7 @@
                         disableBack: true
                     });
 
-                    $state.go('app.account');
+                    $state.go('app.chats');
                 });
 
                 $rootScope.$on('loggedOut', function () {

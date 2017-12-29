@@ -12,17 +12,20 @@
         var types = [];
         var dates = [];
         var abstracts = null;
-
+        var chatMsgs = [];
         var service = {
             getChats: getChats,
             getChat: getChat,
+            getUser: getUser,
             getAuthor: getAuthor,
             getTypes: getTypes,
             getDates: getDates,
             fetchChats: fetchChats,
             toggleFavorites: toggleFavorites,
             isInFavorites: isInFavorites,
-            addMessage: addMessage
+            addMessage: addMessage,
+            updateMessage: updateMessage,
+            getUserId: getUserId
         };
         return service;
 
@@ -30,10 +33,16 @@
             return dataService.getAbstractAuthor(abstractId, authorId);
         }
         function addMessage(msg) {
-			return dataService.insertData(msg,"chatMessages");
-		}
+            return dataService.insertData(msg,"chatMessages");
+        }
+        function updateMessage(mid,msg) {
+            return dataService.update(mid,msg,"chatMessages");
+        }
         function getChat(fromId, toId) {
             return dataService.getChat(fromId, toId);
+        }
+        function getUser(name) {              
+            return dataService.getUserMobile(name);
         }
 
         function getTypes() {
@@ -64,7 +73,32 @@
         }
 
 
-        function getChats() {
+        function getChats(cid) {
+            console.log(cid);
+            chatMsgs = [];
+            return dataService.getChats(cid).then(function (items) {
+                console.log(angular.toJson(items));
+                /*angular.forEach(items, function (cval, ckey) {                   
+                   if (cval.messageFrom == cid || cval.messageTo == cid) {
+                        if(cval.messageFrom == cid){
+                           var user = getUserId(cval.messageTo).then(function(res){
+                                cval.user = res;
+                           });
+                           
+                           chatMsgs.push(cval);
+                        }else if(cval.messageTo == cid){
+                           var user = getUserId(cval.messageFrom).then(function(res){
+                                cval.user = res;
+                           });
+                           chatMsgs.push(cval);
+                        }                        
+                       
+                   }                      
+                });
+                return chatMsgs;*/
+                return items;
+            });
+                
 //            if (!abstracts) {
 //                return dataService.getChats().then(function (items) {
 //                    abstracts = items;
@@ -82,6 +116,10 @@
 //            return $q.when(abstracts);
         }
 
+        function getUserId(userId){
+            console.log(userId);
+            return dataService.getUserId(userId);
+        }
         function fetchChats(filter, showFavorites, types, dates) {
             filter = filter ? filter.toLowerCase() : filter;
             return getChats().then(function () {

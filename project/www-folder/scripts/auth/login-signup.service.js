@@ -106,7 +106,6 @@
             return getUserDetails(userName).then(function (response) {
                 console.log(angular.toJson(response));
                 angular.forEach(response, function (v, k) {
-                    console.log(angular.toJson(v + "  " + k));
                     v.$id = k;
                     console.log(angular.toJson(v));
                     if (userName == v.email) {

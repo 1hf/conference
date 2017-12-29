@@ -10,9 +10,11 @@
 	/* @ngInject */
 	function socialMessagesController(socialService, $stateParams, $state, ionicToast, externalAppsService) {
 		var abstractId = $stateParams.id;
-
+                var messageId = $stateParams.id;
 		var vm = angular.extend(this, {
+                        user: null,
 			abstract: null,
+                        message: null,
 			goToAuthorDetail: goToAuthorDetail,
 			toggleFavorites: toggleFavorites,
 			openPdf: openPdf
@@ -21,9 +23,29 @@
 		// ********************************************************************
 
 		(function activate() {
-			getAbstract();
+			//getAbstract();
+                        getMessageDetails();
 		})();
-
+                
+                function getMessageDetails() {
+			return socialService.getMessage(messageId).then(function(message) {
+				vm.message = message;
+                                
+                                console.log(vm.message);
+                                console.log(vm.message.messageFrom);
+                                socialService.getUser(vm.message.messageFrom).then(function(user){
+                                    vm.user = user;
+                                    console.log(vm.user);
+                                    vm.message.messengerName = vm.user.firstName+" "+vm.user.lastName;
+                                    vm.message.messengerPic = vm.user.avatar;
+                                });
+			});
+                        //return socialService.getAbstract(abstractId).then(function(abstract) {
+				//vm.abstract = abstract;
+				//vm.abstract.isInFavorites = ChatsService.isInFavorites(vm.abstract.$id);
+			//})
+		}
+                
 		function getAbstract() {
 			return socialService.getAbstract(abstractId).then(function(abstract) {
 				vm.abstract = abstract;

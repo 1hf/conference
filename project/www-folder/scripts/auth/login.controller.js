@@ -71,7 +71,8 @@
                         if (res) {
                             $ionicLoading.hide();
                             $rootScope.$emit('loggedIn');
-                            $state.go('app.tabs.schedule');
+                            //$state.go('app.tabs.schedule');
+                            $state,go('app.chats');
                         } else {
                             $ionicLoading.hide();
                             $ionicPopup.alert({
@@ -92,7 +93,8 @@
                         if (res) {
                             $ionicLoading.hide();
                             $rootScope.$emit('loggedIn');
-                            $state.go('app.tabs.schedule');
+                            //$state.go('app.tabs.schedule');
+                            $state.go('app.chats');
                         } else {
                             $ionicLoading.hide();
                             $ionicPopup.alert({

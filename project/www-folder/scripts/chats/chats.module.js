@@ -11,6 +11,7 @@
                 $stateProvider
                         .state('app.chats', {
                             url: '/chats',
+                            params: {refresh: 'yes'},
                             templateUrl: 'scripts/chats/chats.html',
                             controller: 'ChatsController as vm',
                             resolve: {

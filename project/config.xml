@@ -59,6 +59,9 @@
     <feature name="NetworkStatus">
         <param name="android-package" value="org.apache.cordova.NetworkManager" />
     </feature>
+    <preference name="SplashMaintainAspectRatio" value="true" />
+    <preference name="FadeSplashScreenDuration" value="300" />
+    <preference name="SplashShowOnlyFirstTime" value="false" />
     <preference name="SplashScreen" value="screen" />
     <preference name="SplashScreenDelay" value="3000" />
     <preference name="webviewbounce" value="false" />

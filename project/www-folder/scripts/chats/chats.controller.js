@@ -35,6 +35,10 @@
             //fetchUsers();
             $scope.lastKey = '';
             getusersData();
+            var ref = firebase.database().ref("chatMessages");
+            firebase.database().ref().on('value', function (snapshot) {
+                getusersData();
+            });
            
         })()
         
@@ -43,8 +47,10 @@
             $scope.newUsers = [];
             $ionicLoading.show({template: 'Loading Messages'});
             var myId = JSON.parse(localStorageService.get('authUser')).$id;
+            console.log(myId);
             return ChatsService.getChats(myId).then(function (items) {
                 console.log(angular.toJson(items));
+                console.log(angular.toJson(items.length));
                 if(items.length>0){
                     angular.forEach(items, function(itemval, itemkey){
                         var count = 0;
@@ -100,39 +106,56 @@
           $scope.popover.hide();
        };
        function searchUser(){        
-        
+        var count = 0;
         $scope.error = "";
         if((vm.newUser.toString()).length==10){
-        $ionicLoading.show({template: 'Loading Users'});          
-            return ChatsService.getUser(vm.newUser).then(function (users) {
-                console.log(angular.toJson(users));
-                if(!users.$value){
-
-                    angular.forEach(users, function(val,key){
-                        if(JSON.parse(localStorageService.get('authUser')).$id!==key){
+            if(JSON.parse(localStorageService.get('authUser')).mobileNumber!==vm.newUser){
+                $ionicLoading.show({template: 'Loading Users'});          
+                return ChatsService.getUser(vm.newUser).then(function (users) {
+                    console.log(users);
+                    if(!users.$value){
+                        //$scope.newUsers = [];
+                        angular.forEach(users, function(val,key){
+                            console.log(val);
                             val.$id = key;
                             val.message={};
-                            $scope.newUsers.push(val);
+                            angular.forEach($scope.newUsers, function(uval,ukey){
+                                console.log(val.$id+"  "+uval.$id);
+                                if(val.$id===uval.$id){
+                                    //
+                                }else{
+                                    count = count+1;
+                                    if(ukey === $scope.newUsers.length-1 && count === $scope.newUsers.length){
+                                        $scope.newUsers.push(val);
+                                        vm.newUser = "";
+                                    }
+                                }
+                            });
+                            if($scope.newUsers.length<1){
+                                $scope.newUsers.push(val);
+                            }                            
                             //$scope.newUsers.$id = key;
                             $ionicLoading.hide();
                             $scope.error = "";
                             $scope.popover.hide();
-                        }else{
-                            $ionicLoading.hide();
-                            $scope.error = "You Cannot chat with yourself.. :)";
-                            //alert('You Cannot chat with yourself.. :)');
-                        }                        
-                    });
-                    
-                }
-                if(users.$value==null){
-                    $scope.error = 'No User Found..';
-                    $ionicLoading.hide();
-                }
+                        });
+                        
+                    }
+                    if(users.$value==null){
+                        $scope.error = 'No User Found..';
+                        $ionicLoading.hide();
+                    }
 
-                //$scope.newUsers.splice(0,0, users);
-                //console.log(angular.toJson($scope.newUsers));
-            }) 
+                    //$scope.newUsers.splice(0,0, users);
+                    //console.log(angular.toJson($scope.newUsers));
+                }) 
+            }else{
+                $ionicLoading.hide();
+                $scope.error = "You Cannot chat with yourself.. :)";
+                //alert('You Cannot chat with yourself.. :)');
+            } 
+
+
         }
        }
         function loadMore(k){

@@ -177,8 +177,8 @@
 //            });
 //        }
         function goBack(){
-            window.location.reload();
-            
+            //window.location.reload();
+            $state.go('app.chats');
         }
         function toggleFavorites() {
             vm.abstract.isInFavorites = !vm.abstract.isInFavorites;

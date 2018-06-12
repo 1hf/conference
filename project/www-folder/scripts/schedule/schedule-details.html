@@ -5,6 +5,10 @@
                             <i class="icon ion-ios-star light" ng-if="vm.isInFavorites"></i>
                     </button>
             </ion-nav-buttons>-->
+    <ion-nav-buttons side="secondary">
+                    
+        <a style="padding: 5px;cursor:pointer;font-size:16px;font-weight: 500;" ng-click="vm.goBack()""><i class="icon ion-ios-arrow-back"></i></a>
+    </ion-nav-buttons>
     <ion-content padding="true">
         <h2>{{vm.session.sessions[vm.session.sid - 1].events[vm.session.eid - 1].eventTitle}}</h2>
 

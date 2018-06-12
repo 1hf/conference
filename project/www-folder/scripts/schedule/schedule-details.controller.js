@@ -11,7 +11,8 @@
     function ScheduleDetailsController(scheduleService, ionicToast, $stateParams, $state, $scope) {
         var vm = angular.extend(this, {
             session: null,
-            doRefresh: doRefresh
+            doRefresh: doRefresh,
+            goBack: goBack
 //			,toggleFavorites: toggleFavorites
         });
 
@@ -35,6 +36,11 @@
             getSession();
             $scope.$broadcast('scroll.refreshComplete');
             $scope.$apply();
+        }
+
+        function goBack(){
+            //window.location.reload();
+            $state.go('app.tabs.schedule');
         }
 
 //		function toggleFavorites() {
